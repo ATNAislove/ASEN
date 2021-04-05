@@ -14,6 +14,7 @@ public class GestorMunicipal {
     private long telefono;
     private LocalDate fechaRegistro;
     private LocalDate fechaBaja;
+    private int idMunicipio;
 
     public GestorMunicipal() {
     }
@@ -106,6 +107,14 @@ public class GestorMunicipal {
         this.fechaBaja = fechaBaja;
     }
 
+    public int getIdMunicipio() {
+        return idMunicipio;
+    }
+
+    public void setIdMunicipio(int idMunicipio) {
+        this.idMunicipio = idMunicipio;
+    }
+
     @Override
     public String toString() {
         return "GestorMunicipal{" +
@@ -120,6 +129,7 @@ public class GestorMunicipal {
                 ", telefono=" + telefono +
                 ", fechaRegistro=" + fechaRegistro +
                 ", fechaBaja=" + fechaBaja +
+                ", idMunicipio=" + idMunicipio +
                 '}';
     }
 }
