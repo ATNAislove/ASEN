@@ -1,6 +1,5 @@
 package es.uji.ei1027.asen.model;
 
-//uwu
 public class Municipio {
     private int idMunicipio;
     private String nombreMunicipio;
