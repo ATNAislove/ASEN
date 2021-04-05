@@ -46,7 +46,7 @@ public class MunicipioController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
+    @RequestMapping(value="/update/{idMunicipio}", method = RequestMethod.GET)
     public String editMunicipio(Model model, @PathVariable int idMunicipio) {
         model.addAttribute("municipio", municipioDao.getMunicipio(idMunicipio));
         return "municipio/update";
