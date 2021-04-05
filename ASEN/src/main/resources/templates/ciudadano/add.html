@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Crear un nuevo municipio</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+<h2>Nuevo Ciudadano</h2><!-- formulario de ciudadano-->
+<form action="#" th:action="@{/ciudadano/add}"
+      th:object="${ciudadano}" method="post">
+    <table>
+        <tr>
+            <td><label>usuario</label></td>
+            <td><input type="text" th:field="*{usuario}" /></td>
+        </tr>
+        <tr>
+            <td><label>codigo ciudadano</label></td>
+            <td><input type="text" th:field="*{codigoCiudadano}" /></td>
+        </tr>
+        <tr>
+            <td><label>pin</label></td>
+            <td><input type="String" th:field="*{pin}" /></td>
+        </tr>
+        <tr>
+            <td><label>fecha Nacimiento</label></td>
+            <td><input type="date" th:field="*{fechaNacimiento}" /></td>
+        </tr>
+        <tr>
+            <td><label>nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>apellidos</label></td>
+            <td><input type="text" th:field="*{apellidos}" /></td>
+        </tr>
+        <tr>
+            <td><label>direccion</label></td>
+            <td><input type="text" th:field="*{direccion}" /></td>
+        </tr>
+        <tr>
+            <td><label>correoElectronico</label></td>
+            <td><input type="text" th:field="*{correoElectronico}" /></td>
+        </tr>
+        <tr>
+            <td><label>municipio</label></td>
+            <td><input type="text" th:field="*{municipio}" /></td>
+        </tr>
+        <tr>
+            <td><label>pais</label></td>
+            <td><input type="text" th:field="*{pais}" /></td>
+        </tr>
+        <tr>
+            <td><label>fechaRegistro</label></td>
+            <td><input type="date" th:field="*{fechaRegistro}" /></td>
+        </tr>
+        <tr>
+            <td><label>fechaBaja</label></td>
+            <td><input type="date" th:field="*{fechaBaja}" /></td>
 
+            <td colspan="2"><input type="submit" value="Crear Ciudadano" /></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
