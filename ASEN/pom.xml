@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.uji.ei1027</groupId>
-	<artifactId>clubesportiu</artifactId>
+	<artifactId>asen</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>clubesportiu</name>
+	<name>asen</name>
 	<description>Projecte base EI1027 20-21</description>
 	<properties>
 		<java.version>11</java.version>
