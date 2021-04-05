@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 public class CiudadanoController {
-
+    //VICTOR CALLATE
     @Controller
     @RequestMapping("/ciudadano")
     public class MunicipioController {
