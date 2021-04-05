@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 
 @SpringBootApplication
-public class AsenApplication implements CommandLineRunner {
+public class AsenApplication{
 
     private static final Logger log = Logger.getLogger(AsenApplication .class.getName());
 
@@ -20,7 +20,7 @@ public class AsenApplication implements CommandLineRunner {
         new SpringApplicationBuilder(AsenApplication .class).run(args);
     }
 
-    // Funció principal
+/*   // Funció principal
     public void run(String... strings) throws Exception {
         log.info("Ací va el meu codi");
     }
@@ -33,5 +33,5 @@ public class AsenApplication implements CommandLineRunner {
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
-
+*/
 }
