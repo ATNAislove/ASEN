@@ -61,7 +61,7 @@ public class MunicipioController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{nom}")
+    @RequestMapping(value="/delete/{idMunicipio}")
     public String processDelete(@PathVariable int idMunicipio) {
         municipioDao.deleteMunicipio(idMunicipio);
         return "redirect:../list";

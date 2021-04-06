@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Area Natural</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Agregar Area Natural</h2>
+<form action="#" th:action="@{/areaNatural/add}"
+      th:object="${areaNatural}" method="post">
+    <table>
+        <tr>
+            <td><label>idArea</label></td>
+            <td><input type="numer" th:field="*{idArea}" /></td>
+        </tr>
+        <tr>
+            <td><label>NombreArea</label></td>
+            <td><input type="text" th:field="*{nombreArea}" /></td>
+        </tr>
+        <tr>
+            <td><label>descripcion</label></td>
+            <td><input type="text" th:field="*{descripcion}" /></td>
+        </tr>
+        <tr>
+            <td><label>imagen</label></td>
+            <td><input type="text" th:field="*{imagen}" /></td>
+        </tr>
+        <tr>
+            <td><label>tipoTerreno</label></td>
+            <td><input type="text" th:field="*{tipoTerreno}" /></td>
+        </tr>
+        <tr>
+            <td><label>tipoServicio</label></td>
+            <td><input type="text" th:field="*{tipoServicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>instalacion</label></td>
+            <td><input type="text" th:field="*{instalacion}" /></td>
+        </tr>
+        <tr>
+            <td><label>tipoArea</label></td>
+            <td><input type="text" th:field="*{tipoArea}" /></td>
+        </tr>
+        <tr>
+            <td><label>tipoAcceso</label></td>
+            <td><input type="number" th:field="*{tipoAcceso}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear area natural" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

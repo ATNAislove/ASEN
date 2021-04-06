@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo municipio</h2>
+<form action="#" th:action="@{/zona/add}"
+      th:object="${zona}" method="post">
+    <table>
+        <tr>
+            <td><label>idCharNumero</label></td>
+            <td><input type="number" th:field="*{idCharNumero}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nombre zona</label></td>
+            <td><input type="text" th:field="*{nombreZona}" /></td>
+        </tr>
+        <tr>
+            <td><label>Aforo maximo</label></td>
+            <td><input type="number" th:field="*{aforoMaximo}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo terreno</label></td>
+            <td><input type="text" th:field="*{tipoTerreno}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear zona" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
