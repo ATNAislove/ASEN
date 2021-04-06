@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Servicios</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo servicio</h2>
+<form action="#" th:action="@{/servicio/add}"
+      th:object="${servicio}" method="post">
+    <table>
+        <tr>
+            <td><label>idServicio</label></td>
+            <td><input type="number" th:field="*{idServicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha Inicio</label></td>
+            <td><input type="date" th:field="*{fechaInicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha Fin</label></td>
+            <td><input type="date" th:field="*{fechaFin}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo De Servicio</label></td>
+            <td><input type="text" th:field="*{tipoServicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Periodicidad</label></td>
+            <td><input type="number" th:field="*{periodicidad}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo De Temporada</label></td>
+            <td><input type="text" th:field="*{tipoTemporada}" /></td>
+        </tr>
+        <tr>
+            <td><label>ID Area</label></td>
+            <td><input type="number" th:field="*{idArea}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear servicio" /></td>
+        </tr>
+    </table>
+    <a href="/">VOLVER</a>
+</form>
+</body>
+</html>
