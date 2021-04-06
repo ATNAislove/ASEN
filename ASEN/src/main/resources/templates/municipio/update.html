@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar municipio</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Actualizar municipio</h2>
+<form action="#" th:action="@{/municipio/update}"
+      th:object="${municipio}" method="post">
+    <table>
+        <tr>
+            <td><label>idMunicipio</label></td>
+            <td><input type="number" th:field="*{idMunicipio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nombre Municipio</label></td>
+            <td><input type="text" th:field="*{nombreMunicipio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Codigo Postal</label></td>
+            <td><input type="number" th:field="*{codigoPostal}" /></td>
+        </tr>
+        <tr>
+            <td><label>nombre Provincia</label></td>
+            <td><input type="text" th:field="*{nombreProvincia}" /></td>
+        </tr>
+        <tr>
+            <td><label>Poblacion</label></td>
+            <td><input type="number" th:field="*{poblacion}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Actualizar municipio" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

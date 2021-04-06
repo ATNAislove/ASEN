@@ -37,7 +37,7 @@ public class MunicipioDao {
     /* Actualitza els atributs del municipio
        (excepte el nom, que és la clau primària) */
     public void updateMunicipio(Municipio municipio) {
-        jdbcTemplate.update("UPDATE municipio SET nombreMunicipio=?, codigoPostal=?, provincia=?, poblacion=? WHERE idMunicipio=?", municipio.getNombreMunicipio(),municipio.getCodigoPostal(),
+        jdbcTemplate.update("UPDATE municipio SET nombreMunicipio=?, codigoPostal=?, nombreProvincia=?, poblacion=? WHERE idMunicipio=?", municipio.getNombreMunicipio(),municipio.getCodigoPostal(),
                 municipio.getNombreProvincia(),municipio.getPoblacion(), municipio.getIdMunicipio());
     }
 

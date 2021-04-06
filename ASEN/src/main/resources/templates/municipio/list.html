@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Municipios</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Municipios</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id municipio</th>
+            <th>Nombre municipio</th>
+            <th>Codigo Postal</th>
+            <th>Provincia</th>
+            <th>Poblacion</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="municipio: ${municipios}">
+            <td th:text="${municipio.idMunicipio}"></td>
+            <td th:text="${municipio.nombreMunicipio}"></td>
+            <td th:text="${municipio.codigoPostal}"></td>
+            <td th:text="${municipio.nombreProvincia}"></td>
+            <td th:text="${{municipio.poblacion}}"></td>
+            <td> <a th:href="@{/municipio/update/{idMunicipio}(idMunicipio=${municipio.idMunicipio})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td><a th:href="@{/municipio/delete/{idMunicipio}(idMunicipio=${municipio.idMunicipio})}" class="btn btn-danger" role="button">Esborra</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Agregar municipio</a>
+</div>
+</body>
+</html>
