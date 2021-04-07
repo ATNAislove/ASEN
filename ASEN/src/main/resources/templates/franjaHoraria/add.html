@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear una nueva Reserva</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nueva Reserva</h2><!-- formulario de Reserva-->
+<form action="#" th:action="@{/franjaHoraria/add}"
+      th:object="${franjaHoraria}" method="post">
+    <table>
+        <tr>
+            <td><label>idFranja Horaria</label></td>
+            <td><input type="number" th:field="*{idFranjaHoraria}" /></td>
+        </tr>
+        <tr>
+            <td><label>hora Inicio</label></td>
+            <td><input type="time" th:field="*{horaInicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>hora Final</label></td>
+            <td><input type="time" th:field="*{horaFinal}" /></td>
+        </tr>
+        <tr>
+            <td><label>id Area</label></td>
+            <td><input type="number" th:field="*{idArea}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear Franja Horaria" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

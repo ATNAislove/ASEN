@@ -42,7 +42,7 @@ public class CiudadanoDao {
                         "fechaBaja=? WHERE idMunicipio=?", ciudadano.getCodigoCiudadano(),ciudadano.getPin(),
                 ciudadano.getFechaNacimiento(),ciudadano.getNombre(), ciudadano.getApellidos(),
                 ciudadano.getDireccion(),ciudadano.getCorreoElectronico(),ciudadano.getMunicipio(),ciudadano.getPais(),
-                ciudadano.getFechaRegistro(),ciudadano.getFechaBaja());
+                ciudadano.getFechaRegistro(),ciudadano.getFechaBaja(), ciudadano.getMunicipio());
     }
     /* Obté el ciudadano amb el usuario donat. Torna null si no existeix. */
     public Ciudadano getCiudadano(String usuario) {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear una nueva Reserva</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nueva Reserva</h2><!-- formulario de Reserva-->
+<form action="#" th:action="@{/reserva/add}"
+      th:object="${reserva}" method="post">
+    <table>
+        <tr>
+            <td><label>idReserva</label></td>
+            <td><input type="number" th:field="*{idReserva}" /></td>
+        </tr>
+        <tr>
+            <td><label>fecha</label></td>
+            <td><input type="date" th:field="*{fecha}" /></td>
+        </tr>
+        <tr>
+            <td><label>Numero Personas</label></td>
+            <td><input type="number" th:field="*{numeroPersonas}" /></td>
+        </tr>
+        <tr>
+            <td><label>fecha Salida</label></td>
+            <td><input type="date" th:field="*{fechaSalida}" /></td>
+        </tr>
+        <tr>
+            <td><label>fecha Creacion</label></td>
+            <td><input type="date" th:field="*{fechaCreacion}" /></td>
+        </tr>
+        <tr>
+            <td><label>codigoQR</label></td>
+            <td><input type="text" th:field="*{codigoQR}" /></td>
+        </tr>
+        <tr>
+            <td><label>estado Reserva</label></td>
+            <td><input type="text" th:field="*{estadoReserva}" /></td>
+        </tr>
+        <tr>
+            <td><label>usuario</label></td>
+            <td><input type="text" th:field="*{usuario}" /></td>
+        </tr>
+        <tr>
+            <td><label>idFranjaHoraria</label></td>
+            <td><input type="number" th:field="*{idFranjaHoraria}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear Reserva" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
