@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+@Controller
+@RequestMapping("/ciudadano")
 public class CiudadanoController {
-    @Controller
-    @RequestMapping("/ciudadano")
-    public class MunicipioController {
         private CiudadanoDao ciudadanoDao;
-
         @Autowired
         public void setCiudadanoDao(CiudadanoDao ciudadanoDao) {
             this.ciudadanoDao = ciudadanoDao;
@@ -69,5 +67,6 @@ public class CiudadanoController {
             ciudadanoDao.deleteCiudadano(usuario);
             return "redirect:../list";
         }
-    }
+
+
 }

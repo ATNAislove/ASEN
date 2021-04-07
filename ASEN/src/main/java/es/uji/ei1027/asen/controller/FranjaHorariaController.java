@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+@Controller
+@RequestMapping("/franjaHoraria")
 public class FranjaHorariaController {
-    @Controller
-    @RequestMapping("/franjaHoraria")
-    public class MunicipioController {
         private FranjaHorariaDao franjaHorariaDao;
-
         @Autowired
         public void setFranjaHorariaDao(FranjaHorariaDao franjaHorariaDao) {
             this.franjaHorariaDao = franjaHorariaDao;
@@ -68,5 +66,5 @@ public class FranjaHorariaController {
             franjaHorariaDao.deleteFranjaHoraria(idFranjaHoraria);
             return "redirect:../list";
         }
-    }
+
 }

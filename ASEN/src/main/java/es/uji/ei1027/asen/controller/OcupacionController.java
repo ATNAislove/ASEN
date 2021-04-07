@@ -18,7 +18,7 @@ public class OcupacionController {
     private OcupacionDao ocupacionDao;
 
     @Autowired
-    public void setCiudadanoDao(OcupacionDao ocupacionDao) {
+    public void setOcupacionDao(OcupacionDao ocupacionDao) {
         this.ocupacionDao = ocupacionDao;
     }
 
