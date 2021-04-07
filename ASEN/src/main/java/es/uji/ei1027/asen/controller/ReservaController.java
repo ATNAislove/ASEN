@@ -19,10 +19,6 @@ public class ReservaController {
 
     private ReservaDao reservaDao;
 
-    @Autowired
-    public void setReservaDao(ReservaDao reservaDao) {
-        this.reservaDao = reservaDao;
-    }
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...

@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/franjaHoraria")
 public class FranjaHorariaController {
         private FranjaHorariaDao franjaHorariaDao;
-        @Autowired
-        public void setFranjaHorariaDao(FranjaHorariaDao franjaHorariaDao) {
-            this.franjaHorariaDao = franjaHorariaDao;
-        }
 
         // Operacions: Crear, llistar, actualitzar, esborrar
         // ...
