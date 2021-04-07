@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Servicios</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo personal de zona</h2>
+<form action="#" th:action="@{/personalZona/add}"
+      th:object="${personalZona}" method="post">
+    <table>
+        <tr>
+            <td><label>dni</label></td>
+            <td><input type="text" th:field="*{dni}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Apellidos</label></td>
+            <td><input type="text" th:field="*{apellidos}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de nacimiento</label></td>
+            <td><input type="date" th:field="*{fechaNacimiento}" /></td>
+        </tr>
+        <tr>
+            <td><label>Correo electronico</label></td>
+            <td><input type="text" th:field="*{correoElectronico}" /></td>
+        </tr>
+        <tr>
+            <td><label>Direccion</label></td>
+            <td><input type="text" th:field="*{direccion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Municipio</label></td>
+            <td><input type="text" th:field="*{municipio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Pais</label></td>
+            <td><input type="text" th:field="*{pais}" /></td>
+        </tr>
+        <tr>
+            <td><label>Telefono</label></td>
+            <td><input type="text" th:field="*{telefono}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear personal de zona" /></td>
+        </tr>
+    </table>
+    <a href="/">VOLVER</a>
+</form>
+</body>
+</html>
