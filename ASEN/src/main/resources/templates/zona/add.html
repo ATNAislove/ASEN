@@ -14,7 +14,7 @@
     <table>
         <tr>
             <td><label>idCharNumero</label></td>
-            <td><input type="number" th:field="*{idCharNumero}" /></td>
+            <td><input type="text" th:field="*{idCharNumero}" /></td>
         </tr>
         <tr>
             <td><label>Nombre zona</label></td>
@@ -27,6 +27,10 @@
         <tr>
             <td><label>Tipo terreno</label></td>
             <td><input type="text" th:field="*{tipoTerreno}" /></td>
+        </tr>
+        <tr>
+            <td><label>Id area</label></td>
+            <td><input type="number" th:field="*{idArea}" /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Crear zona" /></td>

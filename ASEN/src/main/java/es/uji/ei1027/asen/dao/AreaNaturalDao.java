@@ -21,9 +21,9 @@ public class AreaNaturalDao {
 
     /* Afegeix el areaNatural a la base de dades */
     public void addAreaNatural(AreaNatural areaNatural) {
-        jdbcTemplate.update("INSERT INTO areaNatural VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?)",areaNatural.getIdArea(),
+        jdbcTemplate.update("INSERT INTO areaNatural VALUES(?, ?, ?, ?, ?,?,?,?,?,?)",areaNatural.getIdArea(),
                 areaNatural.getNombreArea(),areaNatural.getDescripcion(),areaNatural.getImagen(),areaNatural.getTipoTerreno(),
-                areaNatural.getTipoServicio(),areaNatural.getInstalacion(),areaNatural.getTipoArea(),areaNatural.getTipoAcceso());
+                areaNatural.getTipoServicio(),areaNatural.getInstalacion(),areaNatural.getTipoArea(),areaNatural.getTipoAcceso(), areaNatural.getIdMunicipio());
     }
     /* Esborra el areaNatural de la base de dades */
     public void deleteAreaNatural(AreaNatural areaNatural) {

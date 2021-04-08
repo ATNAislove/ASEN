@@ -5,6 +5,7 @@ public class Zona {
     private String nombreZona;
     private int aforoMaximo;
     private String tipoTerreno;
+    private int idArea;
 
     public Zona() {
     }
@@ -41,13 +42,22 @@ public class Zona {
         this.tipoTerreno = tipoTerreno;
     }
 
+    public int getIdArea() {
+        return idArea;
+    }
+
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
+    }
+
     @Override
     public String toString() {
         return "Zona{" +
                 "idCharNumero='" + idCharNumero + '\'' +
                 ", nombreZona='" + nombreZona + '\'' +
-                ", aforoMaximo=" + aforoMaximo +
+                ", aforoMaximo=" + aforoMaximo + '\'' +
                 ", tipoTerreno='" + tipoTerreno + '\'' +
+                ", idArea=" + idArea +
                 '}';
     }
 }

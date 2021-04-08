@@ -14,6 +14,7 @@ public final class ZonaRowMapper implements RowMapper<Zona> {
         zona.setNombreZona(rs.getString("nombreZona"));
         zona.setAforoMaximo(rs.getInt("aforoMaximo"));
         zona.setTipoTerreno(rs.getString("tipoTerreno"));
+        zona.setIdArea(rs.getInt("idArea"));
         return zona;
     }
 }

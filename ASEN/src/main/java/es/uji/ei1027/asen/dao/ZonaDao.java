@@ -22,8 +22,8 @@ public class ZonaDao {
 
     /* Afegeix el municipio a la base de dades */
     public void addZona(Zona zona) {
-        jdbcTemplate.update("INSERT INTO Zona VALUES(?, ?, ?, ?)", zona.getIdCharNumero(), zona.getNombreZona(),
-                zona.getAforoMaximo(), zona.getTipoTerreno());
+        jdbcTemplate.update("INSERT INTO Zona VALUES(?, ?, ?, ?, ?)", zona.getIdCharNumero(), zona.getNombreZona(),
+                zona.getAforoMaximo(), zona.getTipoTerreno(),zona.getIdArea());
     }
 
     /* Esborra el zona de la base de dades */
@@ -39,8 +39,8 @@ public class ZonaDao {
     /* Actualitza els atributs del zona
        (excepte el nom, que és la clau primària) */
     public void updateZona(Zona zona) {
-        jdbcTemplate.update("UPDATE zona SET nombreZona=?, aforoMaximo=?, tipoTerreno=? WHERE idCharNumero=?",
-                zona.getNombreZona(), zona.getAforoMaximo(), zona.getTipoTerreno(), zona.getIdCharNumero());
+        jdbcTemplate.update("UPDATE zona SET nombreZona=?, aforoMaximo=?, tipoTerreno=?, idArea=? WHERE idCharNumero=?",
+                zona.getNombreZona(), zona.getAforoMaximo(), zona.getTipoTerreno(), zona.getIdCharNumero(), zona.getIdArea());
     }
 
     /* Obté el zona amb el nom donat. Torna null si no existeix. */

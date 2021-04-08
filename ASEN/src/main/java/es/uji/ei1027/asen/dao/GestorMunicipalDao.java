@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class GestorMunicipalDao {
     /* Afegeix el gestorMunicipal a la base de dades */
     public void addGestorMunicipal(GestorMunicipal gestorMunicipal) {
         jdbcTemplate.update("INSERT INTO gestorMunicipal VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?)",gestorMunicipal.getDni(),
-                gestorMunicipal.getNombre(),gestorMunicipal.getApellidos(),gestorMunicipal.getFechaNacimiento(),gestorMunicipal.getCorreoElectronico(),
+                gestorMunicipal.getNombre(),gestorMunicipal.getApellidos(), gestorMunicipal.getFechaNacimiento(),gestorMunicipal.getCorreoElectronico(),
                 gestorMunicipal.getDireccion(),gestorMunicipal.getMunicipioNacimiento(),gestorMunicipal.getPais(),gestorMunicipal.getTelefono(),
                 gestorMunicipal.getFechaRegistro(),gestorMunicipal.getFechaBaja(),gestorMunicipal.getIdMunicipio());
     }
