@@ -33,7 +33,7 @@ public class ReservaController {
     }
     @RequestMapping(value = "/add")
     public String addReserva(Model model) {
-        model.addAttribute("reservas", new Reserva());
+        model.addAttribute("reserva", new Reserva());
         return "reserva/add";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)

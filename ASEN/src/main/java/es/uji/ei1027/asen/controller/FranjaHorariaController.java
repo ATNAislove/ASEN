@@ -34,7 +34,7 @@ public class FranjaHorariaController {
 
         @RequestMapping(value = "/add")
         public String addFranjaHoraria(Model model) {
-            model.addAttribute("franjasHoraria", new FranjaHoraria());
+            model.addAttribute("franjaHoraria", new FranjaHoraria());
             return "franjaHoraria/add";
         }
 

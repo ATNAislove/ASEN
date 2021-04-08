@@ -11,9 +11,9 @@ import java.time.LocalTime;
 public final class FranjaHorariaRowMapper implements RowMapper<FranjaHoraria> {
     public FranjaHoraria mapRow(ResultSet rs, int i) throws SQLException {
         FranjaHoraria franjaHoraria = new FranjaHoraria();
-        franjaHoraria.setIdFranjaHoraria(rs.getInt("idReserva"));
-        franjaHoraria.setHoraInicio(rs.getObject("horaInicio",LocalTime.class));
-        franjaHoraria.setHoraFin(rs.getObject("horaFin",LocalTime.class));
+        franjaHoraria.setIdFranjaHoraria(rs.getInt("idFranjaHoraria"));
+        franjaHoraria.setHoraInicio(LocalTime.parse(rs.getString("horaInicio")));
+        franjaHoraria.setHoraInicio(LocalTime.parse(rs.getString("horaFin")));
         franjaHoraria.setIdArea(rs.getInt("idArea"));
         return franjaHoraria;
     }

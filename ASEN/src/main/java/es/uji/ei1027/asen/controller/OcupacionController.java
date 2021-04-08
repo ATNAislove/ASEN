@@ -32,7 +32,7 @@ public class OcupacionController {
 
     @RequestMapping(value = "/add")
     public String addOcupacion(Model model) {
-        model.addAttribute("ocupaciones", new Ocupacion());
+        model.addAttribute("ocupacion", new Ocupacion());
         return "ocupacion/add";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
