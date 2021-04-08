@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public final class ReservaRowMapper implements RowMapper<Reserva> {
-    @Override
     public Reserva mapRow(ResultSet rs, int rowNum) throws SQLException {
         Reserva reserva = new Reserva();
         reserva.setIdReserva(rs.getInt("idReserva"));

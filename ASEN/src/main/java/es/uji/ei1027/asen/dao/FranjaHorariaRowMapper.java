@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 
 public final class FranjaHorariaRowMapper implements RowMapper<FranjaHoraria> {
-    @Override
     public FranjaHoraria mapRow(ResultSet rs, int i) throws SQLException {
         FranjaHoraria franjaHoraria = new FranjaHoraria();
         franjaHoraria.setIdFranjaHoraria(rs.getInt("idReserva"));

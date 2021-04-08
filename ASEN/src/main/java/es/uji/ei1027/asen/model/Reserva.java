@@ -88,18 +88,19 @@ public class Reserva {
     public void setIdFranjaHoraria(int idFranjaHoraria) {
         this.idFranjaHoraria = idFranjaHoraria;
     }
+
     @Override
     public String toString() {
         return "Reserva{" +
                 "idReserva=" + idReserva +
-                ", fecha='" + fecha + '\'' +
+                ", fecha=" + fecha +
                 ", numeroPersonas=" + numeroPersonas +
-                ", fechaSalida='" + fechaSalida + '\'' +
+                ", fechaSalida=" + fechaSalida +
                 ", fechaCreacion=" + fechaCreacion +
-                ", codigoQR=" +codigoQR +
-                ", estadoReserva=" +estadoReserva+
-                ", usuario=" +usuario +
-                ", idFranjaHoraria=" +idFranjaHoraria+
+                ", codigoQR='" + codigoQR + '\'' +
+                ", estadoReserva='" + estadoReserva + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", idFranjaHoraria=" + idFranjaHoraria +
                 '}';
     }
 }

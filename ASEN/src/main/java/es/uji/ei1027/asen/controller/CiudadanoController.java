@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/ciudadano")
 public class CiudadanoController {
+
     private CiudadanoDao ciudadanoDao;
 
+    @Autowired
+    public void setCiudadanoDao(CiudadanoDao ciudadanoDao) {
+        this.ciudadanoDao = ciudadanoDao;
+    }
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
@@ -25,9 +30,9 @@ public class CiudadanoController {
         return "ciudadano/list";
     }
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value="/add")
     public String addCiudadano(Model model) {
-        model.addAttribute("ciudadanos", new Ciudadano());
+        model.addAttribute("ciudadano", new Ciudadano());
         return "ciudadano/add";
     }
 

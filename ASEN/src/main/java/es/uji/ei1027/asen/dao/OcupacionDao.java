@@ -5,11 +5,13 @@ import es.uji.ei1027.asen.model.Ocupacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class OcupacionDao {
     private JdbcTemplate jdbcTemplate;
     // Obté el jdbcTemplate a partir del Data Source
@@ -31,6 +33,7 @@ public class OcupacionDao {
     //No hay que actualizar la ocupacion.
 
     /* Obté la ocupacio amb els dos atributs donats. Torna null si no existeix. */
+
     public Ocupacion getOcupacio(int idReserva,String idCharNum) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Prova WHERE idReserva =? and idCharNum=? ",

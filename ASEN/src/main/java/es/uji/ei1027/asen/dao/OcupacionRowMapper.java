@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public final class OcupacionRowMapper implements RowMapper<Ocupacion> {
-    @Override
     public Ocupacion mapRow(ResultSet rs, int i) throws SQLException {
         Ocupacion ocupacion = new Ocupacion();
         ocupacion.setIdReserva(rs.getInt("idReserva"));

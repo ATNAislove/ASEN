@@ -115,21 +115,22 @@ public class Ciudadano {
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
+
     @Override
     public String toString() {
         return "Ciudadano{" +
-                "usuario=" + usuario +
+                "usuario='" + usuario + '\'' +
                 ", codigoCiudadano='" + codigoCiudadano + '\'' +
-                ", pin=" + pin +
-                ", fechaNacimiento ='" + fechaNacimiento + '\'' +
-                ", nombre=" + nombre+
-                ", apellidos=" + apellidos +
-                ", direccion=" + direccion +
-                ", correoElectronico= " +correoElectronico +
-                ", municipio= " +correoElectronico+
-                ", pais=" +pais+
-                ", fechaRegistro" +fechaRegistro+
-                ", fechaBaja" +fechaBaja+
+                ", pin='" + pin + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", municipio='" + municipio + '\'' +
+                ", pais='" + pais + '\'' +
+                ", fechaRegistro=" + fechaRegistro +
+                ", fechaBaja=" + fechaBaja +
                 '}';
     }
 }

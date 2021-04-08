@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OcupacionController {
     private OcupacionDao ocupacionDao;
 
+    @Autowired
+    public void setOcupacionDao(OcupacionDao ocupacionDao) {
+        this.ocupacionDao = ocupacionDao;
+    }
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
