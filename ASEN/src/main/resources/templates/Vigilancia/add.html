@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Disponibilidad</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nueva disponibilidad</h2><!-- formulario de vigilancia-->
+<form action="#" th:action="@{/municipio/add}"
+      th:object="${municipio}" method="post">
+    <table>
+        <tr>
+            <td><label>DNI</label></td>
+            <td><input type="text" th:field="*{dni}" /></td>
+        </tr>
+        <tr>
+            <td><label>Identificativo de área</label></td>
+            <td><input type="number" th:field="*{idArea}" /></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear vigilancia" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
