@@ -1,10 +1,13 @@
 package es.uji.ei1027.asen.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 public class Servicio {
     private int idServicio;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaInicio;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaFin;
     private String tipoServicio;
     private int periodicidad;

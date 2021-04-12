@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Disponibilidad</title>
+    <title>Vigilancia</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nueva disponibilidad</h2><!-- formulario de vigilancia-->
-<form action="#" th:action="@{/municipio/add}"
-      th:object="${municipio}" method="post">
+<h2>Nueva vigilancia</h2><!-- formulario de vigilancia-->
+<form action="#" th:action="@{/vigilancia/add}"
+      th:object="${vigilancia}" method="post">
     <table>
         <tr>
             <td><label>DNI</label></td>
@@ -24,6 +24,8 @@
             <td colspan="2"><input type="submit" value="Crear vigilancia" /></td>
         </tr>
     </table>
+    <br>
+    <a href="n/">VOLVER</a>
 </form>
 </body>
 </html>
