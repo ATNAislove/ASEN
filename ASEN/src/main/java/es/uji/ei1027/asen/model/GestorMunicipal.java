@@ -1,18 +1,23 @@
 package es.uji.ei1027.asen.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class GestorMunicipal {
     private String dni;
     private String nombre;
     private String apellidos;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaNacimiento;
     private String correoElectronico;
     private String direccion;
     private String municipioNacimiento;
     private String pais;
     private long telefono;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaRegistro;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaBaja;
     private int idMunicipio;
 
