@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public final class ReservaRowMapper implements RowMapper<Reserva> {
     public Reserva mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -15,7 +16,7 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
         reserva.setIdReserva(rs.getInt("idReserva"));
         reserva.setFecha(rs.getObject("fecha",LocalDate.class));
         reserva.setNumeroPersonas(rs.getInt("numeroPersonas"));
-        reserva.setFechaSalida(rs.getObject("fechaSalida", LocalDateTime.class));
+        reserva.setFechaSalida(rs.getObject("fechaSalida", LocalTime.class));
         reserva.setFechaCreacion(rs.getObject("fechaCreacion",LocalDate.class));
         reserva.setCodigoQR(rs.getString("codigoQR"));
         reserva.setEstadoReserva(rs.getString("estadoReserva"));

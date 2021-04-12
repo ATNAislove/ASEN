@@ -1,12 +1,16 @@
 package es.uji.ei1027.asen.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Ciudadano {
 
     private String usuario;
     private String codigoCiudadano;
     private String pin;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaNacimiento;
     private String nombre;
     private String apellidos;
@@ -14,7 +18,9 @@ public class Ciudadano {
     private String correoElectronico;
     private String municipio;
     private String pais;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaRegistro;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaBaja;
 
     public Ciudadano(){

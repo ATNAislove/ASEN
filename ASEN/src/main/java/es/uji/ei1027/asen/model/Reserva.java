@@ -1,13 +1,18 @@
 package es.uji.ei1027.asen.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Reserva {
     private int idReserva;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fecha;
     private int numeroPersonas;
-    private LocalDateTime fechaSalida;
+    private LocalTime fechaSalida;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaCreacion;
     private String codigoQR;
     private String estadoReserva;
@@ -29,7 +34,7 @@ public class Reserva {
         return numeroPersonas;
     }
 
-    public LocalDateTime getFechaSalida() {
+    public LocalTime getFechaSalida() {
         return fechaSalida;
     }
 
@@ -65,7 +70,7 @@ public class Reserva {
         this.numeroPersonas = numeroPersonas;
     }
 
-    public void setFechaSalida(LocalDateTime fechaSalida) {
+    public void setFechaSalida(LocalTime fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 
