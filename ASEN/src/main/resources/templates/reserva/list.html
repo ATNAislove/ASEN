@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Reservas</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Reservas</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>IdReserva</th>
+            <th>Fecha</th>
+            <th>Número Personas</th>
+            <th>Fecha Salida</th>
+            <th>Fecha Creación</th>
+            <th>CodigoQR</th>
+            <th>Estado Reserva</th>
+            <th>Usuario</th>
+            <th>idFranjaHoraria</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reserva: ${reservas}">
+            <td th:text="${reserva.idReserva}"></td>
+            <td th:text="${reserva.fecha}"></td>
+            <td th:text="${reserva.numeroPersonas}"></td>
+            <td th:text="${reserva.fechaSalida}"></td>
+            <td th:text="${reserva.fechaCreacion}"></td>
+            <td th:text="${reserva.codigoQR}"></td>
+            <td th:text="${reserva.estadoReserva}"></td>
+            <td th:text="${reserva.usuario}"></td>
+            <td th:text="${reserva.idFranjaHoraria}"></td>
+            <td> <a th:href="@{/municipio/update/{idMunicipio}(idMunicipio=${municipio.idMunicipio})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td><a th:href="@{/municipio/delete/{idMunicipio}(idMunicipio=${municipio.idMunicipio})}" class="btn btn-danger" role="button">Esborra</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Agregar Reserva</a>
+</div>
+</body>
+</html>

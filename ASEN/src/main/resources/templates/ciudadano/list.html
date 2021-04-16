@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ciudadanos</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Ciudadanos</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Código Ciudadano</th>
+            <th>Pin</th>
+            <th>Fecha Nacimiento</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Direccion</th>
+            <th>Correo Electrónico</th>
+            <th>Municipio</th>
+            <th>Pais</th>
+            <th>Fecha Registro</th>
+            <th>Fecha Baja</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ciudadano: ${ciudadanos}">
+            <td th:text="${ciudadano.usuario}"></td>
+            <td th:text="${ciudadano.codigoCiudadano}"></td>
+            <td th:text="${ciudadano.pin}"></td>
+            <td th:text="${ciudadano.fechaNacimiento}"></td>
+            <td th:text="${ciudadano.nombre}"></td>
+            <td th:text="${ciudadano.apellidos}"></td>
+            <td th:text="${ciudadano.direccion}"></td>
+            <td th:text="${ciudadano.correoElectronico}"></td>
+            <td th:text="${ciudadano.municipio}"></td>
+            <td th:text="${ciudadano.pais}"></td>
+            <td th:text="${ciudadano.fechaRegistro}"></td>
+            <td th:text="${ciudadano.fechaBaja}"></td>
+            <td> <a th:href="@{/ciudadano/update/{usuario}(usuario=${ciudadano.usuario})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td><a th:href="@{/ciudadano/delete/{usuario}(usuario=${ciudadano.usuario})}" class="btn btn-danger" role="button">Esborra</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Agregar Ciudadano</a>
+</div>
+</body>
+</html>
