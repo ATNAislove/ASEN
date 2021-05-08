@@ -13,8 +13,7 @@ public final class FranjaHorariaRowMapper implements RowMapper<FranjaHoraria> {
         FranjaHoraria franjaHoraria = new FranjaHoraria();
         franjaHoraria.setIdFranjaHoraria(rs.getInt("idFranjaHoraria"));
         franjaHoraria.setHoraInicio(LocalTime.parse(rs.getString("horaInicio")));
-        franjaHoraria.setHoraInicio(LocalTime.parse(rs.getString("horaFin")));
-        franjaHoraria.setIdArea(rs.getInt("idArea"));
+        franjaHoraria.setHoraFin(LocalTime.parse(rs.getString("horaFin")));
         return franjaHoraria;
     }
 }

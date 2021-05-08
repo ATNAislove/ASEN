@@ -24,7 +24,7 @@ public class ReservaDao {
 
     public void addReserva(Reserva reserva) {
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",reserva.getIdReserva(),reserva.getFecha(),reserva.getNumeroPersonas()
-                ,reserva.getFechaSalida(),reserva.getFechaCreacion(),reserva.getCodigoQR(),reserva.getEstadoReserva()
+                ,reserva.getHoraSalida(),reserva.getFechaCreacion(),reserva.getCodigoQR(),reserva.getEstadoReserva()
                 ,reserva.getUsuario(),reserva.getIdFranjaHoraria());
     }
     /* Esborra la reserva de la base de dades */
@@ -41,7 +41,7 @@ public class ReservaDao {
         jdbcTemplate.update("UPDATE reserva SET fecha=?, numeroPersonas=?, fechaSalida=?, fechaCreacion=?, " +
                         "codigoQR=?, estadoReserva=?, usuario=?, idFranjaHoraria=?" +
                         "WHERE idReserva=?", reserva.getFecha(),reserva.getNumeroPersonas(),
-                reserva.getFechaSalida(),reserva.getFechaCreacion(), reserva.getCodigoQR(),
+                reserva.getHoraSalida(),reserva.getFechaCreacion(), reserva.getCodigoQR(),
                 reserva.getEstadoReserva(),reserva.getUsuario(),reserva.getIdFranjaHoraria(),reserva.getIdReserva());
     }
     /* Obté la reserva amb el idReserva donat. Torna null si no existeix. */

@@ -12,7 +12,7 @@ public final class OcupacionRowMapper implements RowMapper<Ocupacion> {
     public Ocupacion mapRow(ResultSet rs, int i) throws SQLException {
         Ocupacion ocupacion = new Ocupacion();
         ocupacion.setIdReserva(rs.getInt("idReserva"));
-        ocupacion.setIdCharNum(rs.getString("idCharNum"));
+        ocupacion.setIdCharNum(rs.getInt("idZona"));
         return ocupacion;
     }
 }

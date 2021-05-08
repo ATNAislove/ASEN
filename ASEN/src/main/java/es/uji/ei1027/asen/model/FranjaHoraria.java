@@ -6,7 +6,6 @@ public class FranjaHoraria {
     private int idFranjaHoraria;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private int idArea;
     public FranjaHoraria(){
     }
 
@@ -34,21 +33,12 @@ public class FranjaHoraria {
         this.horaFin = horaFin;
     }
 
-    public int getIdArea() {
-        return idArea;
-    }
-
-    public void setIdArea(int idArea) {
-        this.idArea = idArea;
-    }
-
     @Override
     public String toString() {
         return "FranjaHoraria{" +
                 "idFranjaHoraria=" + idFranjaHoraria +
                 ", horaInicio=" + horaInicio +
                 ", horaFin=" + horaFin +
-                ", idArea=" + idArea +
                 '}';
     }
 }

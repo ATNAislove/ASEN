@@ -2,7 +2,7 @@ package es.uji.ei1027.asen.model;
 
 public class Ocupacion {
     private int idReserva;
-    private String idCharNum;
+    private int idCharNum;
 
     public Ocupacion(){
     }
@@ -15,11 +15,11 @@ public class Ocupacion {
         this.idReserva = idReserva;
     }
 
-    public String getIdCharNum() {
+    public int getIdCharNum() {
         return idCharNum;
     }
 
-    public void setIdCharNum(String idCharNum) {
+    public void setIdCharNum(int idCharNum) {
         this.idCharNum = idCharNum;
     }
 
@@ -27,7 +27,7 @@ public class Ocupacion {
     public String toString() {
         return "Ocupacion{" +
                 "idReserva=" + idReserva +
-                ", idCharNum='" + idCharNum + '\'' +
+                ", idZona='" + idCharNum + '\'' +
                 '}';
     }
 }

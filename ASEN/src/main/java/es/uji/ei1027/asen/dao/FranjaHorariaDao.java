@@ -23,8 +23,8 @@ public class FranjaHorariaDao {
     /* Afegeix la franjaHoraria a la base de dades */
 
     public void addFranjaHoraria(FranjaHoraria franjaHoraria) {
-        jdbcTemplate.update("INSERT INTO FranjaHoraria VALUES(?, ?, ?, ?)",franjaHoraria.getIdFranjaHoraria(), franjaHoraria.getHoraInicio(),
-                franjaHoraria.getHoraFin(),franjaHoraria.getIdArea());
+        jdbcTemplate.update("INSERT INTO FranjaHoraria VALUES(?, ?, ?)",franjaHoraria.getIdFranjaHoraria(), franjaHoraria.getHoraInicio(),
+                franjaHoraria.getHoraFin());
     }
     /* Esborra la franja horaria de la base de dades */
     public void deleteFranjaHoraria(int franjaHoraria) {
@@ -34,8 +34,8 @@ public class FranjaHorariaDao {
     /* Actualitza els atributs de la franjaHoraria
        (excepte el idFranjaHoraria, que és la clau primària) */
     public void updateFranjaHoraria(FranjaHoraria franjaHoraria) {
-        jdbcTemplate.update("UPDATE ciudadano SET horaInicio=?, horaFin=?, idArea=? where idFranjaHoraria=? ",franjaHoraria.getHoraInicio(),franjaHoraria.getHoraFin(),
-                franjaHoraria.getIdArea(),franjaHoraria.getIdFranjaHoraria());
+        jdbcTemplate.update("UPDATE ciudadano SET horaInicio=?, horaFin=?, idArea=? where idFranjaHoraria=? ",franjaHoraria.getHoraInicio(),
+                franjaHoraria.getHoraFin(),franjaHoraria.getIdFranjaHoraria());
     }
     /* Obté la franjaHorario amb el id donat. Torna null si no existeix. */
     public FranjaHoraria getFranjaHoraria(int idFranjaHoraria) {

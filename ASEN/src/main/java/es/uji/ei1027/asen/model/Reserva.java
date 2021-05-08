@@ -34,7 +34,7 @@ public class Reserva {
         return numeroPersonas;
     }
 
-    public LocalTime getFechaSalida() {
+    public LocalTime getHoraSalida() {
         return fechaSalida;
     }
 
@@ -70,7 +70,7 @@ public class Reserva {
         this.numeroPersonas = numeroPersonas;
     }
 
-    public void setFechaSalida(LocalTime fechaSalida) {
+    public void setHoraSalida(LocalTime fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 

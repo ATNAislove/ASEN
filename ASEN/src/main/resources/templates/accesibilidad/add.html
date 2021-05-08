@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear una nueva Accesibilidad </title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nueva Accesibilidad</h2><!-- formulario de franjahoraria-->
+<form action="#" th:action="@{/accesibilidad/add}"
+      th:object="${accesibilidad}" method="post">
+    <table>
+        <tr>
+            <td><label>idFranjaHoraria</label></td>
+            <td><input type="number" th:field="*{idFranjaHoraria}" /></td>
+        </tr>
+        <tr>
+            <td><label>idArea</label></td>
+            <td><input type="number" th:field="*{idArea}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="CrearAccesibilidad" /></td>
+        </tr>
+    </table>
+    <br>
+    <a href="n/">VOLVER</a>
+</form>
+</body>
+</html>

@@ -16,7 +16,7 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
         reserva.setIdReserva(rs.getInt("idReserva"));
         reserva.setFecha(rs.getObject("fecha",LocalDate.class));
         reserva.setNumeroPersonas(rs.getInt("numeroPersonas"));
-        reserva.setFechaSalida(rs.getObject("fechaSalida", LocalTime.class));
+        reserva.setHoraSalida(rs.getObject("horaSalida", LocalTime.class));
         reserva.setFechaCreacion(rs.getObject("fechaCreacion",LocalDate.class));
         reserva.setCodigoQR(rs.getString("codigoQR"));
         reserva.setEstadoReserva(rs.getString("estadoReserva"));

@@ -61,8 +61,8 @@ public class OcupacionController {
     }
 */
 
-    @RequestMapping(value = "/delete/{idReserva}/{idCharNum}")
-    public String processDelete(@PathVariable int idReserva, @PathVariable String idCharNum) {
+    @RequestMapping(value = "/delete/{idReserva}/{idZona}")
+    public String processDelete(@PathVariable int idReserva, @PathVariable int idCharNum) {
         ocupacionDao.deleteOcupacio(idReserva,idCharNum);
         return "redirect:../list";
     }
