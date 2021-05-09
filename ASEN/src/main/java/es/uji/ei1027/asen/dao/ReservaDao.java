@@ -38,7 +38,7 @@ public class ReservaDao {
     /* Actualitza els atributs de la reserva
        (excepte el idReserva, que és la clau primària) */
     public void updateReserva(Reserva reserva) {
-        jdbcTemplate.update("UPDATE reserva SET fecha=?, numeroPersonas=?, fechaSalida=?, fechaCreacion=?, " +
+        jdbcTemplate.update("UPDATE reserva SET fecha=?, numeroPersonas=?, horaSalida=?, fechaCreacion=?, " +
                         "codigoQR=?, estadoReserva=?, usuario=?, idFranjaHoraria=?" +
                         "WHERE idReserva=?", reserva.getFecha(),reserva.getNumeroPersonas(),
                 reserva.getHoraSalida(),reserva.getFechaCreacion(), reserva.getCodigoQR(),
