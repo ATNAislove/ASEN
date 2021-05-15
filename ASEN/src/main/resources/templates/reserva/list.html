@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Reservas</title>
     <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
 </head>
 <body>
 <div class="container">
@@ -37,12 +37,17 @@
             <td th:text="${reserva.estadoReserva}"></td>
             <td th:text="${reserva.usuario}"></td>
             <td th:text="${reserva.idFranjaHoraria}"></td>
-            <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-danger" role="button">Esborra</a></td>
+            <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita</a></td>
+            <td><a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}" id="borrar">Esborra</a></td>
+            <td> </td>
+
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Agregar Reserva</a>
+    <a href="add" class="btn btn-primary" role="button">Agregar Reserva</a>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
 </div>
 </body>
 </html>

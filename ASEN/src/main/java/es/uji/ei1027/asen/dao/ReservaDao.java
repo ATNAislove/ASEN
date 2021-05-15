@@ -63,6 +63,14 @@ public class ReservaDao {
             return new ArrayList<Reserva>();
         }
     }
+    public List<Reserva> getReservas_usuario(String usuario) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario +"'", new ReservaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<Reserva>();
+        }
+    }
 
 
 }
