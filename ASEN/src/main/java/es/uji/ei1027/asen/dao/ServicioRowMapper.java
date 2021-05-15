@@ -15,9 +15,9 @@ public final class ServicioRowMapper implements RowMapper<Servicio> {
         servicio.setIdServicio(rs.getInt("idServicio"));
         servicio.setFechaInicio(rs.getObject("fechaInicio", LocalDate.class));
         servicio.setFechaFin(rs.getObject("fechaFin", LocalDate.class));
-        servicio.setTipoServicio(rs.getString("tipoServicio"));
         servicio.setPeriodicidad(rs.getInt("periodicidad"));
         servicio.setTipoTemporada(rs.getString("tipoTemporada"));
+        servicio.setIdTipoServicio(rs.getInt("idTipoServicio"));
         servicio.setIdArea(rs.getInt("idArea"));
         return servicio;
     }

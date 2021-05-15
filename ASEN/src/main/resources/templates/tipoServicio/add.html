@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear un tipo de servicio</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo tipo de servicio</h2><!-- -->
+<form action="#" th:action="@{/tipoServicio/add}"
+      th:object="${tipoServicio}" method="post">
+    <table>
+        <tr>
+            <td><label>idTipoServicio</label></td>
+            <td><input type="number" th:field="*{idTipoServicio}" required/></td>
+        </tr>
+        <tr>
+            <td><label>nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" required/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear tipo de servicio" /></td>
+        </tr>
+    </table>
+    <br>
+    <a href="n/">VOLVER</a>
+</form>
+</body>
+</html>

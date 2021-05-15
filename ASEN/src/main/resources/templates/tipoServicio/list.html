@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de tipos de servicio</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <h1>Lista de tipos de servicio</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>idTipoServicio</th>
+      <th>nombre</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tipoServicio: ${tipoServicios}">
+      <td th:text="${tipoServicio.idTipoServicio}"></td>
+      <td th:text="${tipoServicio.nombre}"></td>
+      <td> <a th:href="@{/tipoServicio/update/{idTipoServicio}(idTipoServicio=${tipoServicio.idTipoServicio})}" class="btn btn-warning" role="button">Edita</a></td>
+      <td><a th:href="@{/tipoServicio/delete/{idTipoServicio}(idTipoServicio=${tipoServicio.idTipoServicio})}" class="btn btn-danger" role="button">Esborra</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="add" class="btn btn-success" role="button">Agregar tipo de servicio</a>
+</div>
+</body>
+</html>

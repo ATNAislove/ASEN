@@ -10,9 +10,9 @@ public class Servicio {
     private LocalDate fechaInicio;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaFin;
-    private String tipoServicio;
     private int periodicidad;
     private String tipoTemporada;
+    private int idTipoServicio;
     private int idArea;
 
     public int getIdServicio() {
@@ -39,14 +39,6 @@ public class Servicio {
         this.fechaFin = fechaFin;
     }
 
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
-    }
-
     public int getPeriodicidad() {
         return periodicidad;
     }
@@ -63,6 +55,14 @@ public class Servicio {
         this.tipoTemporada = tipoTemporada;
     }
 
+    public int getIdTipoServicio() {
+        return idTipoServicio;
+    }
+
+    public void setIdTipoServicio(int idTipoServicio) {
+        this.idTipoServicio = idTipoServicio;
+    }
+
     public int getIdArea() {
         return idArea;
     }
@@ -77,9 +77,9 @@ public class Servicio {
                 "idServicio=" + idServicio +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
-                ", tipoServicio='" + tipoServicio + '\'' +
                 ", periodicidad=" + periodicidad +
                 ", tipoTemporada='" + tipoTemporada + '\'' +
+                ", idTipoServicio=" + idTipoServicio +
                 ", idArea=" + idArea +
                 '}';
     }

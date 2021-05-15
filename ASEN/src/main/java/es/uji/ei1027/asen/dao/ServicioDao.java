@@ -21,8 +21,7 @@ public class ServicioDao {
     /* Afegeix el servici a la base de dades */
 
     public void addServicio(Servicio servicio) {
-        jdbcTemplate.update("INSERT INTO servicio VALUES(?, ?, ?, ?, ?, ?, ?)",servicio.getIdServicio(), servicio.getFechaInicio(),servicio.getFechaFin(),
-                servicio.getTipoServicio(),servicio.getPeriodicidad(),servicio.getTipoTemporada(),servicio.getIdArea());
+        jdbcTemplate.update("INSERT INTO servicio VALUES(?, ?, ?, ?, ?, ?, ?)",servicio.getIdServicio(),servicio.getFechaInicio(),servicio.getFechaFin(), servicio.getPeriodicidad(), servicio.getTipoTemporada(), servicio.getIdTipoServicio(), servicio.getIdArea());
     }
     /* Esborra el servicio de la base de dades */
     public void deleteServicio(Servicio servicio) {
@@ -36,9 +35,7 @@ public class ServicioDao {
     /* Actualitza els atributs del servicio
        (excepte id, que és la clau primària) */
     public void updateServicio(Servicio servicio) {
-        jdbcTemplate.update("UPDATE servicio SET idServicio=?, fechaInicio=?, fechaFin=?, tipoServicio=?, " +
-                        "periodicidad=?, tipoTemporada=?, idArea=?" ,servicio.getIdServicio(), servicio.getFechaInicio(),servicio.getFechaFin(),
-        servicio.getTipoServicio(),servicio.getPeriodicidad(),servicio.getTipoTemporada(),servicio.getIdArea());
+        jdbcTemplate.update("UPDATE servicio SET idServicio=?, fechaInicio=?, fechaFin=?, periodicidad=?, tipoTemporada=?, idTipoServicio=?, idArea=?" ,servicio.getIdServicio(),servicio.getFechaInicio(),servicio.getFechaFin(), servicio.getPeriodicidad(), servicio.getTipoTemporada(), servicio.getIdTipoServicio(), servicio.getIdArea());
     }
     /* Obté el servicio amb el id donat. Torna null si no existeix. */
     public Servicio getServicio(int idServicio) {
