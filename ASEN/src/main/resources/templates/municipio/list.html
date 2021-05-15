@@ -17,7 +17,7 @@
             <th>Nombre municipio</th>
             <th>Codigo Postal</th>
             <th>Provincia</th>
-            <th>Poblacion</th>
+            <th>NumHabitantes</th>
             <th></th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
             <td th:text="${municipio.nombreMunicipio}"></td>
             <td th:text="${municipio.codigoPostal}"></td>
             <td th:text="${municipio.nombreProvincia}"></td>
-            <td th:text="${{municipio.poblacion}}"></td>
+            <td th:text="${{municipio.numHabitantes}}"></td>
             <td> <a th:href="@{/municipio/update/{idMunicipio}(idMunicipio=${municipio.idMunicipio})}" class="btn btn-warning" role="button">Edita</a></td>
             <td><a th:href="@{/municipio/delete/{idMunicipio}(idMunicipio=${municipio.idMunicipio})}" class="btn btn-danger" role="button">Esborra</a></td>
         </tr>

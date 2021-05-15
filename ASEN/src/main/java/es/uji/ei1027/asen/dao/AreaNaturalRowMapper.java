@@ -15,8 +15,6 @@ public AreaNatural mapRow(ResultSet rs, int rowNum) throws SQLException {
         areaNatural.setDescripcion(rs.getString("descripcion"));
         areaNatural.setImagen(rs.getString("imagen"));
         areaNatural.setTipoTerreno(rs.getString("tipoTerreno"));
-        areaNatural.setTipoServicio(rs.getString("tipoServicio"));
-        areaNatural.setInstalacion(rs.getString("instalacion"));
         areaNatural.setTipoArea(rs.getString("tipoArea"));
         areaNatural.setTipoAcceso(rs.getString("tipoAcceso"));
         return areaNatural;

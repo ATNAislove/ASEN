@@ -22,31 +22,31 @@ public class ZonaDao {
 
     /* Afegeix el municipio a la base de dades */
     public void addZona(Zona zona) {
-        jdbcTemplate.update("INSERT INTO Zona VALUES(?, ?, ?, ?, ?)", zona.getIdCharNumero(), zona.getNombreZona(),
+        jdbcTemplate.update("INSERT INTO Zona VALUES(?, ?, ?, ?, ?, ?)", zona.getIdZona(),zona.getIdCharNumero(), zona.getNombreZona(),
                 zona.getAforoMaximo(), zona.getTipoTerreno(),zona.getIdArea());
     }
 
     /* Esborra el zona de la base de dades */
     public void deleteZona(Zona zona) {
-        jdbcTemplate.update("DELETE FROM zona WHERE idCharNumero=?", zona.getIdCharNumero());
+        jdbcTemplate.update("DELETE FROM zona WHERE idCharNumero=?", zona.getIdZona());
     }
 
     /* Esborra el zona de la base de dades */
-    public void deleteZona(String idCharNumero) {
-        jdbcTemplate.update("DELETE FROM zona WHERE idCharNumero=?", idCharNumero);
+    public void deleteZona(int idZona) {
+        jdbcTemplate.update("DELETE FROM zona WHERE idZona=?", idZona);
     }
 
     /* Actualitza els atributs del zona
        (excepte el nom, que és la clau primària) */
     public void updateZona(Zona zona) {
-        jdbcTemplate.update("UPDATE zona SET nombreZona=?, aforoMaximo=?, tipoTerreno=?, idArea=? WHERE idCharNumero=?",
-                zona.getNombreZona(), zona.getAforoMaximo(), zona.getTipoTerreno(), zona.getIdCharNumero(), zona.getIdArea());
+        jdbcTemplate.update("UPDATE zona SET idCharNumero=?, nombreZona=?, aforoMaximo=?, tipoTerreno=?, idArea=? WHERE idZona=?",
+                zona.getIdCharNumero(), zona.getNombreZona(), zona.getAforoMaximo(), zona.getTipoTerreno(), zona.getIdArea(),zona.getIdZona());
     }
 
     /* Obté el zona amb el nom donat. Torna null si no existeix. */
-    public Zona getZona(String idCharNumero) {
+    public Zona getZona(int idZona) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Zona WHERE idCharNumero = '" + idCharNumero + "'", new ZonaRowMapper());
+            return jdbcTemplate.queryForObject("SELECT * FROM Zona WHERE idZona = '" + idZona + "'", new ZonaRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

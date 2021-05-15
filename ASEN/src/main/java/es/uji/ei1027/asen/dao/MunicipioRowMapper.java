@@ -13,7 +13,7 @@ public final class MunicipioRowMapper implements RowMapper<Municipio>{
             municipio.setNombreMunicipio(rs.getString("nombreMunicipio"));
             municipio.setCodigoPostal (rs.getInt("codigoPostal"));
             municipio.setNombreProvincia (rs.getString("nombreProvincia"));
-            municipio.setPoblacion(rs.getInt("poblacion"));
+            municipio.setNumHabitantes(rs.getInt("numHabitantes"));
             return municipio;
         }
 

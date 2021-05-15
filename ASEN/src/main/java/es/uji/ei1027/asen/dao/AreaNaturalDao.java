@@ -21,9 +21,9 @@ public class AreaNaturalDao {
 
     /* Afegeix el areaNatural a la base de dades */
     public void addAreaNatural(AreaNatural areaNatural) {
-        jdbcTemplate.update("INSERT INTO areaNatural VALUES(?, ?, ?, ?, ?,?,?,?,?,?)",areaNatural.getIdArea(),
+        jdbcTemplate.update("INSERT INTO areaNatural VALUES(?, ?, ?, ?, ?,?,?,?)",areaNatural.getIdArea(),
                 areaNatural.getNombreArea(),areaNatural.getDescripcion(),areaNatural.getImagen(),areaNatural.getTipoTerreno(),
-                areaNatural.getTipoServicio(),areaNatural.getInstalacion(),areaNatural.getTipoArea(),areaNatural.getTipoAcceso(), areaNatural.getIdMunicipio());
+                areaNatural.getTipoArea(),areaNatural.getTipoAcceso(), areaNatural.getIdMunicipio());
     }
     /* Esborra el areaNatural de la base de dades */
     public void deleteAreaNatural(AreaNatural areaNatural) {
@@ -38,10 +38,10 @@ public class AreaNaturalDao {
     /* Actualitza els atributs del areaNatural
        (excepte el id, que és la clau primària) */
     public void updateAreaNatural(AreaNatural areaNatural) {
-        jdbcTemplate.update("UPDATE areaNatural SET nombreArea=?, descripcion=?, imagen=?, tipoTerreno=?,tipoServicio=?,instalacion=?," +
+        jdbcTemplate.update("UPDATE areaNatural SET nombreArea=?, descripcion=?, imagen=?, tipoTerreno=?," +
                         "tipoArea=?,tipoAcceso=? WHERE idArea=?",
                 areaNatural.getNombreArea(),areaNatural.getDescripcion(),areaNatural.getImagen(),areaNatural.getTipoTerreno(),
-                areaNatural.getTipoServicio(),areaNatural.getInstalacion(),areaNatural.getTipoArea(),areaNatural.getTipoAcceso(),areaNatural.getIdArea());
+                areaNatural.getTipoArea(),areaNatural.getTipoAcceso(),areaNatural.getIdArea());
     }
 
     /* Obté el areaNatural amb el nom donat. Torna null si no existeix. */

@@ -46,9 +46,9 @@ public class ZonaController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{idCharNumero}", method = RequestMethod.GET)
-    public String editZona(Model model, @PathVariable String idCharNumero) {
-        model.addAttribute("zona", zonaDao.getZona(idCharNumero));
+    @RequestMapping(value="/update/{idZona}", method = RequestMethod.GET)
+    public String editZona(Model model, @PathVariable int idZona) {
+        model.addAttribute("zona", zonaDao.getZona(idZona));
         return "zona/update";
     }
 
@@ -61,9 +61,9 @@ public class ZonaController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{idCharNumero}")
-    public String processDelete(@PathVariable String idCharNumero) {
-        zonaDao.deleteZona(idCharNumero);
+    @RequestMapping(value="/delete/{idZona}")
+    public String processDelete(@PathVariable int idZona) {
+        zonaDao.deleteZona(idZona);
         return "redirect:../list";
     }
 }

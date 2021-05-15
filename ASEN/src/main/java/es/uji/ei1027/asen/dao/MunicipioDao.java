@@ -22,7 +22,7 @@ public class MunicipioDao {
     /* Afegeix el municipio a la base de dades */
     public void addMunicipio(Municipio municipio) {
         jdbcTemplate.update("INSERT INTO Municipio VALUES(?, ?, ?, ?, ?)",municipio.getIdMunicipio(), municipio.getNombreMunicipio(),municipio.getCodigoPostal(),
-                municipio.getNombreProvincia(),municipio.getPoblacion());
+                municipio.getNombreProvincia(),municipio.getNumHabitantes());
     }
     /* Esborra el municipio de la base de dades */
     public void deleteMunicipio(Municipio municipio) {
@@ -37,8 +37,8 @@ public class MunicipioDao {
     /* Actualitza els atributs del municipio
        (excepte el nom, que és la clau primària) */
     public void updateMunicipio(Municipio municipio) {
-        jdbcTemplate.update("UPDATE municipio SET nombreMunicipio=?, codigoPostal=?, nombreProvincia=?, poblacion=? WHERE idMunicipio=?", municipio.getNombreMunicipio(),municipio.getCodigoPostal(),
-                municipio.getNombreProvincia(),municipio.getPoblacion(), municipio.getIdMunicipio());
+        jdbcTemplate.update("UPDATE municipio SET nombreMunicipio=?, codigoPostal=?, nombreProvincia=?, numHabitantes=? WHERE idMunicipio=?", municipio.getNombreMunicipio(),municipio.getCodigoPostal(),
+                municipio.getNombreProvincia(),municipio.getNumHabitantes(), municipio.getIdMunicipio());
     }
 
     /* Obté el municipio amb el nom donat. Torna null si no existeix. */

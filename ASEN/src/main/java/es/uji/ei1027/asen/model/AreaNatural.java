@@ -6,8 +6,6 @@ public class AreaNatural {
     private String descripcion;
     private String imagen;
     private String tipoTerreno;
-    private String tipoServicio;
-    private String instalacion;
     private String tipoArea;
     private String tipoAcceso;
     private int idMunicipio;
@@ -55,22 +53,6 @@ public class AreaNatural {
         this.tipoTerreno = tipoTerreno;
     }
 
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
-    }
-
-    public String getInstalacion() {
-        return instalacion;
-    }
-
-    public void setInstalacion(String instalacion) {
-        this.instalacion = instalacion;
-    }
-
     public String getTipoArea() {
         return tipoArea;
     }
@@ -103,8 +85,6 @@ public class AreaNatural {
                 ", descripcion='" + descripcion + '\'' +
                 ", imagen='" + imagen + '\'' +
                 ", tipoTerreno='" + tipoTerreno + '\'' +
-                ", tipoServicio='" + tipoServicio + '\'' +
-                ", instalacion='" + instalacion + '\'' +
                 ", tipoArea='" + tipoArea + '\'' +
                 ", tipoAcceso='" + tipoAcceso + '\'' +
                 ", idMunicipio=" + idMunicipio +

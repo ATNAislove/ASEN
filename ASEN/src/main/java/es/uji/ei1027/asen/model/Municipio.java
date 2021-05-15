@@ -5,7 +5,7 @@ public class Municipio {
     private String nombreMunicipio;
     private int codigoPostal;
     private String nombreProvincia;
-    private int poblacion;
+    private int numHabitantes;
 
     public Municipio() {
     }
@@ -42,12 +42,12 @@ public class Municipio {
         this.nombreProvincia = nombreProvincia;
     }
 
-    public int getPoblacion() {
-        return poblacion;
+    public int getNumHabitantes() {
+        return numHabitantes;
     }
 
-    public void setPoblacion(int poblacion) {
-        this.poblacion = poblacion;
+    public void setNumHabitantes(int numHabitantes) {
+        this.numHabitantes = numHabitantes;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Municipio {
                 ", nombreMunicipio='" + nombreMunicipio + '\'' +
                 ", codigoPostal=" + codigoPostal +
                 ", nombreProvincia='" + nombreProvincia + '\'' +
-                ", poblacion=" + poblacion +
+                ", numHabitantes=" + numHabitantes +
                 '}';
     }
 }

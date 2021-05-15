@@ -10,6 +10,7 @@ public final class ZonaRowMapper implements RowMapper<Zona> {
     @Override
     public Zona mapRow(ResultSet rs, int rowNum) throws SQLException {
         Zona zona = new Zona();
+        zona.setIdZona(rs.getInt("idZona"));
         zona.setIdCharNumero(rs.getString("idCharNumero"));
         zona.setNombreZona(rs.getString("nombreZona"));
         zona.setAforoMaximo(rs.getInt("aforoMaximo"));

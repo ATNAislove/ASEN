@@ -1,6 +1,7 @@
 package es.uji.ei1027.asen.model;
 
 public class Zona {
+    private int idZona;
     private String idCharNumero;
     private String nombreZona;
     private int aforoMaximo;
@@ -9,6 +10,9 @@ public class Zona {
 
     public Zona() {
     }
+    public int getIdZona() { return idZona; }
+
+    public void  setIdZona(int idZona) { this.idZona=idZona; }
 
     public String getIdCharNumero() {
         return idCharNumero;
@@ -53,7 +57,8 @@ public class Zona {
     @Override
     public String toString() {
         return "Zona{" +
-                "idCharNumero='" + idCharNumero + '\'' +
+                "idZona='" + idZona + '\'' +
+                ", idCharNumero='" + idCharNumero + '\'' +
                 ", nombreZona='" + nombreZona + '\'' +
                 ", aforoMaximo=" + aforoMaximo + '\'' +
                 ", tipoTerreno='" + tipoTerreno + '\'' +

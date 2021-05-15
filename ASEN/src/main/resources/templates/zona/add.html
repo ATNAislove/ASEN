@@ -8,10 +8,14 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nuevo municipio</h2>
+<h2>Nueva Zona</h2>
 <form action="#" th:action="@{/zona/add}"
       th:object="${zona}" method="post">
     <table>
+        <tr>
+            <td><label>Id zona</label></td>
+            <td><input type="number" th:field="*{idZona}" /></td>
+        </tr>
         <tr>
             <td><label>idCharNumero</label></td>
             <td><input type="text" th:field="*{idCharNumero}" /></td>
