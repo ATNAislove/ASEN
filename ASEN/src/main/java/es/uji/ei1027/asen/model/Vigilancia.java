@@ -1,7 +1,6 @@
 package es.uji.ei1027.asen.model;
 
 public class Vigilancia {
-    //Prueba Git
     private String dni;
     private int idArea;
 
