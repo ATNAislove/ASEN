@@ -65,4 +65,19 @@ public class ReservaController {
         reservaDao.deleteReserva(idReserva);
         return "redirect:../list";
     }
+
+    @RequestMapping(value = "/updateHoraSalida/{idReserva}", method = RequestMethod.GET)
+    public String editHoraSalidaReserva(Model model, @PathVariable int idReserva) {
+        model.addAttribute("reserva", reservaDao.getReserva(idReserva));
+        return "reserva/updateHoraSalida";
+    }
+
+    @RequestMapping(value = "/updateHoraSalida", method = RequestMethod.POST)
+    public String processHoraSalidaUpdateSubmit(@ModelAttribute("reserva") Reserva reserva,
+                                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "reserva/updateHoraSalida";
+        reservaDao.updateHoraSalidaReserva(reserva);
+        return "redirect:list";
+    }
 }

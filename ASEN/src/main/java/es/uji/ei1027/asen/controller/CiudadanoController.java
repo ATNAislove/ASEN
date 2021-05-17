@@ -66,5 +66,9 @@ public class CiudadanoController {
         return "redirect:../list";
     }
 
+    @RequestMapping("/menu")
+    public String menuCiudadanos(Model model) {
+        return "ciudadano/menu";
+    }
 
 }

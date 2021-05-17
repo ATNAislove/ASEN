@@ -44,6 +44,12 @@ public class ReservaDao {
                 reserva.getHoraSalida(),reserva.getFechaCreacion(), reserva.getCodigoQR(),
                 reserva.getEstadoReserva(),reserva.getUsuario(),reserva.getIdFranjaHoraria(),reserva.getIdReserva());
     }
+
+    public void updateHoraSalidaReserva(Reserva reserva) {
+        jdbcTemplate.update("UPDATE reserva SET  horaSalida=?" +
+                        "WHERE idReserva=?",
+                reserva.getHoraSalida(),reserva.getIdReserva());
+    }
     /* Obté la reserva amb el idReserva donat. Torna null si no existeix. */
     public Reserva getReserva(int idReserva) {
         try {
