@@ -8,9 +8,23 @@
 </head>
 <body>
 <h2>Nueva Reserva</h2><!-- formulario de Reserva-->
-<form action="#" th:action="@{/reserva/add}"
-      th:object="${reserva}" method="post">
-    <table>
+<form action="#" th:action="@{/reserva/add}" th:object="${reserva}" method="post">
+        <!--<div class="form-group row">
+        <label class="control-label col-sm-2">Nombre terreno:</label>
+        <div class="col-sm-4">
+        <td><select class="form_control" type="text" th:field="*{tipoTerreno}">
+            <option value="No seleccionat">Selecciona el nombre de un tipo de terreno</option>
+            <option value="arena"> arena </option>
+            <option value="hierba"> hierba </option>
+            <option value="piedra"> piedra</option>
+            <option value="humífero"> humífero </option>
+            <option value="fango"> fango </option>
+            <option value="tierra"> tierra </option>
+    </select>
+        </div>
+        </div>
+        </!-->
+            <table>
         <tr>
             <td><label>idReserva</label></td>
             <td><input type="number" th:field="*{idReserva}" required/></td>
@@ -53,6 +67,7 @@
     </table>
     <br>
     <a href="n/">VOLVER</a>
+
 </form>
 </body>
 </html>
