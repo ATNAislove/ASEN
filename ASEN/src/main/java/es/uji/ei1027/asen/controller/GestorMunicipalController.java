@@ -60,7 +60,7 @@ public class GestorMunicipalController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{nom}")
+    @RequestMapping(value="/delete/{dni}")
     public String processDelete(@PathVariable String dni) {
         gestorMunicipalDao.deleteGestorMunicipal(dni);
         return "redirect:../list";

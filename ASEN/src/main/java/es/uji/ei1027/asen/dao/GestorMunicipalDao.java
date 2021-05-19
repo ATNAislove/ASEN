@@ -22,9 +22,9 @@ public class GestorMunicipalDao {
 
     /* Afegeix el gestorMunicipal a la base de dades */
     public void addGestorMunicipal(GestorMunicipal gestorMunicipal) {
-        jdbcTemplate.update("INSERT INTO gestorMunicipal VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?)",gestorMunicipal.getDni(),
+        jdbcTemplate.update("INSERT INTO gestorMunicipal VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)",gestorMunicipal.getDni(),
                 gestorMunicipal.getNombre(),gestorMunicipal.getApellidos(), gestorMunicipal.getFechaNacimiento(),gestorMunicipal.getCorreoElectronico(),
-                gestorMunicipal.getDireccion(),gestorMunicipal.getMunicipioNacimiento(),gestorMunicipal.getPais(),gestorMunicipal.getTelefono(),
+                gestorMunicipal.getUsuario(),gestorMunicipal.getContrasenya(),gestorMunicipal.getDireccion(),gestorMunicipal.getMunicipioNacimiento(),gestorMunicipal.getPais(),gestorMunicipal.getTelefono(),
                 gestorMunicipal.getFechaRegistro(),gestorMunicipal.getFechaBaja(),gestorMunicipal.getIdMunicipio());
     }
     /* Esborra el gestorMunicipal de la base de dades */
@@ -40,10 +40,10 @@ public class GestorMunicipalDao {
     /* Actualitza els atributs del gestorMunicipal
        (excepte el nom, que és la clau primària) */
     public void updateGestorMunicipal(GestorMunicipal gestorMunicipal) {
-        jdbcTemplate.update("UPDATE gestorMunicipal SET nombre=?, apellidos=?, fechaNacimiento=?, correoElectronico=?,direccion=?,municipioNacimineto=?," +
+        jdbcTemplate.update("UPDATE gestorMunicipal SET nombre=?, apellidos=?, fechaNacimiento=?, correoElectronico=?,usuario=?,contrasenya=?,direccion=?,municipioNacimineto=?," +
                         "pais=?,telefono=?,fechaRegistro=?,fechaBaja=?,idMunicipio=? WHERE dni=?",
                 gestorMunicipal.getNombre(),gestorMunicipal.getApellidos(),gestorMunicipal.getFechaNacimiento(),gestorMunicipal.getCorreoElectronico(),
-                gestorMunicipal.getDireccion(),gestorMunicipal.getMunicipioNacimiento(),gestorMunicipal.getPais(),gestorMunicipal.getTelefono(),
+                gestorMunicipal.getUsuario(),gestorMunicipal.getContrasenya(),gestorMunicipal.getDireccion(),gestorMunicipal.getMunicipioNacimiento(),gestorMunicipal.getPais(),gestorMunicipal.getTelefono(),
                 gestorMunicipal.getFechaRegistro(),gestorMunicipal.getFechaBaja(),gestorMunicipal.getIdMunicipio(),gestorMunicipal.getDni());
     }
 
