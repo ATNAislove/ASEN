@@ -11,6 +11,8 @@ public class GestorMunicipal {
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaNacimiento;
     private String correoElectronico;
+    private String usuario;
+    private String contrasenya;
     private String direccion;
     private String municipioNacimiento;
     private String pais;
@@ -63,6 +65,14 @@ public class GestorMunicipal {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
+
+    public String getUsuario() { return usuario; }
+
+    public void setUsuario(String usuario) { this.usuario = usuario;    }
+
+    public String getContrasenya() { return contrasenya;    }
+
+    public void setContrasenya(String contrasenya) { this.contrasenya = contrasenya; }
 
     public String getDireccion() {
         return direccion;

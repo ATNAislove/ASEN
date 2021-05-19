@@ -19,6 +19,8 @@ public final class GestorMunicipalRowMapper implements RowMapper<GestorMunicipal
         //gestorMunicipal.setFechaNacimiento(fechaN != null ? fechaN.toLocalDate() : null);
         gestorMunicipal.setFechaNacimiento (rs.getObject("fechaNacimiento", LocalDate.class));
         gestorMunicipal.setCorreoElectronico(rs.getString("correoElectronico"));
+        gestorMunicipal.setUsuario(rs.getString("usuario"));
+        gestorMunicipal.setContrasenya(rs.getString("contrasenya"));
         gestorMunicipal.setDireccion (rs.getString("direccion "));
         gestorMunicipal.setMunicipioNacimiento (rs.getString("municipioNacimiento"));
         gestorMunicipal.setPais (rs.getString("pais"));
