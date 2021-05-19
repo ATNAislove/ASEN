@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
 
 class UserValidator implements Validator {
     @Override
@@ -37,7 +38,7 @@ class UserValidator implements Validator {
 
 
 @Controller
-public class LoginController {
+public class LoginController implements UserDao {
     @Autowired
     private UserDao userDao;
 
@@ -72,5 +73,13 @@ public class LoginController {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username, String password) {
+        return null;
+    }
 
+    @Override
+    public Collection<UserDetails> listAllUsers() {
+        return null;
+    }
 }
