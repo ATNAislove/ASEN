@@ -9,23 +9,8 @@
 <body>
 <h2>Nueva Reserva</h2><!-- formulario de Reserva-->
 
-
-<label>Nombre terreno:</label>
-<select class="form_control" type="text" th:field="*{tipoTerreno}">
-    <option value="No seleccionat">Selecciona el nombre de un tipo de terreno</option>
-    <option value="arena"> arena </option>
-    <option value="hierba"> hierba </option>
-    <option value="piedra"> piedra</option>
-    <option value="humífero"> humífero </option>
-    <option value="fango"> fango </option>
-    <option value="tierra"> tierra </option>
-</select>
-
 <form action="#" th:action="@{/reserva/add}" th:object="${reserva}" method="post">
-
-
-
-            <table>
+    <table>
         <tr>
             <td><label>idReserva</label></td>
             <td><input type="number" th:field="*{idReserva}" required/></td>
@@ -51,8 +36,8 @@
             <td><input type="text" th:field="*{codigoQR}" maxlength="250" required/></td>
         </tr>
         <tr>
-            <td><label for="estado">estado Reserva</label></td>
-            <td><input type="text" th:field="*{estadoReserva}" name="estado" id="estado" value="pendiente" placeholder="pendiente" readonly /></td>
+            <td><label>estado Reserva</label></td>
+            <td><input type="text" th:field="*{estadoReserva}" value="pendiente" placeholder="pendiente"/></td>
         </tr>
         <tr>
             <td><label>usuario</label></td>
@@ -65,7 +50,7 @@
         <tr>
             <td colspan="2"><input type="submit" value="Crear Reserva" /></td>
         </tr>
-    </table>
+</table>
     <br>
     <a href="n/">VOLVER</a>
 
