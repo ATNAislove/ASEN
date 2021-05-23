@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/areaNatural")
 public class AreaNaturalController {
@@ -65,5 +68,12 @@ public class AreaNaturalController {
     public String processDelete(@PathVariable int idArea) {
         areaNaturalDao.deleteAreaNatural(idArea);
         return "redirect:../list";
+    }
+
+    @RequestMapping("/consultarOcupacion")
+    public String consultarOcupacion(Model model) {
+        //model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
+        model.addAttribute("areaNatural", new AreaNatural());
+        return "areaNatural/consultarOcupacion";
     }
 }

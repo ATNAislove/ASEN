@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>EI1027</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h1>EI1027 - Spring MVC</h1>
+<div class="container">
+    <h2>Página principal menu ciudadano</h2>
+    <center><br>
+        <table>
+            <tr>
+                <td> <a href="../areaNatural/list" class="btn btn-warning" role="button">Consultar <br>información<br> ocupación</a></td>
+                <td><a href="../reserva/list" class="btn btn-warning" role="button"><br>Reservas<br> &nbsp;</a></td>
+            </tr>
+        </table>
+    </center>
+    <!--<table>
+        <tr><td><a  class="btn btn-warning" role="button">Gestionar entrada y<br>salida de<br>áreas naturales</a></td></tr>
+    </table>-->
+</div>
+<!--<h1>EI1027 - Spring MVC</h1>
 <h2>Pruebas de la aplicación</h2>
 <ul>
     <li><a href="municipio/list">Gestión de Municipios</a></li>
@@ -24,7 +41,10 @@
     <li><a href="franjaHoraria/add">Gestión de franjas horarias</a></li>
     <li><a href="accesibilidad/add">Gestión de accesibilidad</a></li>
     <li><a href="ciudadano/menu">Menu del ciudadano</a></li>
+    <li><a href="areaNatural/consultarOcupacion">consultarOcupacion</a></li>
+    <li><a href="areaNatural/list">consultar Areas</a></li>
 
 </ul>
+-->
 </body>
 </html>

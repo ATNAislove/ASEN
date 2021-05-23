@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de areas naturales</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de áreas naturales</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre Area</th>
+            <th>Descripcion</th>
+            <th>Imagen</th>
+            <th>Tipo Terreno</th>
+            <th>Tipo Area</th>
+            <th>Tipo Acceso</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="areaNatural: ${areasNaturales}">
+            <td th:text="${areaNatural.nombreArea}"></td>
+            <td th:text="${areaNatural.descripcion}"></td>
+            <td><img style="max-width:150px;max-height:150px" th:src="${areaNatural.imagen}" alt="No disponible"></td>
+            <td th:text="${areaNatural.tipoTerreno}"></td>
+            <td th:text="${areaNatural.tipoArea}"></td>
+            <td th:text="${areaNatural.tipoAcceso}"></td>
+            <td> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td><a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-danger" role="button">Esborra</a></td>
+            <td><a th:href="@{/reserva/add/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Reservar</a></td>
+            <td><a th:href="@{/areaNatural/consultarOcupacion/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-secondary" role="button">Ocupacion</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Agregar Área Natural</a>
+</div>
+</body>
+</html>

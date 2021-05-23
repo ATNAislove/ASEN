@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Reservas</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+</head>
+<body>
+<h2>Consultar Ocupacion</h2>
+<form action="#" th:action="@{/areaNatural/consultarOcupacion}"
+      th:object="${areaNatural}" method="post">
+    <label>Tipo acceso</label></td>
+    <td><select class="form_control" type="text" th:field="*{tipoAcceso}">
+        <option value="No seleccionado">Selecciona el tipo de acceso</option>
+        <option value="abierto">Abierto</option>
+        <option value="restringido">Restringido</option>
+        <option value="cerrado">Cerrado</option>
+    </select>
+</form>
+</body>
+</html>
