@@ -5,6 +5,8 @@ import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,9 +41,20 @@ public class ReservaController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult) {
+        ReservaValidator reservaValidator = new ReservaValidator();
+        reservaValidator.validate(reserva,bindingResult);
         if (bindingResult.hasErrors())
             return "reserva/add";
-        reservaDao.addReserva(reserva);
+        try{
+            reservaDao.addReserva(reserva);
+        } catch(DuplicateKeyException e){
+            throw new AsenApplicationException(
+                    "Ya existe una reserva con este código "
+                            +reserva.getIdReserva(), "Id repetido");
+        } catch(DataAccessException e) {
+            throw new AsenApplicationException(
+                    "Error en el acceso a la base de datos", "ErrorAcceder");
+        }
         return "redirect:list";
     }
 

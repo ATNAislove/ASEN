@@ -3,6 +3,8 @@ package es.uji.ei1027.asen.controller;
 import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,7 +43,17 @@ public class CiudadanoController {
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "ciudadano/add";
-        ciudadanoDao.addCiudadano(ciudadano);
+        try{
+            ciudadanoDao.addCiudadano(ciudadano);
+        }
+        catch(DuplicateKeyException e){
+            throw new AsenApplicationException(
+                    "Ya existe un usuario con este nombre "
+                            +ciudadano.getUsuario(), "nombre Usuario repetido"); }
+        catch(DataAccessException e) {
+            throw new AsenApplicationException(
+                    "Error en el acceso a la base de datos", "ErrorAcceder");
+        }
         return "redirect:list";
     }
 

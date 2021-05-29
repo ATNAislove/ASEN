@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ReservaDao {
 
     public void addReserva(Reserva reserva) {
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",reserva.getIdReserva(),reserva.getFecha(),reserva.getNumeroPersonas()
-                ,reserva.getHoraSalida(),reserva.getFechaCreacion(),reserva.getCodigoQR(),reserva.getEstadoReserva()
+                ,reserva.getHoraSalida(), LocalDate.now(),"codigoQR","pendiente"
                 ,reserva.getUsuario(),reserva.getIdFranjaHoraria());
     }
     /* Esborra la reserva de la base de dades */

@@ -18,6 +18,7 @@
         <tr>
             <td><label>fecha</label></td>
             <td><input type="date" th:field="*{fecha}" required/></td>
+            <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>
         </tr>
         <tr>
             <td><label>Numero Personas</label></td>
@@ -28,16 +29,16 @@
             <td><input type="time" th:field="*{horaSalida}" /></td>
         </tr>
         <tr>
-            <td><label>fecha Creacion</label></td>
-            <td><input type="date" th:field="*{fechaCreacion}" required/></td>
+            <td hidden><label>fecha Creacion</label></td>
+            <td hidden><input type="date" th:field="*{fechaCreacion}"/></td>
         </tr>
         <tr>
-            <td><label>codigoQR</label></td>
-            <td><input type="text" th:field="*{codigoQR}" maxlength="250" required/></td>
+            <td hidden><label>codigoQR</label></td>
+            <td hidden><input type="text" th:field="*{codigoQR}" maxlength="250" /></td>
         </tr>
         <tr>
-            <td><label>estado Reserva</label></td>
-            <td><input type="text" th:field="*{estadoReserva}" value="pendiente" placeholder="pendiente"/></td>
+            <td hidden><label>estado Reserva</label></td>
+            <td hidden><input type="text" th:field="*{estadoReserva}"  value="pendiente" placeholder="pendiente"/></td>
         </tr>
         <tr>
             <td><label>usuario</label></td>
