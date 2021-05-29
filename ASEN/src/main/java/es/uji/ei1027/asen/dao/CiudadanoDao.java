@@ -1,6 +1,8 @@
 package es.uji.ei1027.asen.dao;
 
 import es.uji.ei1027.asen.model.Ciudadano;
+import es.uji.ei1027.asen.model.UserDetails;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,10 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class CiudadanoDao {
+public class CiudadanoDao implements UserDao {
     private JdbcTemplate jdbcTemplate;
     // Obté el jdbcTemplate a partir del Data Source
     @Autowired
@@ -66,5 +69,37 @@ public class CiudadanoDao {
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Ciudadano>();
         }
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username, String password) {
+        try{
+            Ciudadano ciudadano = jdbcTemplate.queryForObject("SELECT * FROM Ciudadano WHERE usuario = '"+ username + "'", new CiudadanoRowMapper());
+            if (ciudadano==null) return null;
+            else if(password.equals(ciudadano.getPin())){
+                UserDetails user = new UserDetails();
+                user.setUsername(username);
+                user.setPassword(password);
+                return user;
+            }
+        }catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+        /*if (user == null)
+            return null; // Usuari no trobat
+        // Contrasenya
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        if (passwordEncryptor.checkPassword(password, user.getPassword())) {
+            // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+            return user;
+        }
+        else {
+            return null; // bad login!
+        }*/
+        return null;
+
+    }
+    @Override
+    public Collection<UserDetails> listAllUsers() {
+        return null;
     }
 }

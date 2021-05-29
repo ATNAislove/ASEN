@@ -18,6 +18,8 @@
                 <td><a href="../reserva/list" class="btn btn-warning" role="button"><br>Reservas<br> &nbsp;</a></td>
             </tr>
         </table>
+        <div th:object="${session}"><p>Hey esto funciona<span th:text="*{user.username}"></span></p></div>
+
     </center>
     <!--<table>
         <tr><td><a  class="btn btn-warning" role="button">Gestionar entrada y<br>salida de<br>áreas naturales</a></td></tr>

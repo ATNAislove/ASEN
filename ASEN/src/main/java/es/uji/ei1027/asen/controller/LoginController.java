@@ -38,7 +38,7 @@ class UserValidator implements Validator {
 
 
 @Controller
-public class LoginController implements UserDao {
+public class LoginController {
     @Autowired
     private UserDao userDao;
 
@@ -73,7 +73,7 @@ public class LoginController implements UserDao {
     }
 
 
-    @Override
+    /*@Override
     public UserDetails loadUserByUsername(String username, String password) {
         return null;
     }
@@ -81,5 +81,5 @@ public class LoginController implements UserDao {
     @Override
     public Collection<UserDetails> listAllUsers() {
         return null;
-    }
+    }*/
 }
