@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>Consultar Ocupacion</h2>
-<form action="#" th:action="@{/areaNatural/consultarOcupacion}"
+<!--<form action="#" th:action="@{/areaNatural/consultarOcupacion}"
       th:object="${areaNatural}" method="post">
     <label>Tipo acceso</label></td>
     <td><select class="form_control" type="text" th:field="*{tipoAcceso}">
@@ -17,6 +17,14 @@
         <option value="restringido">Restringido</option>
         <option value="cerrado">Cerrado</option>
     </select>
-</form>
+</form>-->
+<h3 th:text="${areaNatural.nombreArea}"></h3>
+<p th:text="${areaNatural.descripcion}"></p>
+<img style="max-width:250px;max-height:250px" th:src="${areaNatural.imagen}" alt="No disponible">
+<p>Tipo de terreno: <span th:text="${areaNatural.tipoTerreno}"/></p>
+<p>Tipo de area: <span th:text="${areaNatural.tipoArea}"/></p>
+<p>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/></p>
+
+<p>Municipio: <span th:text="${municipio}"/></p>
 </body>
 </html>

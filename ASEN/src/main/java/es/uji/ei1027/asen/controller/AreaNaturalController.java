@@ -2,6 +2,7 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.AreaNaturalDao;
 import es.uji.ei1027.asen.model.AreaNatural;
+import es.uji.ei1027.asen.svc.MostrarOcupacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,14 @@ import java.util.List;
 @RequestMapping("/areaNatural")
 public class AreaNaturalController {
     private AreaNaturalDao areaNaturalDao;
+
+
+    private MostrarOcupacionService mostrarOcupacionService;
+
+    @Autowired
+    public void setMostrarOcupacionService(MostrarOcupacionService mostrarOcupacionService) {
+        this.mostrarOcupacionService = mostrarOcupacionService;
+    }
 
     @Autowired
     public void setAreaNaturalDao(AreaNaturalDao areaNaturalDao) {
@@ -70,10 +79,10 @@ public class AreaNaturalController {
         return "redirect:../list";
     }
 
-    @RequestMapping("/consultarOcupacion")
-    public String consultarOcupacion(Model model) {
-        //model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
-        model.addAttribute("areaNatural", new AreaNatural());
+    @RequestMapping(value="/consultarOcupacion/{idArea}", method = RequestMethod.GET)
+    public String consultarOcupacion(Model model, @PathVariable int idArea) {
+        model.addAttribute("areaNatural", areaNaturalDao.getAreaNatural(idArea));
+        model.addAttribute("municipio", mostrarOcupacionService.getMunicipiofromAreaNatural(idArea));
         return "areaNatural/consultarOcupacion";
     }
 }
