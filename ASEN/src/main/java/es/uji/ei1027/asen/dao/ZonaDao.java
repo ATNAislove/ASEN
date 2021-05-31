@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,4 +61,32 @@ public class ZonaDao {
             return new ArrayList<Zona>();
         }
     }
+    /* Obté totes les zones en un area. Torna una llista buida si no n'hi ha cap. */
+    public List<Zona> getZonasByArea(int idArea) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Zona WHERE idArea='"+idArea+"'", new ZonaRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Zona>();
+        }
+    }
+    //Obtener el numero de zonas de un area
+    public int numZonas(int idArea){
+        try {
+            return jdbcTemplate.queryForObject("SELECT count(*) FROM Zona WHERE idArea='"+idArea+"'", Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+    //Obteener las zonas ocupadas en una fecha determinada
+    public List<Zona> getZonasOcupadasByFecha(String fecha, int idArea){
+        try{
+            return jdbcTemplate.query("SELECT z.* FROM zonas AS z" +
+                    "INNER JOIN ocupacion as c ON c.idZona=z.idZona" +
+                    "INNER JOIN reserva as r ON r.idReserva=c.idReserva" +
+                    "WHERE r.fecha=" + fecha+ "AND z.idArea='"+idArea+"'", new ZonaRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Zona>();
+        }
+    }
+
 }

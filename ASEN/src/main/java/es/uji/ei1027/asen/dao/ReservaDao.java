@@ -79,5 +79,16 @@ public class ReservaDao {
         }
     }
 
+    //Obteener las reservas en una fecha determinada
+    public List<Reserva> getReservasByFecha(String fecha, int idArea){
+        try{
+            return jdbcTemplate.query("SELECT r.* FROM reserva AS r" +
+                    "INNER JOIN ocupacion as c ON c.idReserva=r.idReserva" +
+                    "INNER JOIN zona as z ON r.idZona=z.idZona" +
+                    "WHERE r.fecha=" + fecha+ "AND z.idArea='"+idArea+"'", new ReservaRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Reserva>();
+        }
+    }
 
 }
