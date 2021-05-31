@@ -4,6 +4,7 @@ import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
+import es.uji.ei1027.asen.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/reserva")
 public class ReservaController {
 
     private ReservaDao reservaDao;
-
+    private HttpSession session;
     @Autowired
     public void setReservaDao(ReservaDao reservaDao) {
         this.reservaDao = reservaDao;
@@ -40,21 +43,23 @@ public class ReservaController {
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult,HttpSession session) {
         ReservaValidator reservaValidator = new ReservaValidator();
         reservaValidator.validate(reserva,bindingResult);
         if (bindingResult.hasErrors())
             return "reserva/add";
         try{
-            reservaDao.addReserva(reserva);
+            reservaDao.addReserva(reserva,session);
         } catch(DuplicateKeyException e){
             throw new AsenApplicationException(
                     "Ya existe una reserva con este código "
                             +reserva.getIdReserva(), "Id repetido");
         } catch(DataAccessException e) {
+            System.out.println(session.getAttribute("user"));
             throw new AsenApplicationException(
                     "Error en el acceso a la base de datos", "ErrorAcceder");
         }
+
         return "redirect:list";
     }
 

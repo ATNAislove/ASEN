@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,11 +24,12 @@ public class ReservaDao {
 
     /* Afegeix la Reserva a la base de dades */
 
-    public void addReserva(Reserva reserva) {
+    public void addReserva(Reserva reserva, HttpSession session) {
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",reserva.getIdReserva(),reserva.getFecha(),reserva.getNumeroPersonas()
                 ,reserva.getHoraSalida(), LocalDate.now(),"codigoQR","pendiente"
-                ,reserva.getUsuario(),reserva.getIdFranjaHoraria());
+                ,session.getAttribute("user").toString(),reserva.getIdFranjaHoraria());
     }
+
     /* Esborra la reserva de la base de dades */
     public void deleteReserva(Reserva reserva) {
         jdbcTemplate.update("DELETE FROM Reserva WHERE idReserva=?",reserva.getIdReserva());

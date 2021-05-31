@@ -63,6 +63,7 @@ public class LoginController {
             return "login";
         }
         session.setAttribute("user", user);
+
         return "redirect:/";
     }
 
