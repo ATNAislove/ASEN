@@ -1,5 +1,6 @@
 package es.uji.ei1027.asen.controller;
 
+import es.uji.ei1027.asen.dao.GestorUserDao;
 import es.uji.ei1027.asen.dao.UserDao;
 import es.uji.ei1027.asen.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,10 @@ class UserValidator implements Validator {
 
 @Controller
 public class LoginController {
+
     @Autowired
     private UserDao userDao;
+    private GestorUserDao gestorUserDao;
 
     @RequestMapping("/login")
     public String login(Model model) {
@@ -63,8 +66,7 @@ public class LoginController {
             return "login";
         }
         session.setAttribute("user", user);
-
-        return "redirect:/";
+        return "menuCiudadano";
     }
 
     @RequestMapping("/logout")

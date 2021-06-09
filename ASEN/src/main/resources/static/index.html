@@ -1,64 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/style.css"
+          th:href="@{/css/style.css}"/>
     <meta charset="UTF-8">
-    <title>EI1027</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/style.css"
-                                              th:href="@{/css/style.css}"/>
-
-</head>
-<body>
-<div class="loggeduser" th:object="${session}" xmlns:th="http://www.w3.org/1999/xhtml">
-    <p th:if="*{user == null}">
-        No autenticat <a href="/login" th:href="@{/login}">Entrar</a>
-    </p>
-    <p th:unless="*{user == null}">
-        Autenticat com <span th:text="*{user.username}"></span> <a
-            href="/logout" th:href="@{/logout}">Eixir</a>
-    </p>
-</div>
-
-<div class="container"  layout:fragment="content">
-    <h2>Página principal menu ciudadano</h2>
-    <center><br>
+    <title>ASEN</title>
+    <header>
         <table>
             <tr>
-                <td> <a href="../areaNatural/list" class="btn btn-warning" role="button">Consultar <br>información<br> ocupación</a></td>
-                <td><a href="../reserva/list" class="btn btn-warning" role="button"><br>Reservas<br> &nbsp;</a></td>
+                <td> <a href="login" class="btn btn-warning" role="button">Inicio Sesión</a></td>
+                <td><a href="ciudadano/add" class="btn btn-warning" role="button"><br>Registro<br> &nbsp;</a></td>
             </tr>
         </table>
-        <div th:object="${session}"><p>Hey esto funciona<span th:text="*{user.username}"></span></p></div>
+    </header>
+</head>
+<body>
+<h1> ASEN </h1>
+<h5>Acceso Seguro a Espacios Naturales</h5>
+<a href="../areaNatural/list" class="btn btn-warning" role="button">Consultar <br>información<br> de áreas naturales</a>
+<a href="../menuGestorMunicipal" class="btn btn-warning" role="button">gestorMunicipal</a>
 
-    </center>
-    <!--<table>
-        <tr><td><a  class="btn btn-warning" role="button">Gestionar entrada y<br>salida de<br>áreas naturales</a></td></tr>
-    </table>-->
-</div>
-<!--<h1>EI1027 - Spring MVC</h1>
-<h2>Pruebas de la aplicación</h2>
-<ul>
-    <li><a href="municipio/list">Gestión de Municipios</a></li>
-    <li><a href="gestorMunicipal/add">Gestión de gestor municipal</a></li>
-    <li><a href="areaNatural/add">Gestión de areas naturales</a></li>
-    <li><a href="zona/add">Gestión zonas</a></li>
-    <li><a href="servicio/add">Gestión de servicios</a></li>
-    <li><a href="tipoServicio/list">Gestión de tipos de servicio</a></li>
-    <li><a href="personalZona/add">Gestión de personal de zona</a></li>
-    <li><a href="vigilancia/add">Gestión de vigilancia</a></li>
-    <li><a href="disponibilidad/add">Gestión de disponibilidad de servicios</a></li>
-    <li><a href="ciudadano/list">Gestión de ciudadanos</a></li>
-    <li><a href="reserva/list">Gestión de reservas</a></li>
-    <li><a href="ocupacion/add">Gestión de ocupaciones</a></li>
-    <li><a href="franjaHoraria/add">Gestión de franjas horarias</a></li>
-    <li><a href="accesibilidad/add">Gestión de accesibilidad</a></li>
-    <li><a href="ciudadano/menu">Menu del ciudadano</a></li>
-    <li><a href="areaNatural/consultarOcupacion">consultarOcupacion</a></li>
-    <li><a href="areaNatural/list">consultar Areas</a></li>
-
-</ul>
--->
 </body>
 </html>

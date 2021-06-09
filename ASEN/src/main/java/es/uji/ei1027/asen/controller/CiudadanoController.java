@@ -54,7 +54,7 @@ public class CiudadanoController {
             throw new AsenApplicationException(
                     "Error en el acceso a la base de datos", "ErrorAcceder");
         }
-        return "redirect:list";
+        return "redirect:../login";
     }
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)

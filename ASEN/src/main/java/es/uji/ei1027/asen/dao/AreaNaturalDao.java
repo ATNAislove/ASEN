@@ -1,6 +1,7 @@
 package es.uji.ei1027.asen.dao;
 
 import es.uji.ei1027.asen.model.AreaNatural;
+import es.uji.ei1027.asen.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -70,6 +71,22 @@ public class AreaNaturalDao {
                     "INNER JOIN zona AS z ON z.idArea=a.idArea WHERE idArea='" + idArea + "'", Integer.class);
         }catch(EmptyResultDataAccessException e){
             return 0;
+        }
+    }
+    public List<AreaNatural> getAreasPorTipoArea_PorNombre(String tipoArea,String nombreArea){
+        try {
+            return jdbcTemplate.query("SELECT * FROM AreaNatural WHERE tipoArea='" + tipoArea + "' and nombreArea='" + nombreArea +"'", new AreaNaturalRowMapper());
+        }
+        catch (EmptyResultDataAccessException e) {
+            return new ArrayList<AreaNatural>();
+        }
+    }
+    public List<AreaNatural> getAreasPorMunicipio(int idMunicipio){
+        try {
+            return jdbcTemplate.query("SELECT * FROM AreaNatural WHERE idMunicipio='" + idMunicipio + "'", new AreaNaturalRowMapper());
+        }
+        catch (EmptyResultDataAccessException e) {
+            return new ArrayList<AreaNatural>();
         }
     }
 }

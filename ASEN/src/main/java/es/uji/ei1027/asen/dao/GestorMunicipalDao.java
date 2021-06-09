@@ -1,6 +1,8 @@
 package es.uji.ei1027.asen.dao;
 
+import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.GestorMunicipal;
+import es.uji.ei1027.asen.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,10 +11,11 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class GestorMunicipalDao {
+public class GestorMunicipalDao implements  GestorUserDao {
     private JdbcTemplate jdbcTemplate;
     // Obté el jdbcTemplate a partir del Data Source
     @Autowired
@@ -66,4 +69,21 @@ public class GestorMunicipalDao {
             return new ArrayList<GestorMunicipal>();
         }
     }
+    @Override
+    public UserDetails loadUserByUsername(String username, String password) {
+        try {
+            GestorMunicipal gestorMunicipal = jdbcTemplate.queryForObject("SELECT * FROM GestorMunicipal WHERE usuario = '" + username + "'", new GestorMunicipalRowMapper());
+            if (gestorMunicipal == null) return null;
+            else if (password.equals(gestorMunicipal.getContrasenya())) {
+                UserDetails user = new UserDetails();
+                user.setUsername(username);
+                user.setPassword(password);
+                return user;
+            }
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+        return null;
+    }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +30,7 @@ public class CiudadanoDao implements UserDao {
                 ciudadano.getCodigoCiudadano(),ciudadano.getPin(),
                 ciudadano.getFechaNacimiento(),ciudadano.getNombre(),ciudadano.getApellidos(),
                 ciudadano.getDireccion(),ciudadano.getCorreoElectronico(),ciudadano.getMunicipio()
-                ,ciudadano.getPais(),ciudadano.getFechaRegistro(),ciudadano.getFechaBaja());
+                ,ciudadano.getPais(), LocalDate.now(),ciudadano.getFechaBaja());
     }
 
     /* Esborra el ciudadano de la base de dades */

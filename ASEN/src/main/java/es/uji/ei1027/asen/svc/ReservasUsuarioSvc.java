@@ -14,15 +14,8 @@ public class ReservasUsuarioSvc implements getReservasUsuarios {
     CiudadanoDao ciudadanoDao;
 
     public List<Reserva> getReservasUsuario(String usuario) {
-        List<Reserva> classReserva = reservaDao.getReservas(); //todas las reserva
-        //modificar con session
-        Ciudadano ciudadano = ciudadanoDao.getCiudadano(usuario); //usuario que tengo
-        List<Reserva> res = new LinkedList<>();
-        for (Reserva rsv : classReserva) {
-            if(rsv.getUsuario().equals(usuario)){
-                res.add(rsv);
-            }
-        }
-        return res;
+        return reservaDao.getReservas_usuario(usuario);
     }
+
+
 }
