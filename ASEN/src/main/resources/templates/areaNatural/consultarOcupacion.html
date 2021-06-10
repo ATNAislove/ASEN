@@ -26,5 +26,21 @@
 <p>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/></p>
 
 <p>Municipio: <span th:text="${municipio}"/></p>
+<table>
+    <tr>
+        <td><label>Fecha</label></td>
+        <td><input type="date" /></td>
+    </tr>
+    <tr>
+        <td><label>Franja horaria</label></td>
+        <td><select> //th:field="*{franjaHoraria}"
+            <option th:each="franja: ${mostrarOcupacionSvc.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
+                    th:text="${franja.horaInicio}+' '+${franja.horaFin}">
+            </option>
+        </select>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

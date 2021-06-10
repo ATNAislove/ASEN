@@ -1,10 +1,7 @@
 package es.uji.ei1027.asen.svc;
 
 import es.uji.ei1027.asen.dao.*;
-import es.uji.ei1027.asen.model.AreaNatural;
-import es.uji.ei1027.asen.model.Municipio;
-import es.uji.ei1027.asen.model.Reserva;
-import es.uji.ei1027.asen.model.Zona;
+import es.uji.ei1027.asen.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +19,8 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
     private ZonaDao zonaDao;
     @Autowired
     private ReservaDao reservaDao;
+    @Autowired
+    private FranjaHorariaDao franjaHorariaDao;
 
     @Override
     public String getMunicipiofromAreaNatural(int idArea){
@@ -56,5 +55,7 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
         int plazasTotales = areaNaturalDao.getCapacidadTotal(idArea);
         return ((plazasTotales-plazasOcupadas)/plazasTotales)*100;
     }
-
+    public List<FranjaHoraria> getFranjasHorarias(){
+        return franjaHorariaDao.getFranjasHorarias();
+    }
 }

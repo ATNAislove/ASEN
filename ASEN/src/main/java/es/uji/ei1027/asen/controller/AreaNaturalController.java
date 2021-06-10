@@ -80,6 +80,17 @@ public class AreaNaturalController {
     public String consultarOcupacion(Model model, @PathVariable int idArea) {
         model.addAttribute("areaNatural", areaNaturalDao.getAreaNatural(idArea));
         model.addAttribute("municipio", mostrarOcupacionService.getMunicipiofromAreaNatural(idArea));
+        model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
         return "areaNatural/consultarOcupacion";
+    }
+    @RequestMapping(value="/consultarOcupacion", method = RequestMethod.POST)
+    public String processConsultarOcupacionSubmit(Model model,@ModelAttribute("areaNatural") AreaNatural areaNatural,
+                                                  BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "areaNatural/consultarOcupacion";
+
+        model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
+        return "areaNatural/ocupacion";
+
     }
 }
