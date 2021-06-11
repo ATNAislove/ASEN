@@ -80,13 +80,12 @@ public class LoginController {
 
         if(user.getRol().equals("Ciudadano")){
             session.setAttribute("userType","ciudadano");
-            return "menuCiudadano";
+            return "ciudadano/menuCiudadano";
         } else{
             session.setAttribute("userType","gestor");
-            return "menuGestorMunicipal";
+            return "gestorMunicipal/menuGestorMunicipal";
         }
     }
-
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
