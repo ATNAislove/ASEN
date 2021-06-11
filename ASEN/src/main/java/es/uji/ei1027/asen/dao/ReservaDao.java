@@ -35,6 +35,7 @@ public class ReservaDao {
         jdbcTemplate.update("DELETE FROM Reserva WHERE idReserva=?",reserva.getIdReserva());
     }
     public void deleteReserva(int idReserva) {
+        jdbcTemplate.update("DELETE FROM Ocupacion WHERE idReserva=?",idReserva);
         jdbcTemplate.update("DELETE FROM reserva WHERE idReserva=?",idReserva);
     }
 

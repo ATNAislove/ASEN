@@ -3,7 +3,9 @@ package es.uji.ei1027.asen.dao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.GestorMunicipal;
 import es.uji.ei1027.asen.model.UserDetails;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class GestorMunicipalDao implements  GestorUserDao {
+public class GestorMunicipalDao implements UserDao {
     private JdbcTemplate jdbcTemplate;
     // Obté el jdbcTemplate a partir del Data Source
     @Autowired
@@ -50,10 +52,19 @@ public class GestorMunicipalDao implements  GestorUserDao {
                 gestorMunicipal.getFechaRegistro(),gestorMunicipal.getFechaBaja(),gestorMunicipal.getIdMunicipio(),gestorMunicipal.getDni());
     }
 
-    /* Obté el gestorMunicipal amb el nom donat. Torna null si no existeix. */
+    /* Obté el gestorMunicipal amb el dni donat. Torna null si no existeix. */
     public GestorMunicipal getGestorMunicipal(String dni) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM gestorMunicipal WHERE dni = '"+ dni + "'", new GestorMunicipalRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    //Obté el gestorMunicipal amb el nom donat. Torna null si no existeix
+    public GestorMunicipal getGestorMunicipalUser(String usuario) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM gestorMunicipal WHERE usuario = '"+ usuario + "'", new GestorMunicipalRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return null;
@@ -72,17 +83,23 @@ public class GestorMunicipalDao implements  GestorUserDao {
     @Override
     public UserDetails loadUserByUsername(String username, String password) {
         try {
-            GestorMunicipal gestorMunicipal = jdbcTemplate.queryForObject("SELECT * FROM GestorMunicipal WHERE usuario = '" + username + "'", new GestorMunicipalRowMapper());
+            GestorMunicipal gestorMunicipal = getGestorMunicipalUser(username);
             if (gestorMunicipal == null) return null;
             else if (password.equals(gestorMunicipal.getContrasenya())) {
                 UserDetails user = new UserDetails();
                 user.setUsername(username);
                 user.setPassword(password);
+                user.setRol("GestorMunicipal");
                 return user;
             }
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+        return null;
+    }
+
+    @Override
+    public Collection<UserDetails> listAllUsers() {
         return null;
     }
 

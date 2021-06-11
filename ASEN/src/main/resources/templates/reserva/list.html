@@ -41,7 +41,10 @@
             <td th:text="${reserva.idFranjaHoraria}"></td>
             <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita</a></td>
             <td> <a th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita horaSalida</a></td>
-            <td><a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}" id="borrar">Esborra</a></td>
+            <td><a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}"
+                   th:onclick="return confirm('¿ Estás seguro de que quiere borrar la reserva con código \''
+                    + [[${reserva.idReserva}]] + '\'?');"
+                   id="borrar">Esborra</a></td>
             <td> </td>
 
         </tr>

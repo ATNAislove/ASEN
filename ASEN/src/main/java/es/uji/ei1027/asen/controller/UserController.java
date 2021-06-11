@@ -1,3 +1,4 @@
+/*
 package es.uji.ei1027.asen.controller;
 
 
@@ -32,3 +33,4 @@ public class UserController {
         return "user/list";
     }
 }
+*/

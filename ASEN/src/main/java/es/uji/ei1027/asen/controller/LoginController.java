@@ -1,7 +1,8 @@
 package es.uji.ei1027.asen.controller;
 
+import es.uji.ei1027.asen.dao.CiudadanoDao;
+import es.uji.ei1027.asen.dao.GestorMunicipalDao;
 import es.uji.ei1027.asen.dao.GestorUserDao;
-import es.uji.ei1027.asen.dao.UserDao;
 import es.uji.ei1027.asen.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,13 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.Collection;
 
 class UserValidator implements Validator {
     @Override
@@ -42,8 +41,14 @@ class UserValidator implements Validator {
 public class LoginController {
 
     @Autowired
-    private UserDao userDao;
-    private GestorUserDao gestorUserDao;
+    private CiudadanoDao ciudadanoDao;
+    @Autowired
+    private GestorMunicipalDao gestorUserDao;
+
+    public void setLoginController(CiudadanoDao ciudadanoDao, GestorMunicipalDao gestorUserDao){
+        this.ciudadanoDao=ciudadanoDao;
+        this.gestorUserDao=gestorUserDao;
+    }
 
     @RequestMapping("/login")
     public String login(Model model) {
@@ -59,15 +64,25 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "login";
         }
+        if (ciudadanoDao.getCiudadano(user.getUsername()) != null){
+            user = ciudadanoDao.loadUserByUsername(user.getUsername(), user.getPassword());
+        } else{
+            if(gestorUserDao.getGestorMunicipalUser(user.getUsername())!= null){
+                user = gestorUserDao.loadUserByUsername(user.getUsername(), user.getPassword());
 
-        user = userDao.loadUserByUsername(user.getUsername(), user.getPassword());
+            }
+        }
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contrasenya incorrecta");
             return "login";
         }
         session.setAttribute("user", user);
-        session.setAttribute("userType", "ciudadano");
-        return "menuCiudadano";
+
+        if(user.getRol().equals("Ciudadano")){
+            return "menuCiudadano";
+        } else{
+            return "menuGestorMunicipal";
+        }
     }
 
     @RequestMapping("/logout")

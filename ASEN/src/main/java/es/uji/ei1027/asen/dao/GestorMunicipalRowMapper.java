@@ -21,7 +21,7 @@ public final class GestorMunicipalRowMapper implements RowMapper<GestorMunicipal
         gestorMunicipal.setCorreoElectronico(rs.getString("correoElectronico"));
         gestorMunicipal.setUsuario(rs.getString("usuario"));
         gestorMunicipal.setContrasenya(rs.getString("contrasenya"));
-        gestorMunicipal.setDireccion (rs.getString("direccion "));
+        gestorMunicipal.setDireccion (rs.getString("direccion"));
         gestorMunicipal.setMunicipioNacimiento (rs.getString("municipioNacimiento"));
         gestorMunicipal.setPais (rs.getString("pais"));
         gestorMunicipal.setTelefono (rs.getLong("telefono"));

@@ -74,12 +74,13 @@ public class CiudadanoDao implements UserDao {
     @Override
     public UserDetails loadUserByUsername(String username, String password) {
         try{
-            Ciudadano ciudadano = jdbcTemplate.queryForObject("SELECT * FROM Ciudadano WHERE usuario = '"+ username + "'", new CiudadanoRowMapper());
+            Ciudadano ciudadano = getCiudadano(username);
             if (ciudadano==null) return null;
             else if(password.equals(ciudadano.getPin())){
                 UserDetails user = new UserDetails();
                 user.setUsername(username);
                 user.setPassword(password);
+                user.setRol("Ciudadano");
                 return user;
             }
         }catch(EmptyResultDataAccessException e) {
