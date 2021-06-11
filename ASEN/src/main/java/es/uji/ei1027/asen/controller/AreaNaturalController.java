@@ -2,6 +2,7 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.AreaNaturalDao;
 import es.uji.ei1027.asen.model.AreaNatural;
+import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import es.uji.ei1027.asen.svc.MostrarOcupacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,15 @@ public class AreaNaturalController {
 
 
     private MostrarOcupacionService mostrarOcupacionService;
+    private GetMunicipiosService getMunicipiosService;
 
     @Autowired
     public void setMostrarOcupacionService(MostrarOcupacionService mostrarOcupacionService) {
         this.mostrarOcupacionService = mostrarOcupacionService;
+    }
+    @Autowired
+    public void setGetMunicipiosService(GetMunicipiosService getMunicipiosService) {
+        this.getMunicipiosService = getMunicipiosService;
     }
 
     @Autowired
@@ -42,6 +48,7 @@ public class AreaNaturalController {
     @RequestMapping(value="/add")
     public String addAreaNatural(Model model) {
         model.addAttribute("areaNatural", new AreaNatural());
+        model.addAttribute("municipios", getMunicipiosService.getMunicipios());
         return "areaNatural/add";
     }
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Area Natural</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Modificar Area Natural</h2>
+<form action="#" th:action="@{/areaNatural/update}"
+      th:object="${areaNatural}" method="post">
+    <table>
+        <tr>
+            <td><label>idArea</label></td>
+            <td><input type="number" th:field="*{idArea}" readonly/></td>
+        </tr>
+        <tr>
+            <td><label>NombreArea</label></td>
+            <td><input type="text" th:field="*{nombreArea}" /></td>
+        </tr>
+        <tr>
+            <td><label>descripcion</label></td>
+            <td><textarea type="text" th:field="*{descripcion}" /></td>
+        </tr>
+        <tr>
+            <td><label>imagen</label></td>
+            <td><input type="text" th:field="*{imagen}" placeholder="Introduce la url" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo de terreno</label></td>
+            <td><select th:field="*{tipoTerreno}">
+                <option th:value="arena">arena</option>
+                <option th:value="hierba">hierba</option>
+                <option th:value="piedra">piedra</option>
+                <option th:value="humífero">humífero</option>
+                <option th:value="fango">fango</option>
+                <option th:value="tierra">tierra</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Tipo de area</label></td>
+            <td><select th:field="*{tipoArea}">
+                <option th:value="playa">playa</option>
+                <option th:value="montaña">montaña</option>
+                <option th:value="lago">lago</option>
+                <option th:value="río">río</option>
+                <option th:value="desierto">desierto</option>
+                <option th:value="campo">campo</option>
+                <option th:value="bosque">bosque</option>
+                <option th:value="meseta">meseta</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Tipo de acceso</label></td>
+            <td>
+                <select th:field="*{tipoAcceso}">
+                    <option th:value="abierto">abierto</option>
+                    <option th:value="restringido">restringido</option>
+                    <option th:value="cerrado">cerrado</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td><label>Municipio</label></td>
+            <td><input type="text" th:field="*{idMunicipio}" readonly/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear area natural" /></td>
+        </tr>
+    </table>
+    <br>
+    <a href="n/">VOLVER</a>
+</form>
+</body>
+</html>
