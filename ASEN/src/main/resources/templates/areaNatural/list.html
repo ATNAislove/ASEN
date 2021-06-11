@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:object="${session}">
 <head>
     <meta charset="UTF-8">
     <title>Lista de areas naturales</title>
@@ -13,7 +14,6 @@
         <thead>
         <tr>
             <th>Nombre Area</th>
-            <th>Descripcion</th>
             <th>Imagen</th>
             <th>Tipo Terreno</th>
             <th>Tipo Area</th>
@@ -32,15 +32,14 @@
             <td th:text="${areaNatural.tipoTerreno}"></td>
             <td th:text="${areaNatural.tipoArea}"></td>
             <td th:text="${areaNatural.tipoAcceso}"></td>
-            <!--<td> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-danger" role="button">Esborra</a></td>
-            -->
-            <td><a th:href="@{/reserva/add/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Reservar</a></td>
+            <td th:if="*{userType == 'gestor'}"> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td th:if="*{userType == 'gestor'}"><a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-danger" role="button">Esborra</a></td>
+            <td th:if="*{userType == 'ciudadano'}"><a th:href="@{/reserva/add/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Reservar</a></td>
             <td><a th:href="@{/areaNatural/consultarOcupacion/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-secondary" role="button">Ocupacion</a></td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Agregar Área Natural</a>
+    <a th:if="*{userType == 'gestor'}" href="add" class="btn btn-success" role="button">Agregar Área Natural</a>
 </div>
 </body>
 </html>

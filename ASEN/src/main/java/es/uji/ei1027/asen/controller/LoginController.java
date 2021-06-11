@@ -66,6 +66,7 @@ public class LoginController {
             return "login";
         }
         session.setAttribute("user", user);
+        session.setAttribute("userType", "ciudadano");
         return "menuCiudadano";
     }
 
