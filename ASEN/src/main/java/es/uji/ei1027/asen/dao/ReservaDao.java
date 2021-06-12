@@ -26,7 +26,7 @@ public class ReservaDao {
 
     public void addReserva(Reserva reserva, HttpSession session) {
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",reserva.getIdReserva(),reserva.getFecha(),reserva.getNumeroPersonas()
-                ,reserva.getHoraSalida(), LocalDate.now(),"codigoQR","pendiente"
+                ,reserva.getHoraSalida(), LocalDate.now(),"https://static-unitag.com/images/help/QRCode/qrcode.png?mh=07b7c2a2","pendiente"
                 ,session.getAttribute("user").toString(),reserva.getIdFranjaHoraria());
     }
 
@@ -73,7 +73,7 @@ public class ReservaDao {
             return new ArrayList<Reserva>();
         }
     }
-    public List<Reserva> getReservas_usuario(String usuario) {
+    public List<Reserva> getReservasUsuario(String usuario) {
         try {
             return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario +"'", new ReservaRowMapper());
         }

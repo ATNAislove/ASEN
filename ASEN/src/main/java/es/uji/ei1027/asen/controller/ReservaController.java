@@ -5,6 +5,7 @@ import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
 import es.uji.ei1027.asen.model.UserDetails;
+import es.uji.ei1027.asen.svc.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -20,10 +21,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/reserva")
-public class ReservaController {
+public class ReservaController{
 
     private ReservaDao reservaDao;
-    private HttpSession session;
+    private ReservaService reservaService;
+    @Autowired
+    public void setReservaService(ReservaService reservaService){this.reservaService=reservaService;}
     @Autowired
     public void setReservaDao(ReservaDao reservaDao) {
         this.reservaDao = reservaDao;
@@ -32,13 +35,16 @@ public class ReservaController {
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
     @RequestMapping("/list")
-    public String listReservas(Model model) {
-        model.addAttribute("reservas", reservaDao.getReservas());
+    public String listReservas(Model model, HttpSession session) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("reservas", reservaDao.getReservasUsuario(user.getUsername()));
+        model.addAttribute("reservaService", reservaService);
         return "reserva/list";
     }
     @RequestMapping(value = "/add")
     public String addReserva(Model model) {
         model.addAttribute("reserva", new Reserva());
+        model.addAttribute("reservaService", reservaService);
         return "reserva/add";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)

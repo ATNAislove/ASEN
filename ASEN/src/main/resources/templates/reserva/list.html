@@ -22,8 +22,7 @@
             <th>Fecha Creación</th>
             <th>CodigoQR</th>
             <th>Estado Reserva</th>
-            <th>Usuario</th>
-            <th>idFranjaHoraria</th>
+            <th>Franja Horaria</th>
             <th></th>
             <th></th>
         </tr>
@@ -35,10 +34,9 @@
             <td th:text="${reserva.numeroPersonas}"></td>
             <td th:text="${reserva.horaSalida}"></td>
             <td th:text="${reserva.fechaCreacion}"></td>
-            <td th:text="${reserva.codigoQR}"></td>
+            <td><img style="max-width:40px;max-height:40px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
             <td th:text="${reserva.estadoReserva}"></td>
-            <td th:text="${reserva.usuario}"></td>
-            <td th:text="${reserva.idFranjaHoraria}"></td>
+            <td th:text="${reservaService.getHorasFranja(reserva.idFranjaHoraria)}"></td>
             <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita</a></td>
             <td> <a th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita horaSalida</a></td>
             <td><a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}"

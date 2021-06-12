@@ -24,29 +24,15 @@
             <td><label>Numero Personas</label></td>
             <td><input type="number" th:field="*{numeroPersonas}" required/></td>
         </tr>
-        <tr>
-            <td><label>hora Salida</label></td>
-            <td><input type="time" th:field="*{horaSalida}" /></td>
-        </tr>
-        <tr>
-            <td hidden><label>fecha Creacion</label></td>
-            <td hidden><input type="date" th:field="*{fechaCreacion}"/></td>
-        </tr>
-        <tr>
-            <td hidden><label>codigoQR</label></td>
-            <td hidden><input type="text" th:field="*{codigoQR}" maxlength="250" /></td>
-        </tr>
-        <tr>
-            <td hidden><label>estado Reserva</label></td>
-            <td hidden><input type="text" th:field="*{estadoReserva}"  value="pendiente" placeholder="pendiente"/></td>
-        </tr>
-        <tr>
-            <td hidden><label>usuario</label></td>
-            <td hidden><input type="text" th:field="*{usuario}" maxlength="15" /></td>
-        </tr>
+
         <tr>
             <td><label>idFranjaHoraria</label></td>
-            <td><input type="number" th:field="*{idFranjaHoraria}" required/></td>
+            <td><select th:field="*{idFranjaHoraria}" required>
+                    <option th:each="franja: ${reservaService.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
+                            th:text="${franja.horaInicio}+' '+${franja.horaFin}">
+                    </option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Crear Reserva" /></td>
