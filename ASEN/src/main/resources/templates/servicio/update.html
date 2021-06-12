@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar un Servicio</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Servicio</h2><!-- formulario de Reserva-->
+<form action="#" th:action="@{/servicio/update}"
+      th:object="${servicio}" method="post">
+    <table>
+        <tr>
+            <td><label>idServicio</label></td>
+            <td><input type="number" th:field="*{idServicio}" readonly /></td>
+        </tr>
+        <tr>
+            <td><label>fecha Inicio</label></td>
+            <td><input type="date" th:field="*{fechaInicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>fecha Fin</label></td>
+            <td><input type="date" th:field="*{fechaFin}" /></td>
+        </tr>
+        <tr>
+            <td><label>Periodicidad</label></td>
+            <td><input type="number" th:field="*{periodicidad}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo Temporada</label></td>
+            <td><select th:field="*{tipoTemporada}">
+                <option th:value="fijo">fijo</option>
+                <option th:value="temporal">temporal</option>
+            </select>
+        </tr>
+        <tr>
+            <td><label>Servicio</label></td>
+            <td><input type="text" th:field="*{idTipoServicio}" readonly/></td>
+        </tr>
+
+        <tr>
+            <td><label>Area</label></td>
+            <td><input type="number" th:field="*{idArea}" readonly /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Actualizar Servicio" /></td>
+        </tr>
+    </table>
+    <br>
+</form>
+</body>
+</html>

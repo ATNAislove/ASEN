@@ -29,16 +29,27 @@
         </tr>
         <tr>
             <td><label>Tipo De Temporada</label></td>
-            <td><input type="text" th:field="*{tipoTemporada}" /></td>
+            <td><select th:field="*{tipoTemporada}">
+                <option th:value="fijo">fijo</option>
+                <option th:value="temporal">temporal</option>
+            </select></td>
         </tr>
         <tr>
         <tr>
             <td><label>Tipo de Servicio</label></td>
-            <td><input type="number" th:field="*{idTipoServicio}" /></td>
+        <td><select th:field="*{idTipoServicio}">
+            <option th:each="tipoServicio: ${tiposServicio}" th:value="${tipoServicio.idTipoServicio}"
+                    th:text="${tipoServicio.nombre}">
+            </option>
+        </select></td>
         </tr>
         <tr>
             <td><label>ID Area</label></td>
-            <td><input type="number" th:field="*{idArea}" /></td>
+            <td><select th:field="*{idArea}">
+                <option th:each="areaNatural: ${areasNaturales}" th:value="${areaNatural.idArea}"
+                        th:text="${areaNatural.nombreArea}">
+                </option>
+            </select></td>
         </tr>
         <br>
         <tr>

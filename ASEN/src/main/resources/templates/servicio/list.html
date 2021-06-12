@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Reservas</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Servicios</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id Servicio</th>
+            <th>fecha Inicio</th>
+            <th>fecha Fin</th>
+            <th>periodicidad</th>
+            <th>tipo Temporada</th>
+            <th>idTipoServicio</th>
+            <th>idArea</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="servicio: ${servicios}">
+            <td th:text="${servicio.idServicio}"></td>
+            <td th:text="${servicio.fechaInicio}"></td>
+            <td th:text="${servicio.fechaFin}"></td>
+            <td th:text="${servicio.periodicidad}"></td>
+            <td th:text="${servicio.tipoTemporada}"></td>
+            <td th:text="${servicio.idTipoServicio}"></td>
+            <td th:text="${servicio.idArea}"></td>
+            <td> <a th:href="@{/servicio/update/{idServicio}(idServicio=${servicio.idServicio})}" class="btn btn-primary" role="button">Editar</a></td>
+            <td><a th:href="@{/servicio/delete/{idServicio}(idServicio=${servicio.idServicio})}"
+                   th:onclick="return confirm('¿ Estás seguro de que quiere borrar el servicio con el id  \''
+                    + [[${servicio.idServicio}]] + '\'?');"
+                   id="borrar">Borrar</a></td>
+            <td> </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-primary" role="button">Agregar Servicio</a>
+</div>
+</body>
+</html>

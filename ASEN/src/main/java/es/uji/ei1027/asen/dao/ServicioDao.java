@@ -29,13 +29,16 @@ public class ServicioDao {
     }
 
     public void deleteServicio(int idServicio) {
+        jdbcTemplate.update("DELETE FROM disponibilidad WHERE idServicio=?",idServicio);
         jdbcTemplate.update("DELETE FROM servicio WHERE idServicio=?",idServicio);
     }
 
     /* Actualitza els atributs del servicio
        (excepte id, que és la clau primària) */
     public void updateServicio(Servicio servicio) {
-        jdbcTemplate.update("UPDATE servicio SET idServicio=?, fechaInicio=?, fechaFin=?, periodicidad=?, tipoTemporada=?, idTipoServicio=?, idArea=?" ,servicio.getIdServicio(),servicio.getFechaInicio(),servicio.getFechaFin(), servicio.getPeriodicidad(), servicio.getTipoTemporada(), servicio.getIdTipoServicio(), servicio.getIdArea());
+        jdbcTemplate.update("UPDATE servicio SET idServicio=?, fechaInicio=?, fechaFin=?, periodicidad=?, tipoTemporada=?, idTipoServicio=?, idArea=? where idServicio=?" ,
+                servicio.getIdServicio(), servicio.getFechaInicio(), servicio.getFechaFin(), servicio.getPeriodicidad(),
+                servicio.getTipoTemporada(), servicio.getIdTipoServicio(), servicio.getIdArea(),servicio.getIdServicio());
     }
     /* Obté el servicio amb el id donat. Torna null si no existeix. */
     public Servicio getServicio(int idServicio) {

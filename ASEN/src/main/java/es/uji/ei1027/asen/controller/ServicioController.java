@@ -2,6 +2,9 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.ServicioDao;
 import es.uji.ei1027.asen.model.Servicio;
+import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
+import es.uji.ei1027.asen.svc.GetMunicipiosService;
+import es.uji.ei1027.asen.svc.GetTiposServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +19,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ServicioController {
     private ServicioDao servicioDao;
 
+    private GetTiposServicioService getTiposServicioService;
+    private GetAreasNaturalesService getAreasNaturalesService;
     @Autowired
     public void setServicioDao(ServicioDao servicioDao) {
         this.servicioDao=servicioDao;
+    }
+
+    @Autowired
+    public void setGetTiposServicioService(GetTiposServicioService getTiposServicioService){
+        this.getTiposServicioService = getTiposServicioService;
+    }
+    @Autowired
+    public void setGetAreasNaturalesService(GetAreasNaturalesService getAreasNaturalesService){
+        this.getAreasNaturalesService = getAreasNaturalesService;
     }
 
     // Operacions: Crear, llistar, actualitzar, esborrar
@@ -33,6 +47,8 @@ public class ServicioController {
     @RequestMapping(value="/add")
     public String addServicio(Model model) {
         model.addAttribute("servicio", new Servicio());
+        model.addAttribute("tiposServicio",getTiposServicioService.getTiposServicioService());
+        model.addAttribute("areasNaturales",getAreasNaturalesService.getAreas());
         return "servicio/add";
     }
 
