@@ -2,6 +2,7 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.ServicioDao;
 import es.uji.ei1027.asen.model.Servicio;
+import es.uji.ei1027.asen.model.UserDetails;
 import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
 import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import es.uji.ei1027.asen.svc.GetTiposServicioService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/servicio")
 public class ServicioController {
@@ -21,6 +24,7 @@ public class ServicioController {
 
     private GetTiposServicioService getTiposServicioService;
     private GetAreasNaturalesService getAreasNaturalesService;
+    private GetMunicipiosService getMunicipiosService;
     @Autowired
     public void setServicioDao(ServicioDao servicioDao) {
         this.servicioDao=servicioDao;
@@ -34,12 +38,18 @@ public class ServicioController {
     public void setGetAreasNaturalesService(GetAreasNaturalesService getAreasNaturalesService){
         this.getAreasNaturalesService = getAreasNaturalesService;
     }
+    @Autowired
+    public void setGetMunicipiosService(GetMunicipiosService getMunicipiosService){
+        this.getMunicipiosService=getMunicipiosService;
+    }
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
     @RequestMapping("/list")
-    public String listServicios(Model model) {
-        model.addAttribute("servicios", servicioDao.getServicios());
+    public String listServicios(Model model, HttpSession session) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+        model.addAttribute("servicios", getTiposServicioService.getServiciosMunicipio(municipio));
         model.addAttribute("areaNaturalService",getAreasNaturalesService);
         model.addAttribute("getTiposServicioService",getTiposServicioService);
         return "servicio/list";
@@ -47,10 +57,12 @@ public class ServicioController {
 
 
     @RequestMapping(value="/add")
-    public String addServicio(Model model) {
+    public String addServicio(Model model, HttpSession session) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
         model.addAttribute("servicio", new Servicio());
         model.addAttribute("tiposServicio",getTiposServicioService.getTiposServicioService());
-        model.addAttribute("areasNaturales",getAreasNaturalesService.getAreas());
+        model.addAttribute("areasNaturales",getAreasNaturalesService.getAreasPueblo(municipio));
         return "servicio/add";
     }
 

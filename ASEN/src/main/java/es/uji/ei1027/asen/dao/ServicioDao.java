@@ -59,4 +59,12 @@ public class ServicioDao {
             return new ArrayList<Servicio>();
         }
     }
+    public List<Servicio> getServicioByArea(int idArea){
+        try {
+            return jdbcTemplate.query("SELECT * FROM servicio WHERE idArea= '"+idArea + "'", new ServicioRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<Servicio>();
+        }
+    }
 }
