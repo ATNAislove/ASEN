@@ -5,6 +5,7 @@ import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
 import es.uji.ei1027.asen.model.UserDetails;
+import es.uji.ei1027.asen.svc.GetFranjasHorariasService;
 import es.uji.ei1027.asen.svc.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,6 +29,11 @@ public class ReservaController{
 
     private ReservaDao reservaDao;
     private ReservaService reservaService;
+    private GetFranjasHorariasService getFranjasHorariasService;
+    @Autowired
+    public void setGetFranjasHorariasService(GetFranjasHorariasService getFranjasHorariasService){
+        this.getFranjasHorariasService=getFranjasHorariasService;
+    }
     @Autowired
     public void setReservaService(ReservaService reservaService){this.reservaService=reservaService;}
     @Autowired
@@ -41,13 +47,13 @@ public class ReservaController{
     public String listReservas(Model model, HttpSession session) {
         UserDetails user = (UserDetails) session.getAttribute("user");
         model.addAttribute("reservas", reservaDao.getReservasUsuario(user.getUsername()));
-        model.addAttribute("reservaService", reservaService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         return "reserva/list";
     }
     @RequestMapping(value = "/add/{idZona}", method = RequestMethod.GET)
     public String addReserva(Model model, @PathVariable int idZona, HttpSession session) {
         model.addAttribute("reserva", new Reserva());
-        model.addAttribute("reservaService", reservaService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         session.setAttribute("zona", idZona);
         return "reserva/add";
     }
@@ -81,7 +87,7 @@ public class ReservaController{
     @RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int idReserva) {
         model.addAttribute("reserva", reservaDao.getReserva(idReserva));
-        model.addAttribute("reservaService", reservaService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         return "reserva/update";
     }
 

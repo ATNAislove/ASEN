@@ -24,6 +24,7 @@
             <th>idArea</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
             <td th:text="${getTiposServicioService.getTipoServicio(servicio.idTipoServicio)}"></td>
             <td th:text="${areaNaturalService.getNombreArea(servicio.idArea)}"></td>
             <td> <a th:href="@{/servicio/update/{idServicio}(idServicio=${servicio.idServicio})}" class="btn btn-primary" role="button">Editar</a></td>
+            <td> <a th:href="@{/disponibilidad/verHorarios/{idServicio}(idServicio=${servicio.idServicio})}" class="btn btn-primary" role="button">Horarios</a></td>
             <td><a th:href="@{/servicio/delete/{idServicio}(idServicio=${servicio.idServicio})}"
                    th:onclick="return confirm('¿ Estás seguro de que quiere borrar el servicio con el id  \''
                     + [[${servicio.idServicio}]] + '\'?');"
@@ -46,6 +48,7 @@
         </tbody>
     </table>
     <a href="add" class="btn btn-primary" role="button">Agregar Servicio</a>
+    <a href="/disponibilidad/add" class="btn btn-primary" role="button">Agregar Horario</a>
 </div>
 </body>
 </html>

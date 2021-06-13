@@ -36,7 +36,7 @@
             <td th:text="${reserva.fechaCreacion}"></td>
             <td><img style="max-width:40px;max-height:40px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
             <td th:text="${reserva.estadoReserva}"></td>
-            <td th:text="${reservaService.getHorasFranja(reserva.idFranjaHoraria)}"></td>
+            <td th:text="${franjaHorariaService.getHorasFranja(reserva.idFranjaHoraria)}"></td>
             <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita</a></td>
             <td> <a th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita horaSalida</a></td>
             <td><a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}"

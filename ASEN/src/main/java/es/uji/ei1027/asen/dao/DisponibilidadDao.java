@@ -20,8 +20,8 @@ public class DisponibilidadDao {
     }
 
     /* Afegeix la disponibilitat a la base de dades */
-    public void addvDisponibilidad(Disponibilidad disponibilidad) {
-        jdbcTemplate.update("INSERT INTO Disponibilidad VALUES(?, ?)",disponibilidad.getIdFranjaHoraria(), disponibilidad.getIdServicio());
+    public void addDisponibilidad(Disponibilidad disponibilidad) {
+        jdbcTemplate.update("INSERT INTO disponibilidad VALUES(?, ?)",disponibilidad.getIdFranjaHoraria(), disponibilidad.getIdServicio());
     }
     /* Esborra la disponibilitat de la base de dades */
     public void deleteDisponibilidad(Disponibilidad disponibilidad) {
@@ -42,7 +42,7 @@ public class DisponibilidadDao {
     /* Obté la disponibilitat amb el nom donat. Torna null si no existeix. */
     public Disponibilidad getDisponibilidad(int idFranjaHoraria) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Disponibilidad WHERE idFranjaHoraria = '"+ idFranjaHoraria + "'", new DisponibilidadRowMapper());
+            return jdbcTemplate.queryForObject("SELECT * FROM disponibilidad WHERE idFranjaHoraria = '"+ idFranjaHoraria + "'", new DisponibilidadRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return null;
@@ -52,7 +52,15 @@ public class DisponibilidadDao {
     /* Obté tots els disponibilitats. Torna una llista buida si no n'hi ha cap. */
     public List<Disponibilidad> getDisponibilidades() {
         try {
-            return jdbcTemplate.query("SELECT * FROM Disponibilidad", new DisponibilidadRowMapper());
+            return jdbcTemplate.query("SELECT * FROM disponibilidad", new DisponibilidadRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<Disponibilidad>();
+        }
+    }
+    public List<Disponibilidad> getDisponibilidadesServicio(int idServicio){
+        try {
+            return jdbcTemplate.query("SELECT * FROM disponibilidad WHERE idServicio="+idServicio, new DisponibilidadRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Disponibilidad>();

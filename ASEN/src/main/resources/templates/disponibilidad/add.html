@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Horario servicio</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo Horario servicio</h2>
+<form action="#" th:action="@{/disponibilidad/add}"
+      th:object="${disponibilidad}" method="post">
+    <table>
+        <tr>
+            <td><label>Servicio</label></td>
+            <td><select th:field="*{idServicio}" required>
+                <option th:each="servicio: ${servicios}" th:value="${servicio.idServicio}"
+                        th:text="${getTiposServicio.getTipoServicio(__(${servicio.idTipoServicio})__)}+' - '+${servicio.idServicio}">
+                </option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label>Franja Horaria</label></td>
+            <td><select th:field="*{idFranjaHoraria}" required>
+                <option th:each="franja: ${franjasHorarias}" th:value="${franja.IdFranjaHoraria}"
+                        th:text="${franja.horaInicio}+' '+${franja.horaFin}">
+                </option>
+            </select>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td colspan="2"><input type="submit" value="Crear horario" /></td>
+        </tr>
+    </table>
+    <br>
+    <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
+</form>
+</body>
+</html>

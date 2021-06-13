@@ -44,7 +44,7 @@
         </select></td>
         </tr>
         <tr>
-            <td><label>ID Area</label></td>
+            <td><label>Area</label></td>
             <td><select th:field="*{idArea}">
                 <option th:each="areaNatural: ${areasNaturales}" th:value="${areaNatural.idArea}"
                         th:text="${areaNatural.nombreArea}">
@@ -57,7 +57,7 @@
         </tr>
     </table>
     <br>
-    <a href="n/">VOLVER</a>
+    <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
 </form>
 </body>
 </html>

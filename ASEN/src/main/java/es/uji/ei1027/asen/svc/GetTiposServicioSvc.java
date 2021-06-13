@@ -1,10 +1,9 @@
 package es.uji.ei1027.asen.svc;
 
+import es.uji.ei1027.asen.dao.DisponibilidadDao;
 import es.uji.ei1027.asen.dao.ServicioDao;
 import es.uji.ei1027.asen.dao.TipoServicioDao;
-import es.uji.ei1027.asen.model.AreaNatural;
-import es.uji.ei1027.asen.model.Servicio;
-import es.uji.ei1027.asen.model.TipoServicio;
+import es.uji.ei1027.asen.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +17,8 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
     private ServicioDao servicioDao;
     @Autowired
     private GetAreasNaturalesService getAreasNaturalesService;
+    @Autowired
+    private DisponibilidadDao disponibilidadDao;
     @Override
     public List<TipoServicio> getTiposServicioService() {
         return tipoServicioDao.getTipoServicios();
@@ -41,6 +42,10 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
     @Override
     public List<Servicio> getServiciosArea(int idArea){
         return servicioDao.getServicioByArea(idArea);
+    }
+    @Override
+    public List<Disponibilidad> getHorariosServicio(int idServicio){
+        return disponibilidadDao.getDisponibilidadesServicio(idServicio);
     }
 
 }

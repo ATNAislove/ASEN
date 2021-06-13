@@ -1,9 +1,11 @@
 package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.ServicioDao;
+import es.uji.ei1027.asen.model.Disponibilidad;
 import es.uji.ei1027.asen.model.Servicio;
 import es.uji.ei1027.asen.model.UserDetails;
 import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
+import es.uji.ei1027.asen.svc.GetFranjasHorariasService;
 import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import es.uji.ei1027.asen.svc.GetTiposServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/servicio")
@@ -25,6 +28,11 @@ public class ServicioController {
     private GetTiposServicioService getTiposServicioService;
     private GetAreasNaturalesService getAreasNaturalesService;
     private GetMunicipiosService getMunicipiosService;
+    private GetFranjasHorariasService getFranjasHorariasService;
+    @Autowired
+    public void setGetFranjasHorariasService(GetFranjasHorariasService getFranjasHorariasService){
+        this.getFranjasHorariasService=getFranjasHorariasService;
+    }
     @Autowired
     public void setServicioDao(ServicioDao servicioDao) {
         this.servicioDao=servicioDao;
@@ -96,4 +104,5 @@ public class ServicioController {
         servicioDao.deleteServicio(idServicio);
         return "redirect:../list";
     }
+
 }

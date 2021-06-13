@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Horarios servicio</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de horarios del servicio</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id Franja Horaria</th>
+            <th>Id Servicio</th>
+            <th>Hora Inicio y Fin</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="disponibilidad: ${disponibilidades}">
+            <td th:text="${disponibilidad.idFranjaHoraria}"></td>
+            <td th:text="${disponibilidad.idServicio}"></td>
+            <td th:text="${franjaHorariaService.getHorasFranja(disponibilidad.idFranjaHoraria)}"></td>
+            <td><a th:href="@{/servicio/deleteHorario/{idFranjaHoraria}/{idServicio}(idFranjaHoraria=${disponibilidad.idFranjaHoraria},idServicio=${disponibilidad.idServicio})}"
+                   th:onclick="return confirm('¿ Estás seguro de que quiere borrar este horario?');"
+                   id="borrar">Borrar</a></td>
+            <td> </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
+</div>
+</body>
+</html>
