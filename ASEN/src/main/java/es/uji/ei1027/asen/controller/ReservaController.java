@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,21 +55,24 @@ public class ReservaController{
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult,HttpSession session) {
         ReservaValidator reservaValidator = new ReservaValidator();
-        reservaValidator.validate(reserva,bindingResult);
-        if (bindingResult.hasErrors())
+        reservaValidator.validate(reserva, bindingResult);
+        if (bindingResult.hasErrors()) {
             return "reserva/add";
-        try{
-            reservaDao.addReserva(reserva,session);
+        }
+        try {
+            reservaDao.addReserva(reserva, session);
             int zona = (int) session.getAttribute("zona");
-            reservaService.addOcupacion(reserva.getIdReserva(),zona);
-        } catch(DuplicateKeyException e){
+            reservaService.addOcupacion(reserva.getIdReserva(), zona);
+        } catch (DuplicateKeyException e) {
             throw new AsenApplicationException(
                     "Ya existe una reserva con este código "
-                            +reserva.getIdReserva(), "Id repetido");
-        } catch(DataAccessException e) {
+                            + reserva.getIdReserva(), "Id repetido");
+        } catch (DataAccessException e) {
             System.out.println(session.getAttribute("user"));
             throw new AsenApplicationException(
                     "Error en el acceso a la base de datos", "ErrorAcceder");
+        } catch (TemplateInputException e) {
+            throw new AsenApplicationException("Escribe una fecha posterior a la actual ", "errorfecha");
         }
 
         return "redirect:list";

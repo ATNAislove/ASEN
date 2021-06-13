@@ -1,10 +1,14 @@
 package es.uji.ei1027.asen.controller;
 
+import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.model.Ciudadano;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CiudadanoValidator implements Validator {
     @Override

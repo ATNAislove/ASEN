@@ -7,6 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+
 <h2>Nuevo Ciudadano</h2><!-- formulario de ciudadano-->
 <form action="#" th:action="@{/ciudadano/add}"
       th:object="${ciudadano}" method="post">
@@ -26,6 +27,7 @@
         <tr>
             <td><label>fecha Nacimiento*</label></td>
             <td><input type="date" th:field="*{fechaNacimiento}" required/></td>
+            <td th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></td>
         </tr>
         <tr>
             <td><label>nombre*</label></td>
@@ -58,6 +60,7 @@
         <tr>
             <td><label>fechaBaja</label></td>
             <td><input type="date" th:field="*{fechaBaja}" /></td>
+            <td th:if="${#fields.hasErrors('fechaBaja')}" th:errors="*{fechaBaja}"></td>
         </tr>
         <tr>
             <td>    <h5>Los campos con * son obligatorios </h5> </td>
@@ -66,7 +69,6 @@
             <td colspan="2"><input type="submit" value="Crear Ciudadano" /></td>
         </tr>
     </table>
-
     <br>
 </form>
 </body>

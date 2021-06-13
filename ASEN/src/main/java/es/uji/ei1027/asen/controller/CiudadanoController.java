@@ -4,6 +4,7 @@ import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/ciudadano")
@@ -51,7 +53,7 @@ public class CiudadanoController {
         catch(DuplicateKeyException e){
             throw new AsenApplicationException(
                     "Ya existe un usuario con este nombre "
-                            +ciudadano.getUsuario(), "nombre Usuario repetido"); }
+                            +ciudadano.getUsuario(), "nombreUsuarioRepetido"); }
         catch(DataAccessException e) {
             throw new AsenApplicationException(
                     "Error en el acceso a la base de datos", "ErrorAcceder");
@@ -75,7 +77,7 @@ public class CiudadanoController {
     }
 
     @RequestMapping(value = "/delete/{usuario}")
-    public String processDelete(@PathVariable String usuario) {
+    public String processDelete(@PathVariable String usuario, RedirectAttributes redirectAttrs) {
         ciudadanoDao.deleteCiudadano(usuario);
         return "redirect:../list";
     }

@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td><label>fecha</label></td>
-            <td><input type="date" th:field="*{fecha}" required/></td>
+            <td><input type="date" th:field="*{fecha}" min="current_date" required/></td>
             <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>
         </tr>
         <tr>

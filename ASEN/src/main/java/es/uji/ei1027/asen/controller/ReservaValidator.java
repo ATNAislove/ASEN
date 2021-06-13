@@ -18,12 +18,10 @@ public class ReservaValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Reserva reserva = (Reserva) obj;
-        if (reserva.getFecha().equals(""))
-            errors.rejectValue("fecha", "obligatorio",
-                    "Debes introducir una fecha válida");
         // Validación para una fecha válida
-        if (reserva.getFecha().compareTo(LocalDate.now()) < 0)
+        if (reserva.getFecha().compareTo(LocalDate.now()) < 0) {
             errors.rejectValue("fecha", "obligatorio",
                     "Debes introducir una fecha posterior a la actual");
+        }
     }
 }
