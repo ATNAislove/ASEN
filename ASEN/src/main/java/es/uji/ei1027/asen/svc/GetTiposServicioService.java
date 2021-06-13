@@ -9,4 +9,5 @@ public interface GetTiposServicioService {
     public List<TipoServicio> getTiposServicioService();
     public String getTipoServicio(int idTipoServicio);
     public List<Servicio> getServiciosMunicipio(int idMunicipio);
+    public List<Servicio> getServiciosArea(int idArea);
 }

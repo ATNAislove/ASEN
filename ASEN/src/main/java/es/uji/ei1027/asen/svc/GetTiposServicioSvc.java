@@ -38,5 +38,9 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
         }
         return servicios;
     }
+    @Override
+    public List<Servicio> getServiciosArea(int idArea){
+        return servicioDao.getServicioByArea(idArea);
+    }
 
 }
