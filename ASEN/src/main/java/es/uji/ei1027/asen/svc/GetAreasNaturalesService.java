@@ -8,4 +8,5 @@ import java.util.List;
 public interface GetAreasNaturalesService {
     public List<AreaNatural> getAreas();
     public String getNombreArea(int idArea);
+    public int getIdArea(int idZona);
 }

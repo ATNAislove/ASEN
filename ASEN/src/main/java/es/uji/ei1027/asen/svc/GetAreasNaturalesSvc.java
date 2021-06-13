@@ -1,6 +1,7 @@
 package es.uji.ei1027.asen.svc;
 
 import es.uji.ei1027.asen.dao.AreaNaturalDao;
+import es.uji.ei1027.asen.dao.ZonaDao;
 import es.uji.ei1027.asen.model.AreaNatural;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import java.util.List;
 public class GetAreasNaturalesSvc implements  GetAreasNaturalesService {
     @Autowired
     private AreaNaturalDao areaNaturalDao;
+    @Autowired
+    private ZonaDao zonaDao;
 
     @Override
     public List<AreaNatural> getAreas() {
@@ -20,6 +23,10 @@ public class GetAreasNaturalesSvc implements  GetAreasNaturalesService {
     @Override
     public String getNombreArea(int idArea) {
         return areaNaturalDao.getAreaNatural(idArea).getNombreArea();
+    }
+    @Override
+    public int getIdArea(int idZona){
+        return zonaDao.getZona(idZona).getIdArea();
     }
 
 

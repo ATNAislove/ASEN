@@ -40,8 +40,8 @@ public class ZonaDao {
     /* Actualitza els atributs del zona
        (excepte el nom, que és la clau primària) */
     public void updateZona(Zona zona) {
-        jdbcTemplate.update("UPDATE zona SET idCharNumero=?, nombreZona=?, aforoMaximo=?, tipoTerreno=?, idArea=? WHERE idZona=?",
-                zona.getIdCharNumero(), zona.getNombreZona(), zona.getAforoMaximo(), zona.getTipoTerreno(), zona.getIdArea(),zona.getIdZona());
+        jdbcTemplate.update("UPDATE zona SET  nombreZona=?, aforoMaximo=?, tipoTerreno=? WHERE idZona=?",
+                 zona.getNombreZona(), zona.getAforoMaximo(), zona.getTipoTerreno(),zona.getIdZona());
     }
 
     /* Obté el zona amb el nom donat. Torna null si no existeix. */

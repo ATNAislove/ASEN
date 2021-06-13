@@ -5,6 +5,7 @@ import es.uji.ei1027.asen.model.AreaNatural;
 import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import es.uji.ei1027.asen.svc.MostrarOcupacionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/areaNatural")
@@ -78,8 +80,15 @@ public class AreaNaturalController {
     }
 
     @RequestMapping(value="/delete/{idArea}")
-    public String processDelete(@PathVariable int idArea) {
-        areaNaturalDao.deleteAreaNatural(idArea);
+    public String processDelete(@PathVariable int idArea, RedirectAttributes redirectAttrs) {
+        try {
+            areaNaturalDao.deleteAreaNatural(idArea);
+        }catch(DataIntegrityViolationException e){
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "No se puede eliminar el area, pues tiene zonas asignadas")
+                    .addFlashAttribute("clase", "error");
+            return "redirect:../list";
+        }
         return "redirect:../list";
     }
 

@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Editar zona</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-
+<h2>Editar Zona</h2>
+<form action="#" th:action="@{/zona/update}"
+      th:object="${zona}" method="post">
+    <table>
+        <tr>
+            <td><label>Id zona</label></td>
+            <td><input type="number" th:field="*{idZona}" placeholder="ejemplo: 12" readonly/></td>
+        </tr>
+        <tr>
+            <td><label>idCharNumero</label></td>
+            <td><input type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" readonly/></td>
+        </tr>
+        <tr>
+            <td><label>Nombre de la zona</label></td>
+            <td><input type="text" th:field="*{nombreZona}" /></td>
+        </tr>
+        <tr>
+            <td><label>Aforo máximo</label></td>
+            <td><input type="number" th:field="*{aforoMaximo}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo de terreno</label></td>
+            <td><select th:field="*{tipoTerreno}">
+                <option th:value="arena">arena</option>
+                <option th:value="hierba">hierba</option>
+                <option th:value="piedra">piedra</option>
+                <option th:value="humífero">humífero</option>
+                <option th:value="fango">fango</option>
+                <option th:value="tierra">tierra</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label>Area</label></td>
+            <td><select th:field="*{idArea}" readonly>
+                <option th:each="area: ${areas}" th:value="${area.idArea}"
+                        th:text="${area.nombreArea}">
+                </option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Editar zona" /></td>
+        </tr>
+    </table>
+    <br>
+</form>
+<a th:href="'/zona/list/' + ${zona.idArea}">VOLVER</a>
 </body>
 </html>
