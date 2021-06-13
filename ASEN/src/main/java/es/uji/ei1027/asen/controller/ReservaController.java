@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
+import static java.lang.Integer.parseInt;
+
 @Controller
 @RequestMapping("/reserva")
 public class ReservaController{
@@ -41,10 +43,11 @@ public class ReservaController{
         model.addAttribute("reservaService", reservaService);
         return "reserva/list";
     }
-    @RequestMapping(value = "/add")
-    public String addReserva(Model model) {
+    @RequestMapping(value = "/add/{idZona}", method = RequestMethod.GET)
+    public String addReserva(Model model, @PathVariable int idZona, HttpSession session) {
         model.addAttribute("reserva", new Reserva());
         model.addAttribute("reservaService", reservaService);
+        session.setAttribute("zona", idZona);
         return "reserva/add";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -56,6 +59,8 @@ public class ReservaController{
             return "reserva/add";
         try{
             reservaDao.addReserva(reserva,session);
+            int zona = (int) session.getAttribute("zona");
+            reservaService.addOcupacion(reserva.getIdReserva(),zona);
         } catch(DuplicateKeyException e){
             throw new AsenApplicationException(
                     "Ya existe una reserva con este código "
@@ -72,6 +77,7 @@ public class ReservaController{
     @RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int idReserva) {
         model.addAttribute("reserva", reservaDao.getReserva(idReserva));
+        model.addAttribute("reservaService", reservaService);
         return "reserva/update";
     }
 
@@ -86,6 +92,7 @@ public class ReservaController{
 
     @RequestMapping(value = "/delete/{idReserva}")
     public String processDelete(@PathVariable int idReserva) {
+        reservaService.deleteOcupacion(idReserva);
         reservaDao.deleteReserva(idReserva);
         return "redirect:../list";
     }

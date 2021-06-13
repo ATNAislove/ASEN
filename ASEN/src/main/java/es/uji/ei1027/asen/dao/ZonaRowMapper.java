@@ -11,7 +11,7 @@ public final class ZonaRowMapper implements RowMapper<Zona> {
     public Zona mapRow(ResultSet rs, int rowNum) throws SQLException {
         Zona zona = new Zona();
         zona.setIdZona(rs.getInt("idZona"));
-        zona.setIdCharNumero(rs.getString("idCharNumero"));
+        zona.setIdCharNumero(rs.getString("idCharNum"));
         zona.setNombreZona(rs.getString("nombreZona"));
         zona.setAforoMaximo(rs.getInt("aforoMaximo"));
         zona.setTipoTerreno(rs.getString("tipoTerreno"));

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:object="${session}">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de zonas</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de zonas</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Parcela</th>
+            <th>Nombre zona</th>
+            <th>Aforo máximo</th>
+            <th>Tipo de terreno</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="zona: ${zonas}">
+            <td th:text="${zona.idCharNumero}"></td>
+            <td th:text="${zona.nombreZona}"></td>
+            <td th:text="${zona.aforoMaximo}"></td>
+            <td th:text="${zona.tipoTerreno}"></td>
+            <td th:if="*{userType == 'gestor'}"> <a th:href="@{/zona/update/{idZona}(idZona=${zona.idZona})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td th:if="*{userType == 'gestor'}"><a th:href="@{/zona/delete/{idZona}(idZona=${zona.idZona})}" class="btn btn-danger" role="button">Esborra</a></td>
+            <td th:if="*{userType == 'ciudadano'}"><a th:href="@{/reserva/add/{idZona}(idZona=${zona.idZona})}" class="btn btn-primary" role="button">Reservar</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:if="*{userType == 'gestor'}" th:href="@{/zona/add}" class="btn btn-warning" role="button">Añadir zona</a>
+</div>
+</body>
+</html>

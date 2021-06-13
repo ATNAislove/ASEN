@@ -7,7 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nueva Reserva</h2><!-- formulario de Reserva-->
+<h2>Nueva Reserva</h2>
 
 <form action="#" th:action="@{/reserva/add}" th:object="${reserva}" method="post">
     <table>
@@ -26,7 +26,7 @@
         </tr>
 
         <tr>
-            <td><label>idFranjaHoraria</label></td>
+            <td><label>Franja Horaria</label></td>
             <td><select th:field="*{idFranjaHoraria}" required>
                     <option th:each="franja: ${reservaService.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
                             th:text="${franja.horaInicio}+' '+${franja.horaFin}">
@@ -39,7 +39,7 @@
         </tr>
 </table>
     <br>
-    <a href="n/">VOLVER</a>
+    <a href="/areaNatural/list" class="btn btn-primary" role="button">VOLVER</a>
 
 </form>
 </body>

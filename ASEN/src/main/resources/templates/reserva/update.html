@@ -7,7 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Reserva</h2><!-- formulario de Reserva-->
+<h2>Modificar reserva</h2>
 <form action="#" th:action="@{/reserva/update}"
       th:object="${reserva}" method="post">
     <table>
@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td><label>hora Salida</label></td>
-            <td><input type="time" th:field="*{horaSalida}" /></td>
+            <td><input type="time" th:field="*{horaSalida}"/></td>
         </tr>
         <tr>
             <td><label>fecha Creacion</label></td>
@@ -33,26 +33,23 @@
         </tr>
         <tr>
             <td><label>codigoQR</label></td>
-            <td><input type="text" th:field="*{codigoQR}" readonly /></td>
+            <td><img style="max-width:300px;max-height:300px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
         </tr>
         <tr>
-            <td><label>estado Reserva</label></td>
-            <td><input type="text" th:field="*{estadoReserva}" readonly /></td>
-        </tr>
-        <tr>
-            <td><label>usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" readonly /></td>
-        </tr>
-        <tr>
-            <td><label>idFranjaHoraria</label></td>
-            <td><input type="number" th:field="*{idFranjaHoraria}" /></td>
+            <td><label>Franja Horaria</label></td>
+            <td><select th:field="*{idFranjaHoraria}" required>
+                <option th:each="franja: ${reservaService.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
+                        th:text="${franja.horaInicio}+' '+${franja.horaFin}">
+                </option>
+            </select>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Actualizar Reserva" /></td>
         </tr>
     </table>
     <br>
-    <a href="n/">VOLVER</a>
+    <a href="/reserva/list" class="btn btn-primary" role="button">VOLVER</a>
 </form>
 </body>
 </html>

@@ -34,7 +34,7 @@
             <td th:text="${areaNatural.tipoAcceso}"></td>
             <td th:if="*{userType == 'gestor'}"> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-warning" role="button">Edita</a></td>
             <td th:if="*{userType == 'gestor'}"><a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-danger" role="button">Esborra</a></td>
-            <td th:if="*{userType == 'ciudadano'}"><a th:href="@{/reserva/add/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Reservar</a></td>
+            <td><a th:href="@{/zona/list/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Mostrar zonas</a></td>
             <td><a th:href="@{/areaNatural/consultarOcupacion/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-secondary" role="button">Ocupacion</a></td>
         </tr>
         </tbody>

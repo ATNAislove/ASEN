@@ -23,15 +23,15 @@ public class OcupacionDao {
     /* Afegeix la ocupacio a la base de dades */
 
     public void addOcupacio(Ocupacion ocupacion) {
-        jdbcTemplate.update("INSERT INTO Ocupacion VALUES(?, ?)",ocupacion.getIdReserva(),ocupacion.getIdCharNum());
+        jdbcTemplate.update("INSERT INTO Ocupacion VALUES(?, ?)",ocupacion.getIdReserva(),ocupacion.getIdZona());
     }
     /* Esborra la ocupacio de la base de dades */
-    public void deleteOcupacio(int idReserva,int idCharNum) {
-        jdbcTemplate.update("DELETE FROM ciudadano WHERE idReserva=?, idZona=?",idReserva,idCharNum);
+    public void deleteOcupacio(int idReserva) {
+        jdbcTemplate.update("DELETE FROM ocupacion WHERE idReserva=?",idReserva);
     }
 
     public void deleteOcupacio(Ocupacion ocupacion) {
-        jdbcTemplate.update("DELETE FROM ciudadano WHERE idReserva=?, idZona=?",ocupacion.getIdReserva(),ocupacion.getIdCharNum());
+        jdbcTemplate.update("DELETE FROM ocupacion WHERE idReserva=?, idZona=?",ocupacion.getIdReserva(),ocupacion.getIdZona());
     }
 
     //No hay que actualizar la ocupacion.

@@ -23,9 +23,9 @@ public class ZonaController {
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
-    @RequestMapping("/list")
-    public String listZonas(Model model) {
-        model.addAttribute("zonas", zonaDao.getZonas());
+    @RequestMapping(value="/list/{idArea}", method = RequestMethod.GET)
+    public String listZonas(Model model,@PathVariable int idArea) {
+        model.addAttribute("zonas", zonaDao.getZonasByArea(idArea));
         return "zona/list";
     }
 

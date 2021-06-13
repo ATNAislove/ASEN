@@ -69,7 +69,6 @@ public class LoginController {
         } else{
             if(gestorUserDao.getGestorMunicipalUser(user.getUsername())!= null){
                 user = gestorUserDao.loadUserByUsername(user.getUsername(), user.getPassword());
-
             }
         }
         if (user == null) {
