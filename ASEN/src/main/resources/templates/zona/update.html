@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td><label>Area</label></td>
-            <td><select th:field="*{idArea}" readonly>
+            <td><select th:field="*{idArea}">
                 <option th:each="area: ${areas}" th:value="${area.idArea}"
                         th:text="${area.nombreArea}">
                 </option>

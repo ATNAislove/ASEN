@@ -28,6 +28,10 @@ public class GetAreasNaturalesSvc implements  GetAreasNaturalesService {
     public int getIdArea(int idZona){
         return zonaDao.getZona(idZona).getIdArea();
     }
+    @Override
+    public List<AreaNatural> getAreasPueblo(int idMunicipio) {
+        return  areaNaturalDao.getAreasPorMunicipio(idMunicipio);
+    }
 
 
 }

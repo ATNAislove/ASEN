@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 public interface GetMunicipiosService {
     public List<Municipio> getMunicipios();
+    public int getMunicipioGestor(String user);
+    public Municipio getObjetoMunicipio(int idMunicipio);
 }

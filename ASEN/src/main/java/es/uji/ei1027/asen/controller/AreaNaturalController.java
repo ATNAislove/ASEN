@@ -2,6 +2,9 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.AreaNaturalDao;
 import es.uji.ei1027.asen.model.AreaNatural;
+import es.uji.ei1027.asen.model.Municipio;
+import es.uji.ei1027.asen.model.UserDetails;
+import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
 import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import es.uji.ei1027.asen.svc.MostrarOcupacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/areaNatural")
 public class AreaNaturalController {
@@ -23,6 +28,7 @@ public class AreaNaturalController {
 
     private MostrarOcupacionService mostrarOcupacionService;
     private GetMunicipiosService getMunicipiosService;
+    private GetAreasNaturalesService getAreasNaturalesService;
 
     @Autowired
     public void setMostrarOcupacionService(MostrarOcupacionService mostrarOcupacionService) {
@@ -32,7 +38,10 @@ public class AreaNaturalController {
     public void setGetMunicipiosService(GetMunicipiosService getMunicipiosService) {
         this.getMunicipiosService = getMunicipiosService;
     }
-
+    @Autowired
+    public void setGetAreasNaturalesService(GetAreasNaturalesService getAreasNaturalesService){
+        this.getAreasNaturalesService = getAreasNaturalesService;
+    }
     @Autowired
     public void setAreaNaturalDao(AreaNaturalDao areaNaturalDao) {
         this.areaNaturalDao=areaNaturalDao;
@@ -41,16 +50,24 @@ public class AreaNaturalController {
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
     @RequestMapping("/list")
-    public String listAreasNaturales(Model model) {
-        model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
+    public String listAreasNaturales(Model model, HttpSession session) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if(user.getRol()=="GestorMunicipal"){
+            int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+            model.addAttribute("areasNaturales", getAreasNaturalesService.getAreasPueblo(municipio));
+        }else
+            model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
+
         return "areaNatural/list";
     }
 
 
     @RequestMapping(value="/add")
-    public String addAreaNatural(Model model) {
+    public String addAreaNatural(Model model, HttpSession session) {
         model.addAttribute("areaNatural", new AreaNatural());
-        model.addAttribute("municipios", getMunicipiosService.getMunicipios());
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        Municipio municipio = getMunicipiosService.getObjetoMunicipio(getMunicipiosService.getMunicipioGestor(user.getUsername()));
+        model.addAttribute("municipio", municipio);
         return "areaNatural/add";
     }
 

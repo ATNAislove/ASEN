@@ -1,8 +1,11 @@
 package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.ZonaDao;
+import es.uji.ei1027.asen.model.Municipio;
+import es.uji.ei1027.asen.model.UserDetails;
 import es.uji.ei1027.asen.model.Zona;
 import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
+import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -14,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/zona")
 public class ZonaController {
     private ZonaDao zonaDao;
     private GetAreasNaturalesService getAreasNaturalesService;
+    private GetMunicipiosService getMunicipiosService;
 
     @Autowired
     public void setZonaDao(ZonaDao zonaDao) {
@@ -28,6 +34,10 @@ public class ZonaController {
     @Autowired
     public void setGetAreasNaturalesService(GetAreasNaturalesService getAreasNaturalesService){
         this.getAreasNaturalesService = getAreasNaturalesService;
+    }
+    @Autowired
+    public void setGetMunicipiosService(GetMunicipiosService getMunicipiosService) {
+        this.getMunicipiosService = getMunicipiosService;
     }
 
     // Operacions: Crear, llistar, actualitzar, esborrar
@@ -41,9 +51,11 @@ public class ZonaController {
 
 
     @RequestMapping(value="/add")
-    public String addZona(Model model) {
+    public String addZona(Model model, HttpSession session) {
         model.addAttribute("zona", new Zona());
-        model.addAttribute("areas", getAreasNaturalesService.getAreas());
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+        model.addAttribute("areas", getAreasNaturalesService.getAreasPueblo(municipio));
         return "zona/add";
     }
 
@@ -58,9 +70,11 @@ public class ZonaController {
     }
 
     @RequestMapping(value="/update/{idZona}", method = RequestMethod.GET)
-    public String editZona(Model model, @PathVariable int idZona) {
+    public String editZona(Model model, @PathVariable int idZona, HttpSession session) {
         model.addAttribute("zona", zonaDao.getZona(idZona));
-        model.addAttribute("areas", getAreasNaturalesService.getAreas());
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+        model.addAttribute("areas", getAreasNaturalesService.getAreasPueblo(municipio));
         return "zona/update";
     }
 

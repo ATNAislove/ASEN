@@ -83,10 +83,8 @@ public class LoginController {
         session.setAttribute("user", user);
 
         if(user.getRol().equals("Ciudadano")){
-            session.setAttribute("userType","ciudadano");
             return "ciudadano/menuCiudadano";
         } else{
-            session.setAttribute("userType","gestor");
             return "gestorMunicipal/menuGestorMunicipal";
         }
     }

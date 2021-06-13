@@ -36,14 +36,14 @@
             <td th:text="${areaNatural.tipoTerreno}"></td>
             <td th:text="${areaNatural.tipoArea}"></td>
             <td th:text="${areaNatural.tipoAcceso}"></td>
-            <td th:if="*{userType == 'gestor'}"> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-warning" role="button">Editar</a></td>
-            <td th:if="*{userType == 'gestor'}"><a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-danger" role="button">Borrar</a></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}"> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-danger" role="button">Borrar</a></td>
             <td><a th:href="@{/zona/list/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Mostrar zonas</a></td>
             <td><a th:href="@{/areaNatural/consultarOcupacion/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-secondary" role="button">Ocupacion</a></td>
         </tr>
         </tbody>
     </table>
-    <a th:if="*{userType == 'gestor'}" href="add" class="btn btn-success" role="button">+ Añadir Área Natural</a>
+    <a th:if="*{user.rol == 'GestorMunicipal'}" href="add" class="btn btn-success" role="button">+ Añadir Área Natural</a>
 </div>
 </body>
 </html>
