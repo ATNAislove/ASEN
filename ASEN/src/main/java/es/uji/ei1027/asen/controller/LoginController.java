@@ -75,6 +75,11 @@ public class LoginController {
             bindingResult.rejectValue("password", "badpw", "Contrasenya incorrecta");
             return "login";
         }
+        if(user.getRol()== null){
+            bindingResult.rejectValue("password", "badpw", "Usuario no encontrado");
+            return "login";
+        }
+
         session.setAttribute("user", user);
 
         if(user.getRol().equals("Ciudadano")){

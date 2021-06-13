@@ -33,8 +33,8 @@
             <td th:text="${servicio.fechaFin}"></td>
             <td th:text="${servicio.periodicidad}"></td>
             <td th:text="${servicio.tipoTemporada}"></td>
-            <td th:text="${servicio.idTipoServicio}"></td>
-            <td th:text="${servicio.idArea}"></td>
+            <td th:text="${getTiposServicioService.getTipoServicio(servicio.idTipoServicio)}"></td>
+            <td th:text="${areaNaturalService.getNombreArea(servicio.idArea)}"></td>
             <td> <a th:href="@{/servicio/update/{idServicio}(idServicio=${servicio.idServicio})}" class="btn btn-primary" role="button">Editar</a></td>
             <td><a th:href="@{/servicio/delete/{idServicio}(idServicio=${servicio.idServicio})}"
                    th:onclick="return confirm('¿ Estás seguro de que quiere borrar el servicio con el id  \''

@@ -16,4 +16,11 @@ public class GetAreasNaturalesSvc implements  GetAreasNaturalesService {
     public List<AreaNatural> getAreas() {
         return  areaNaturalDao.getAreasNaturales();
     }
+
+    @Override
+    public String getNombreArea(int idArea) {
+        return areaNaturalDao.getAreaNatural(idArea).getNombreArea();
+    }
+
+
 }

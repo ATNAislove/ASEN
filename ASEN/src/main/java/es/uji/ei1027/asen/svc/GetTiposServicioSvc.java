@@ -14,4 +14,10 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
     public List<TipoServicio> getTiposServicioService() {
         return tipoServicioDao.getTipoServicios();
     }
+
+    @Override
+    public String getTipoServicio(int idTipoServicio) {
+        return tipoServicioDao.getTipoServicio(idTipoServicio).getNombre();
+    }
+
 }

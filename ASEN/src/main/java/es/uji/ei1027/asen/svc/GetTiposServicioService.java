@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GetTiposServicioService {
     public List<TipoServicio> getTiposServicioService();
+    public String getTipoServicio(int idTipoServicio);
 }

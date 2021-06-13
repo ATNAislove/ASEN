@@ -40,6 +40,8 @@ public class ServicioController {
     @RequestMapping("/list")
     public String listServicios(Model model) {
         model.addAttribute("servicios", servicioDao.getServicios());
+        model.addAttribute("areaNaturalService",getAreasNaturalesService);
+        model.addAttribute("getTiposServicioService",getTiposServicioService);
         return "servicio/list";
     }
 

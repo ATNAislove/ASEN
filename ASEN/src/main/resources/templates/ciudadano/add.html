@@ -12,47 +12,47 @@
       th:object="${ciudadano}" method="post">
     <table>
         <tr>
-            <td><label>usuario</label></td>
+            <td><label>usuario*</label></td>
             <td><input type="text" th:field="*{usuario}" maxlength="15" required/></td>
         </tr>
         <tr>
-            <td><label>codigo ciudadano</label></td>
+            <td><label>codigo ciudadano*</label></td>
             <td><input type="text" th:field="*{codigoCiudadano}" maxlength="50" required/></td>
         </tr>
         <tr>
-            <td><label>pin</label></td>
+            <td><label>pin*</label></td>
             <td><input type="text" th:field="*{pin}" maxlength="15" required/></td>
         </tr>
         <tr>
-            <td><label>fecha Nacimiento</label></td>
+            <td><label>fecha Nacimiento*</label></td>
             <td><input type="date" th:field="*{fechaNacimiento}" required/></td>
         </tr>
         <tr>
-            <td><label>nombre</label></td>
+            <td><label>nombre*</label></td>
             <td><input type="text" th:field="*{nombre}" maxlength="20" required/></td>
         </tr>
         <tr>
-            <td><label>apellidos</label></td>
+            <td><label>apellidos*</label></td>
             <td><input type="text" th:field="*{apellidos}" maxlength="50" required/></td>
         </tr>
         <tr>
-            <td><label>direccion</label></td>
+            <td><label>direccion*</label></td>
             <td><input type="text" th:field="*{direccion}" maxlength="20" required/></td>
         </tr>
         <tr>
-            <td><label>correoElectronico</label></td>
+            <td><label>correoElectronico*</label></td>
             <td><input type="text" th:field="*{correoElectronico}" maxlength="30" required/></td>
         </tr>
         <tr>
-            <td><label>municipio</label></td>
+            <td><label>municipio*</label></td>
             <td><input type="text" th:field="*{municipio}" maxlength="30" required/></td>
         </tr>
         <tr>
-            <td><label>pais</label></td>
+            <td><label>pais*</label></td>
             <td><input type="text" th:field="*{pais}" maxlength="30" required/></td>
         </tr>
         <tr>
-            <td hidden><label>fechaRegistro</label></td>
+            <td hidden><label>fechaRegistro*</label></td>
             <td hidden><input type="date" th:field="*{fechaRegistro}" /></td>
         </tr>
         <tr>
@@ -60,11 +60,14 @@
             <td><input type="date" th:field="*{fechaBaja}" /></td>
         </tr>
         <tr>
+            <td>    <h5>Los campos con * son obligatorios </h5> </td>
+        </tr>
+        <tr>
             <td colspan="2"><input type="submit" value="Crear Ciudadano" /></td>
         </tr>
     </table>
+
     <br>
-    <a href="n/">VOLVER</a>
 </form>
 </body>
 </html>
