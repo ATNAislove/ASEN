@@ -6,6 +6,7 @@ import es.uji.ei1027.asen.model.Municipio;
 import es.uji.ei1027.asen.model.UserDetails;
 import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
 import es.uji.ei1027.asen.svc.GetMunicipiosService;
+import es.uji.ei1027.asen.svc.GetTiposServicioService;
 import es.uji.ei1027.asen.svc.MostrarOcupacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,6 +30,11 @@ public class AreaNaturalController {
     private MostrarOcupacionService mostrarOcupacionService;
     private GetMunicipiosService getMunicipiosService;
     private GetAreasNaturalesService getAreasNaturalesService;
+    private GetTiposServicioService getTiposServicioService;
+    @Autowired
+    public void setGetTiposServicioService(GetTiposServicioService getTiposServicioService){
+        this.getTiposServicioService=getTiposServicioService;
+    }
 
     @Autowired
     public void setMostrarOcupacionService(MostrarOcupacionService mostrarOcupacionService) {
@@ -51,16 +57,20 @@ public class AreaNaturalController {
     // ...
     @RequestMapping("/list")
     public String listAreasNaturales(Model model, HttpSession session) {
-        UserDetails user = (UserDetails) session.getAttribute("user");
-        if(user.getRol()=="GestorMunicipal"){
-            int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
-            model.addAttribute("areasNaturales", getAreasNaturalesService.getAreasPueblo(municipio));
-        }else
-            model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
-
+            UserDetails user = (UserDetails) session.getAttribute("user");
+            if (user.getRol() == "GestorMunicipal") {
+                int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+                model.addAttribute("areasNaturales", getAreasNaturalesService.getAreasPueblo(municipio));
+            } else
+                model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
         return "areaNatural/list";
     }
-
+    @RequestMapping("/listNoRegister")
+    public String listAreasNaturalesNoRegister(Model model, HttpSession session) {
+        model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
+        session.setAttribute("user", new UserDetails());
+        return "areaNatural/listNoRegister";
+    }
 
     @RequestMapping(value="/add")
     public String addAreaNatural(Model model, HttpSession session) {
@@ -109,21 +119,14 @@ public class AreaNaturalController {
         return "redirect:../list";
     }
 
-    @RequestMapping(value="/consultarOcupacion/{idArea}", method = RequestMethod.GET)
+    @RequestMapping(value="/consultarOcupacion/{idArea}")
     public String consultarOcupacion(Model model, @PathVariable int idArea) {
         model.addAttribute("areaNatural", areaNaturalDao.getAreaNatural(idArea));
         model.addAttribute("municipio", mostrarOcupacionService.getMunicipiofromAreaNatural(idArea));
         model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
+        model.addAttribute("servicios", getTiposServicioService.getServiciosArea(idArea));
+        model.addAttribute("TipoServicioService", getTiposServicioService);
         return "areaNatural/consultarOcupacion";
     }
-    @RequestMapping(value="/consultarOcupacion", method = RequestMethod.POST)
-    public String processConsultarOcupacionSubmit(Model model,@ModelAttribute("areaNatural") AreaNatural areaNatural,
-                                                  BindingResult bindingResult){
-        if (bindingResult.hasErrors())
-            return "areaNatural/consultarOcupacion";
 
-        model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
-        return "areaNatural/ocupacion";
-
-    }
 }

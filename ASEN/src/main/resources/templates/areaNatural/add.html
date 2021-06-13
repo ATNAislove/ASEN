@@ -6,16 +6,15 @@
     <title>Agregar Area Natural</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
 </head>
 <body>
+<div class="container">
 <h2>Agregar Area Natural</h2>
 <form action="#" th:action="@{/areaNatural/add}"
       th:object="${areaNatural}" method="post">
     <table>
-        <tr>
-            <td><label>idArea</label></td>
-            <td><input type="number" th:field="*{idArea}" /></td>
-        </tr>
         <tr>
             <td><label>NombreArea</label></td>
             <td><input type="text" th:field="*{nombreArea}" /></td>
@@ -76,7 +75,8 @@
         </tr>
     </table>
     <br>
-    <a href="n/">VOLVER</a>
+    <a href="areaNatural/list" class="btn btn-primary">VOLVER</a>
 </form>
+</div>
 </body>
 </html>

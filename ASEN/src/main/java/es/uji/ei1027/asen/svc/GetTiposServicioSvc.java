@@ -19,6 +19,8 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
     private GetAreasNaturalesService getAreasNaturalesService;
     @Autowired
     private DisponibilidadDao disponibilidadDao;
+    @Autowired
+    private GetFranjasHorariasService getFranjasHorariasService;
     @Override
     public List<TipoServicio> getTiposServicioService() {
         return tipoServicioDao.getTipoServicios();
@@ -46,6 +48,15 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
     @Override
     public List<Disponibilidad> getHorariosServicio(int idServicio){
         return disponibilidadDao.getDisponibilidadesServicio(idServicio);
+    }
+    public String getFranjasTexto(int idServicio){
+        String resultado = "";
+        List<Disponibilidad> disponibilidades = disponibilidadDao.getDisponibilidadesServicio(idServicio);
+        for (Disponibilidad disponibilidad : disponibilidades){
+            resultado += getFranjasHorariasService.getHorasFranja(disponibilidad.getIdFranjaHoraria());
+            resultado += " , ";
+        }
+        return resultado;
     }
 
 }

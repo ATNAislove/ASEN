@@ -8,6 +8,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+<div class="container">
 <h2>Modificar Area Natural</h2>
 <form action="#" th:action="@{/areaNatural/update}"
       th:object="${areaNatural}" method="post">
@@ -72,7 +73,8 @@
         </tr>
     </table>
     <br>
-    <a href="n/">VOLVER</a>
+    <a href="areaNatural/list" class="btn btn-primary">VOLVER</a>
 </form>
+</div>
 </body>
 </html>

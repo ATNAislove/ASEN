@@ -22,7 +22,7 @@ public class AreaNaturalDao {
 
     /* Afegeix el areaNatural a la base de dades */
     public void addAreaNatural(AreaNatural areaNatural) {
-        jdbcTemplate.update("INSERT INTO areaNatural VALUES(?, ?, ?, ?, ?,?,?,?)",areaNatural.getIdArea(),
+        jdbcTemplate.update("INSERT INTO areaNatural (nombreArea,descripcion,imagen,tipoTerreno,tipoArea,tipoAcceso,idMunicipio) VALUES( ?, ?, ?, ?,?,?,?)",
                 areaNatural.getNombreArea(),areaNatural.getDescripcion(),areaNatural.getImagen(),areaNatural.getTipoTerreno(),
                 areaNatural.getTipoArea(),areaNatural.getTipoAcceso(), areaNatural.getIdMunicipio());
     }

@@ -21,7 +21,9 @@ public class ServicioDao {
     /* Afegeix el servici a la base de dades */
 
     public void addServicio(Servicio servicio) {
-        jdbcTemplate.update("INSERT INTO servicio VALUES(?, ?, ?, ?, ?, ?, ?)",servicio.getIdServicio(),servicio.getFechaInicio(),servicio.getFechaFin(), servicio.getPeriodicidad(), servicio.getTipoTemporada(), servicio.getIdTipoServicio(), servicio.getIdArea());
+        jdbcTemplate.update("INSERT INTO servicio (fechaInicio,fechaFin,periodicidad,tipoTemporada,idTipoServicio,idArea) VALUES( ?, ?, ?, ?, ?, ?)",
+                servicio.getFechaInicio(),servicio.getFechaFin(), servicio.getPeriodicidad(), servicio.getTipoTemporada(),
+                servicio.getIdTipoServicio(), servicio.getIdArea());
     }
     /* Esborra el servicio de la base de dades */
     public void deleteServicio(Servicio servicio) {

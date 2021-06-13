@@ -6,7 +6,7 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
-<body>
+<body><div class="container">
 <h2>Servicio</h2><!-- formulario de Reserva-->
 <form action="#" th:action="@{/servicio/update}"
       th:object="${servicio}" method="post">
@@ -44,10 +44,10 @@
             <td><input type="number" th:field="*{idArea}" readonly /></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Actualizar Servicio" /></td>
+            <td colspan="2"><input type="submit"  class="btn btn-primary" value="Actualizar Servicio" /></td>
         </tr>
     </table>
     <br>
-</form>
+</form></div>
 </body>
 </html>

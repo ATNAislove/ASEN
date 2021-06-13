@@ -46,7 +46,12 @@ public class ReservaController{
     @RequestMapping("/list")
     public String listReservas(Model model, HttpSession session) {
         UserDetails user = (UserDetails) session.getAttribute("user");
-        model.addAttribute("reservas", reservaDao.getReservasUsuario(user.getUsername()));
+        if(user.getRol()=="Ciudadano") {
+            model.addAttribute("reservas", reservaDao.getReservasUsuario(user.getUsername()));
+
+        }else{
+            model.addAttribute("reservas", reservaDao.getReservas());
+        }
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         return "reserva/list";
     }
@@ -93,10 +98,14 @@ public class ReservaController{
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("reserva") Reserva reserva,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors())
             return "reserva/update";
-        reservaDao.updateReserva(reserva);
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if(user.getRol()=="Ciudadano")
+            reservaDao.updateReserva(reserva);
+        else
+            reservaDao.updateReservaEstado(reserva);
         return "redirect:list";
     }
 
@@ -107,18 +116,10 @@ public class ReservaController{
         return "redirect:../list";
     }
 
-    @RequestMapping(value = "/updateHoraSalida/{idReserva}", method = RequestMethod.GET)
-    public String editHoraSalidaReserva(Model model, @PathVariable int idReserva) {
-        model.addAttribute("reserva", reservaDao.getReserva(idReserva));
-        return "reserva/updateHoraSalida";
+    @RequestMapping(value = "/updateHoraSalida/{idReserva}")
+    public String editHoraSalidaReserva(@PathVariable int idReserva) {
+        reservaDao.updateHoraSalidaReserva(idReserva);
+        return "redirect:../list";
     }
 
-    @RequestMapping(value = "/updateHoraSalida", method = RequestMethod.POST)
-    public String processHoraSalidaUpdateSubmit(@ModelAttribute("reserva") Reserva reserva,
-                                      BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "reserva/updateHoraSalida";
-        reservaDao.updateHoraSalidaReserva(reserva);
-        return "redirect:list";
-    }
 }

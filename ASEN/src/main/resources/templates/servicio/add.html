@@ -7,14 +7,11 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+<div class="container">
 <h2>Nuevo servicio</h2>
 <form action="#" th:action="@{/servicio/add}"
       th:object="${servicio}" method="post">
     <table>
-        <tr>
-            <td><label>idServicio</label></td>
-            <td><input type="number" th:field="*{idServicio}" /></td>
-        </tr>
         <tr>
             <td><label>Fecha Inicio</label></td>
             <td><input type="date" th:field="*{fechaInicio}" /></td>
@@ -58,6 +55,6 @@
     </table>
     <br>
     <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
-</form>
+</form></div>
 </body>
 </html>

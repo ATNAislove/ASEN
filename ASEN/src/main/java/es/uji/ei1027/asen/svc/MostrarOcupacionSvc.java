@@ -55,7 +55,4 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
         int plazasTotales = areaNaturalDao.getCapacidadTotal(idArea);
         return ((plazasTotales-plazasOcupadas)/plazasTotales)*100;
     }
-    public List<FranjaHoraria> getFranjasHorarias(){
-        return franjaHorariaDao.getFranjasHorarias();
-    }
 }

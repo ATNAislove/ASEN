@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ReservaDao {
     /* Afegeix la Reserva a la base de dades */
 
     public void addReserva(Reserva reserva, HttpSession session) {
-        jdbcTemplate.update("INSERT INTO Reserva VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",reserva.getIdReserva(),reserva.getFecha(),reserva.getNumeroPersonas()
+        jdbcTemplate.update("INSERT INTO Reserva (fecha, numeroPersonas, horaSalida, fechaCreacion, codigoQr, estadoReserva, usuario,idFranjaHoraria) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)",reserva.getFecha(),reserva.getNumeroPersonas()
                 ,reserva.getHoraSalida(), LocalDate.now(),"https://static-unitag.com/images/help/QRCode/qrcode.png?mh=07b7c2a2","pendiente"
                 ,session.getAttribute("user").toString(),reserva.getIdFranjaHoraria());
     }
@@ -47,11 +48,19 @@ public class ReservaDao {
                 reserva.getFecha(),reserva.getNumeroPersonas(), reserva.getHoraSalida(),
                 reserva.getIdFranjaHoraria(),reserva.getIdReserva());
     }
+    /* Actualitza els atributs de la reserva si ets un gestor
+       (excepte el idReserva, que és la clau primària) */
+    public void updateReservaEstado(Reserva reserva) {
+        jdbcTemplate.update("UPDATE reserva SET fecha=?, numeroPersonas=?, horaSalida=?, estadoReserva=?, " +
+                        "idFranjaHoraria=? WHERE idReserva=?",
+                reserva.getFecha(),reserva.getNumeroPersonas(), reserva.getHoraSalida(),reserva.getEstadoReserva(),
+                reserva.getIdFranjaHoraria(),reserva.getIdReserva());
+    }
 
-    public void updateHoraSalidaReserva(Reserva reserva) {
-        jdbcTemplate.update("UPDATE reserva SET  horaSalida=?" +
+    public void updateHoraSalidaReserva(int idReserva) {
+        jdbcTemplate.update("UPDATE reserva SET  horaSalida=?, estadoReserva=?" +
                         "WHERE idReserva=?",
-                reserva.getHoraSalida(),reserva.getIdReserva());
+                LocalTime.now(),"usado",idReserva);
     }
     /* Obté la reserva amb el idReserva donat. Torna null si no existeix. */
     public Reserva getReserva(int idReserva) {

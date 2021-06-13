@@ -5,8 +5,11 @@
     <title>Lista de Reservas</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
 </head>
 <body>
+<div class="container">
 <h2>Consultar Ocupacion</h2>
 <!--<form action="#" th:action="@{/areaNatural/consultarOcupacion}"
       th:object="${areaNatural}" method="post">
@@ -26,7 +29,34 @@
 <p>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/></p>
 
 <p>Municipio: <span th:text="${municipio}"/></p>
-<table>
+
+<h4>Lista de Servicios disponibles</h4>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Periodicidad</th>
+        <th>Tipo Temporada</th>
+        <th>Tipo Servicio</th>
+        <th>Horarios</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="servicio: ${servicios}">
+        <td th:text="${servicio.fechaInicio}"></td>
+        <td th:text="${servicio.fechaFin}"></td>
+        <td th:text="${servicio.periodicidad}"></td>
+        <td th:text="${servicio.tipoTemporada}"></td>
+        <td th:text="${TipoServicioService.getTipoServicio(servicio.idTipoServicio)}"></td>
+        <td th:text="${TipoServicioService.getFranjasTexto(servicio.idServicio)}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!--<table>
     <tr>
         <td><label>Fecha</label></td>
         <td><input type="date" /></td>
@@ -40,7 +70,7 @@
         </select>
         </td>
     </tr>
-</table>
-
+</table>-->
+</div>
 </body>
 </html>

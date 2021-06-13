@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" >
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:object="${session}">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Reservas</title>
@@ -11,6 +11,8 @@
 </head>
 <body>
 <div class="container">
+    <h1 th:if="*{user.rol=='Ciudadano'}"><a href="/ciudadano/menuCiudadano">ASEN</a> </h1>
+    <h1 th:if="*{user.rol=='GestorMunicipal'}"><a href="/gestorMunicipal/menuGestorMunicipal">ASEN</a></h1>
     <h1>Lista de Servicios</h1>
     <table class="table table-striped">
         <thead>

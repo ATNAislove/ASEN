@@ -6,7 +6,7 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
-<body>
+<body><div class="container">
 <h2>Editar Zona</h2>
 <form action="#" th:action="@{/zona/update}"
       th:object="${zona}" method="post">
@@ -48,11 +48,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Editar zona" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-primary" value="Editar zona" /></td>
         </tr>
     </table>
     <br>
 </form>
-<a th:href="'/zona/list/' + ${zona.idArea}">VOLVER</a>
+<a th:href="'/zona/list/' + ${zona.idArea}" class="btn btn-primary">VOLVER</a>
+</div>
 </body>
 </html>

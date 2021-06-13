@@ -20,6 +20,7 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
             return " ";
         }
     }
+    @Override
     public List<FranjaHoraria> getFranjasHorarias(){
         return franjaHorariaDao.getFranjasHorarias();
     }

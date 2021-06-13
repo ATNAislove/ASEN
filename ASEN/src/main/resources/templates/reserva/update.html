@@ -7,6 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+<div class="container">
 <h2>Modificar reserva</h2>
 <form action="#" th:action="@{/reserva/update}"
       th:object="${reserva}" method="post">
@@ -25,11 +26,22 @@
         </tr>
         <tr>
             <td><label>hora Salida</label></td>
-            <td><input type="time" th:field="*{horaSalida}"/></td>
+            <td><input th:if="${reserva.horaSalida==null}" type="time" th:field="*{horaSalida}"/>
+                <input th:unless="${reserva.horaSalida==null}"type="time" th:field="*{horaSalida}" readonly/></td>
         </tr>
         <tr>
             <td><label>fecha Creacion</label></td>
             <td><input type="date" th:field="*{fechaCreacion}" readonly /></td>
+        </tr>
+        <tr th:if="${session.user.rol=='GestorMunicipal'}">
+            <td><label>Estado reserva</label></td>
+            <td><select th:field="*{estadoReserva}" required>
+                    <option th:value="usado" th:text="Usado"></option>
+                    <option th:value="enUso">En Uso</option>
+                    <option th:value="cancelado" th:text="Cancelado"></option>
+                    <option th:value="pendiente" th:text="Pendiente"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><label>codigoQR</label></td>
@@ -45,11 +57,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Actualizar Reserva" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva" /></td>
         </tr>
     </table>
     <br>
     <a href="/reserva/list" class="btn btn-primary" role="button">VOLVER</a>
 </form>
+</div>
 </body>
 </html>

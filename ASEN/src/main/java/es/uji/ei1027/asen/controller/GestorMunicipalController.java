@@ -22,6 +22,10 @@ public class GestorMunicipalController {
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
+    @RequestMapping("/menuGestorMunicipal")
+    public String menuGestor(Model model) {
+        return "gestorMunicipal/menuGestorMunicipal";
+    }
     @RequestMapping("/list")
     public String listGestoresMunicipales(Model model) {
         model.addAttribute("gestoresMunicipales", gestorMunicipalDao.getGestoresMunicipales());

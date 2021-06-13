@@ -28,6 +28,10 @@ public class CiudadanoController {
 
     // Operacions: Crear, llistar, actualitzar, esborrar
     // ...
+    @RequestMapping("/menuCiudadano")
+    public String menuCiudadano(Model model) {
+        return "ciudadano/menuCiudadano";
+    }
     @RequestMapping("/list")
     public String listCiudadanos(Model model) {
         model.addAttribute("ciudadanos", ciudadanoDao.getCiudadanos());

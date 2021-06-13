@@ -9,5 +9,4 @@ public interface MostrarOcupacionService {
     public String getMunicipiofromAreaNatural(int idArea);
     public List<Zona> getZonasLibresByfecha(String fecha, int idArea);
     public int getPlazasOcupadasByFecha(String fecha, int idArea);
-    public List<FranjaHoraria> getFranjasHorarias();
 }
