@@ -31,6 +31,12 @@ public class ReservaDao {
                 ,session.getAttribute("user").toString(),reserva.getIdFranjaHoraria());
     }
 
+    /*Cancelar una reserva*/
+    public void cancelarReserva(int idReserva){
+        jdbcTemplate.update("UPDATE reserva SET estadoReserva=? WHERE idReserva=?","cancelado",idReserva);
+
+    }
+
     /* Esborra la reserva de la base de dades */
     public void deleteReserva(Reserva reserva) {
         jdbcTemplate.update("DELETE FROM Reserva WHERE idReserva=?",reserva.getIdReserva());
@@ -83,7 +89,7 @@ public class ReservaDao {
     }
     public List<Reserva> getReservasUsuario(String usuario) {
         try {
-            return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario +"'", new ReservaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario +"' AND estadoReserva NOT IN ('cancelado')", new ReservaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Reserva>();

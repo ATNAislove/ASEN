@@ -32,8 +32,8 @@
         <tbody>
         <tr th:each="servicio: ${servicios}">
             <td th:text="${servicio.idServicio}"></td>
-            <td th:text="${servicio.fechaInicio}"></td>
-            <td th:text="${servicio.fechaFin}"></td>
+            <td th:text="${franjaHorariaService.transformarFecha(servicio.fechaInicio)}"></td>
+            <td th:text="${servicio.fechaFin!=null} ? ${franjaHorariaService.transformarFecha(servicio.fechaFin)}"></td>
             <td th:text="${servicio.periodicidad}"></td>
             <td th:text="${servicio.tipoTemporada}"></td>
             <td th:text="${getTiposServicioService.getTipoServicio(servicio.idTipoServicio)}"></td>

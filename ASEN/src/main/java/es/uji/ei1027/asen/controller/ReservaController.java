@@ -108,7 +108,11 @@ public class ReservaController{
             reservaDao.updateReservaEstado(reserva);
         return "redirect:list";
     }
-
+    @RequestMapping(value="/cancel/{idReserva}")
+    public String processCancel(@PathVariable int idReserva){
+        reservaDao.cancelarReserva(idReserva);
+        return "redirect:../list";
+    }
     @RequestMapping(value = "/delete/{idReserva}")
     public String processDelete(@PathVariable int idReserva) {
         reservaService.deleteOcupacion(idReserva);

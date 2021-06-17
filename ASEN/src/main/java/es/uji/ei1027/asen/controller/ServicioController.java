@@ -60,6 +60,7 @@ public class ServicioController {
         model.addAttribute("servicios", getTiposServicioService.getServiciosMunicipio(municipio));
         model.addAttribute("areaNaturalService",getAreasNaturalesService);
         model.addAttribute("getTiposServicioService",getTiposServicioService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         return "servicio/list";
     }
 

@@ -4,10 +4,7 @@ import es.uji.ei1027.asen.dao.AreaNaturalDao;
 import es.uji.ei1027.asen.model.AreaNatural;
 import es.uji.ei1027.asen.model.Municipio;
 import es.uji.ei1027.asen.model.UserDetails;
-import es.uji.ei1027.asen.svc.GetAreasNaturalesService;
-import es.uji.ei1027.asen.svc.GetMunicipiosService;
-import es.uji.ei1027.asen.svc.GetTiposServicioService;
-import es.uji.ei1027.asen.svc.MostrarOcupacionService;
+import es.uji.ei1027.asen.svc.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -31,6 +28,11 @@ public class AreaNaturalController {
     private GetMunicipiosService getMunicipiosService;
     private GetAreasNaturalesService getAreasNaturalesService;
     private GetTiposServicioService getTiposServicioService;
+    private GetFranjasHorariasService getFranjasHorariasService;
+    @Autowired
+    public void setGetFranjasHorariasService(GetFranjasHorariasService getFranjasHorariasService){
+        this.getFranjasHorariasService=getFranjasHorariasService;
+    }
     @Autowired
     public void setGetTiposServicioService(GetTiposServicioService getTiposServicioService){
         this.getTiposServicioService=getTiposServicioService;
@@ -126,6 +128,7 @@ public class AreaNaturalController {
         model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
         model.addAttribute("servicios", getTiposServicioService.getServiciosArea(idArea));
         model.addAttribute("TipoServicioService", getTiposServicioService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         return "areaNatural/consultarOcupacion";
     }
 

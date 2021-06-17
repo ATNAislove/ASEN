@@ -33,19 +33,19 @@
         <tbody>
         <tr th:each="reserva: ${reservas}">
             <td th:text="${reserva.idReserva}"></td>
-            <td th:text="${reserva.fecha}"></td>
+            <td th:text="${franjaHorariaService.transformarFecha(reserva.fecha)}"></td>
             <td th:text="${reserva.numeroPersonas}"></td>
             <td th:text="${reserva.horaSalida}"></td>
-            <td th:text="${reserva.fechaCreacion}"></td>
+            <td th:text="${franjaHorariaService.transformarFecha(reserva.fechaCreacion)}"></td>
             <td><img style="max-width:40px;max-height:40px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
             <td th:text="${reserva.estadoReserva}"></td>
             <td th:text="${franjaHorariaService.getHorasFranja(reserva.idFranjaHoraria)}"></td>
             <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Edita</a></td>
             <td> <a th:if="${reserva.horaSalida == null}" th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Escanear Qr</a></td>
-            <td> <a th:href="@{/reserva/delete/{idReserva}(idReserva=${reserva.idReserva})}"
-                   th:onclick="return confirm('¿ Estás seguro de que quiere borrar la reserva con código \''
+            <td> <a th:href="@{/reserva/cancel/{idReserva}(idReserva=${reserva.idReserva})}"
+                   th:onclick="return confirm('¿ Estás seguro de que quiere cancelar la reserva con código \''
                     + [[${reserva.idReserva}]] + '\'?');"
-                   id="borrar">Esborra</a></td>
+                   id="borrar">Cancelar</a></td>
             <td> </td>
 
         </tr>

@@ -26,11 +26,11 @@ public class CiudadanoDao implements UserDao {
     /* Afegeix el Ciudadano a la base de dades */
 
     public void addCiudadano(Ciudadano ciudadano) {
-        jdbcTemplate.update("INSERT INTO ciudadano VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",ciudadano.getUsuario(),
+        jdbcTemplate.update("INSERT INTO ciudadano VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",ciudadano.getUsuario(),
                 ciudadano.getCodigoCiudadano(),ciudadano.getPin(),
                 ciudadano.getFechaNacimiento(),ciudadano.getNombre(),ciudadano.getApellidos(),
                 ciudadano.getDireccion(),ciudadano.getCorreoElectronico(),ciudadano.getMunicipio()
-                ,ciudadano.getPais(), LocalDate.now(),ciudadano.getFechaBaja());
+                ,ciudadano.getPais(), LocalDate.now());
     }
 
     /* Esborra el ciudadano de la base de dades */
