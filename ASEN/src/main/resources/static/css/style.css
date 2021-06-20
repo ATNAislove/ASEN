@@ -1,8 +1,22 @@
 /* Estil aplicat al cos de la pàgina */
-body {
-   font-family: Helvetica, Arial;
-   background-color: white;
+html {
+  min-height: 100%;
+  position: relative;
 }
+body {
+  margin: 0;
+  margin-bottom: 130px;
+  font-family: Helvetica, Arial;
+  background-color: white;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 85%;
+  height: 130px;
+  margin-right: 20px;
+}
+
 
 /* Capçalera de nivell 1 */
 h1 {
@@ -25,6 +39,11 @@ h3{
     font-size: 16;
     font-family: Helvetica;
 }
+h5{
+    color: black;
+    font-size: 14;
+    font-family: Helvetica;
+}
 
 p{
     color: black;
@@ -41,8 +60,14 @@ p{
 .loggeduser {
 	color: gray;
 	text-align: right;
-margin-right: 10pt;
+    margin-right: 10pt;
+    display: block;
+    margin: 0 0 0 auto;
 }
+#pie {
+    text-align: center;
+    list-style:none;
+    font-size:12px;}
 
 /* Classe CSS error */
 

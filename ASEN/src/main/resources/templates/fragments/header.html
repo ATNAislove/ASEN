@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:object="${session}">
 <head>
     <meta charset="UTF-8">
     <header>
-        <h2> ASEN</h2>
+        <h2 th:if="*{user==null}"> ASEN</h2>
+        <h2 th:if="*{user!=null && user.rol=='Ciudadano'}"><a href="/ciudadano/menuCiudadano" style="text-decoration:none;color:black;">ASEN</a></h2>
+        <h2 th:if="*{user!=null && user.rol=='GestorMunicipal'}"><a href="/gestorMunicipal/menuGestorMunicipal" style="text-decoration:none;color:black;">ASEN</a></h2>
     </header>
 </head>
 <body>
