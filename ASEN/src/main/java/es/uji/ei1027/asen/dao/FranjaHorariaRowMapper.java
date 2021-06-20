@@ -1,7 +1,6 @@
 package es.uji.ei1027.asen.dao;
 
 import es.uji.ei1027.asen.model.FranjaHoraria;
-import es.uji.ei1027.asen.model.Ocupacion;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

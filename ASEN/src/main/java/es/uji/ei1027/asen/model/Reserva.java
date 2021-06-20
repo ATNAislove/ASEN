@@ -11,13 +11,14 @@ public class Reserva {
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fecha;
     private int numeroPersonas;
-    private LocalTime fechaSalida;
+    private LocalTime horaSalida;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaCreacion;
     private String codigoQR;
     private String estadoReserva;
     private String usuario;
     private int idFranjaHoraria;
+    private int idZona;
 
     public Reserva() {
     }
@@ -35,7 +36,7 @@ public class Reserva {
     }
 
     public LocalTime getHoraSalida() {
-        return fechaSalida;
+        return horaSalida;
     }
 
     public LocalDate getFechaCreacion() {
@@ -58,6 +59,8 @@ public class Reserva {
         return idFranjaHoraria;
     }
 
+    public int getIdZona() { return idZona; }
+
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
     }
@@ -71,7 +74,7 @@ public class Reserva {
     }
 
     public void setHoraSalida(LocalTime fechaSalida) {
-        this.fechaSalida = fechaSalida;
+        this.horaSalida = fechaSalida;
     }
 
     public void setFechaCreacion(LocalDate fechaCreacion) {
@@ -94,18 +97,23 @@ public class Reserva {
         this.idFranjaHoraria = idFranjaHoraria;
     }
 
+    public void setIdZona(int idZona) {
+        this.idZona = idZona;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
                 "idReserva=" + idReserva +
                 ", fecha=" + fecha +
                 ", numeroPersonas=" + numeroPersonas +
-                ", fechaSalida=" + fechaSalida +
+                ", fechaSalida=" + horaSalida +
                 ", fechaCreacion=" + fechaCreacion +
                 ", codigoQR='" + codigoQR + '\'' +
                 ", estadoReserva='" + estadoReserva + '\'' +
                 ", usuario='" + usuario + '\'' +
                 ", idFranjaHoraria=" + idFranjaHoraria +
+                ", idZona="+idZona+
                 '}';
     }
 }

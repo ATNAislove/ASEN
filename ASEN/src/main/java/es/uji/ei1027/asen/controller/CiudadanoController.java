@@ -57,10 +57,10 @@ public class CiudadanoController {
         catch(DuplicateKeyException e){
             throw new AsenApplicationException(
                     "Ya existe un usuario con este nombre "
-                            +ciudadano.getUsuario(), "nombreUsuarioRepetido"); }
+                            +ciudadano.getUsuario(), "nombreUsuarioRepetido","danger"); }
         catch(DataAccessException e) {
             throw new AsenApplicationException(
-                    "Error en el acceso a la base de datos", "ErrorAcceder");
+                    "Error en el acceso a la base de datos", "ErrorAcceder","danger");
         }
         return "redirect:../login";
     }

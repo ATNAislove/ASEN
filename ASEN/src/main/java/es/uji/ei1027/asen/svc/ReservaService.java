@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ReservaService {
     public List<Reserva> getReservasUsuario(String usuario);
-    public void addOcupacion(int idReserva, int idZona);
-    public void deleteOcupacion(int idReserva);
+    public String recuperarNombreZona(int idReserva);
+    public String recuperarNombreArea(int idReserva);
+    public String recuperarIdCharNum(int idZona);
+    public boolean existeReserva(Reserva reserva);
 }

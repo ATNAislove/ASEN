@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td><label>codigoQR</label></td>
-            <td><img style="max-width:300px;max-height:300px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
+            <td><img style="max-width:100px;max-height:100px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
         </tr>
         <tr>
             <td><label>Franja Horaria</label></td>
@@ -55,6 +55,14 @@
                 </option>
             </select>
             </td>
+        </tr>
+        <tr>
+            <td><label>Área natural</label></td>
+            <td><input type="text" th:value="${reservaService.recuperarNombreArea(reserva.idZona)}" readonly /></td>
+        </tr>
+        <tr>
+            <td><label>Zona</label></td>
+            <td><input type="text" th:value="${reservaService.recuperarIdCharNum(reserva.idZona)}" readonly /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva" /></td>

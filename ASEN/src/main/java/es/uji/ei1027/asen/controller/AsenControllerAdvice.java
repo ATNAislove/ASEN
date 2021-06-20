@@ -11,6 +11,7 @@ public class AsenControllerAdvice {
         ModelAndView mav = new ModelAndView("error/errorException");
         mav.addObject("message", ex.getMessage());
         mav.addObject("errorName", ex.getErrorName());
+        mav.addObject("clase",ex.getClase());
         return mav;
     }
 

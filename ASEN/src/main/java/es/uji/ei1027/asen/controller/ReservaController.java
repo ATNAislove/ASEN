@@ -1,10 +1,13 @@
 package es.uji.ei1027.asen.controller;
 
+import com.google.zxing.WriterException;
 import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
 import es.uji.ei1027.asen.model.UserDetails;
+import es.uji.ei1027.asen.svc.GeneradorQRService;
+import es.uji.ei1027.asen.svc.GeneradorQRSvc;
 import es.uji.ei1027.asen.svc.GetFranjasHorariasService;
 import es.uji.ei1027.asen.svc.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
+
 import static java.lang.Integer.parseInt;
 
 @Controller
@@ -30,6 +35,11 @@ public class ReservaController{
     private ReservaDao reservaDao;
     private ReservaService reservaService;
     private GetFranjasHorariasService getFranjasHorariasService;
+    private GeneradorQRService generadorQRService;
+    @Autowired
+    public void setGeneradorQRService(GeneradorQRService generadorQRService){
+        this.generadorQRService=generadorQRService;
+    }
     @Autowired
     public void setGetFranjasHorariasService(GetFranjasHorariasService getFranjasHorariasService){
         this.getFranjasHorariasService=getFranjasHorariasService;
@@ -53,6 +63,7 @@ public class ReservaController{
             model.addAttribute("reservas", reservaDao.getReservas());
         }
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("reservaService", reservaService);
         return "reserva/list";
     }
     @RequestMapping(value = "/add/{idZona}", method = RequestMethod.GET)
@@ -65,25 +76,37 @@ public class ReservaController{
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult,HttpSession session) {
-        ReservaValidator reservaValidator = new ReservaValidator();
-        reservaValidator.validate(reserva, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "reserva/add";
-        }
         try {
-            reservaDao.addReserva(reserva, session);
+            ReservaValidator reservaValidator = new ReservaValidator();
             int zona = (int) session.getAttribute("zona");
-            reservaService.addOcupacion(reserva.getIdReserva(), zona);
+            reserva.setIdZona(zona);
+            reserva.setUsuario(session.getAttribute("user").toString());
+            reservaValidator.validate(reserva, bindingResult);
+            if (bindingResult.hasErrors()) {
+                return "reserva/add/{"+zona+"}";
+            }
+            if(reservaService.existeReserva(reserva)) {
+                throw new AsenApplicationException(
+                        "Ya existe una reserva para esa hora en esa zona ", "Reserva repetida","danger");
+            }
+            String datos = "zona="+reserva.getIdZona()+"; fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria();
+            reserva.setCodigoQR(generadorQRService.crearQR(datos,100,100));
+            reservaDao.addReserva(reserva);
+
         } catch (DuplicateKeyException e) {
             throw new AsenApplicationException(
                     "Ya existe una reserva con este código "
-                            + reserva.getIdReserva(), "Id repetido");
+                            + reserva.getIdReserva(), "Id repetido","danger");
         } catch (DataAccessException e) {
             System.out.println(session.getAttribute("user"));
             throw new AsenApplicationException(
-                    "Error en el acceso a la base de datos", "ErrorAcceder");
+                    "Error en el acceso a la base de datos", "ErrorAcceder","danger");
         } catch (TemplateInputException e) {
-            throw new AsenApplicationException("Escribe una fecha posterior a la actual ", "errorfecha");
+            throw new AsenApplicationException("Escribe una fecha posterior a la actual ", "errorfecha","danger");
+        }catch(WriterException e){
+            throw new AsenApplicationException("Error al crear al QR", "errorfecha","danger");
+        }catch(IOException e){
+            throw new AsenApplicationException("Error al convertir el QR ", "errorQR","warning");
         }
 
         return "redirect:list";
@@ -91,8 +114,10 @@ public class ReservaController{
 
     @RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int idReserva) {
-        model.addAttribute("reserva", reservaDao.getReserva(idReserva));
+        Reserva reserva = reservaDao.getReserva(idReserva);
+        model.addAttribute("reserva", reserva);
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("reservaService", reservaService);
         return "reserva/update";
     }
 
@@ -102,6 +127,14 @@ public class ReservaController{
         if (bindingResult.hasErrors())
             return "reserva/update";
         UserDetails user = (UserDetails) session.getAttribute("user");
+        try{
+            String datos = "zona="+reserva.getIdZona()+"; fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria();
+            reserva.setCodigoQR(generadorQRService.crearQR(datos,100,100));
+        }catch(WriterException e){
+            throw new AsenApplicationException("Error al crear al QR", "errorfecha","danger");
+        }catch(IOException e){
+            throw new AsenApplicationException("Error al convertir el QR ", "errorQR","warning");
+        }
         if(user.getRol()=="Ciudadano")
             reservaDao.updateReserva(reserva);
         else
@@ -115,7 +148,6 @@ public class ReservaController{
     }
     @RequestMapping(value = "/delete/{idReserva}")
     public String processDelete(@PathVariable int idReserva) {
-        reservaService.deleteOcupacion(idReserva);
         reservaDao.deleteReserva(idReserva);
         return "redirect:../list";
     }

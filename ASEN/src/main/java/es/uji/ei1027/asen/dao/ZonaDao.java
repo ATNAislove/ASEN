@@ -23,13 +23,13 @@ public class ZonaDao {
 
     /* Afegeix el municipio a la base de dades */
     public void addZona(Zona zona) {
-        jdbcTemplate.update("INSERT INTO Zona VALUES(?, ?, ?, ?, ?, ?)", zona.getIdZona(),zona.getIdCharNumero(), zona.getNombreZona(),
+        jdbcTemplate.update("INSERT INTO Zona( idcharnum, nombrezona, aforomaximo, tipoterreno, idarea) VALUES (?,?,?,?,?)", zona.getIdCharNumero(), zona.getNombreZona(),
                 zona.getAforoMaximo(), zona.getTipoTerreno(),zona.getIdArea());
     }
 
     /* Esborra el zona de la base de dades */
     public void deleteZona(Zona zona) {
-        jdbcTemplate.update("DELETE FROM zona WHERE idCharNumero=?", zona.getIdZona());
+        jdbcTemplate.update("DELETE FROM zona WHERE idzona=?", zona.getIdZona());
     }
 
     /* Esborra el zona de la base de dades */
