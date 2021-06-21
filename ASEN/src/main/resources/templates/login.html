@@ -18,17 +18,23 @@
   <h2>Acceso</h2>
   <form action="#" th:action="@{/login}"
         th:object="${user}" method="post">
-    <p>
-      <label>Nombre de usuario:</label>
-      <input class="form_control" type="text" th:field="*{username}"/>
-    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-    </p>
-    <p>
-      <label>Contraseña:</label>
-      <input class="form_control" type="password" th:field="*{password}"/>
-    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-    </p>
-    <input type="submit" value="Acceder" />
+    <br>
+    <table>
+      <tr>
+        <td class="espacio_tabla"><label>Nombre de usuario</label></td>
+          <td><input class="form-control" type="text" th:field="*{username}"/>
+            <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div></td>
+
+      </tr>
+      <tr>
+          <td class="espacio_tabla"><label>Contraseña </label></td>
+          <td><input class="form-control" type="password" th:field="*{password}"/>
+        <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div></td>
+      </tr>
+      <tr>
+        <th><input type="submit" class="btn btn-primary" value="Acceder" />
+      </tr>
+    </table>
   </form>
 </div>
 

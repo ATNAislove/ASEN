@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8">
     <title>EI1027</title>
@@ -11,17 +12,7 @@
 
 </head>
 <body>
-<div class="loggeduser" th:object="${session}" xmlns:th="http://www.w3.org/1999/xhtml">
-    <p th:if="*{user == null}">
-        No autenticat <a href="/login" th:href="@{/login}">Entrar</a>
-    </p>
-    <p th:unless="*{user == null}">
-        Autenticat com <span th:text="*{user.username}"></span> <a
-            href="/logout" th:href="@{/logout}">Salir</a>
-    </p>
-</div>
-
-<div class="container"  layout:fragment="content">
+<div  layout:fragment="content">
     <h2>Página principal</h2>
     <center><br>
         <table>

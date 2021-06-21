@@ -67,7 +67,14 @@ p{
 #pie {
     text-align: center;
     list-style:none;
-    font-size:12px;}
+    font-size:12px;
+}
+.espacio_tabla{
+  margin: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
 /* Classe CSS error */
 
