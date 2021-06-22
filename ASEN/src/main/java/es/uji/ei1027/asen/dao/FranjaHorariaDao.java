@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,34 @@ public class FranjaHorariaDao {
     public List<FranjaHoraria> getFranjasHorarias() {
         try {
             return jdbcTemplate.query("SELECT * FROM FranjaHoraria", new FranjaHorariaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<FranjaHoraria>();
+        }
+    }
+    /* Obté totes les franjes horaries destinades a reservar zones. Torna una llista buida si no n'hi ha cap. */
+    public List<FranjaHoraria> getFranjasReserva() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM FranjaHoraria WHERE (horafin-horainicio)<='1:00:00'", new FranjaHorariaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<FranjaHoraria>();
+        }
+    }
+    /* Obté totes les franjes horaries destinades a reservar zones. Torna una llista buida si no n'hi ha cap. */
+    public List<FranjaHoraria> getFranjasReserva(LocalTime horaIni, LocalTime horaFin) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM FranjaHoraria WHERE (horafin-horainicio)<='1:00:00' AND horainicio BETWEEN '"+horaIni+
+                    "' AND '"+horaFin+"' AND horafin BETWEEN '"+horaIni+"' AND '"+horaFin+"'", new FranjaHorariaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<FranjaHoraria>();
+        }
+    }
+    /* Obté totes les franjes horaries destinades als serveis. Torna una llista buida si no n'hi ha cap. */
+    public List<FranjaHoraria> getFranjasServicio() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM FranjaHoraria WHERE (horafin-horainicio)>'1:00:00'", new FranjaHorariaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<FranjaHoraria>();

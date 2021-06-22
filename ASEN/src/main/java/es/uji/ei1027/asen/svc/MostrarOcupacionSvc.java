@@ -28,6 +28,7 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
         Municipio municipio = municipioDao.getMunicipio(municipioID);
         return municipio.getNombreMunicipio();
     }
+    @Override
     public List<Zona> getZonasLibresByfecha(String fecha, int idArea){
         List<Zona> zonasOcupadas = zonaDao.getZonasOcupadasByFecha(fecha, idArea);
         List<Zona> zonasArea = zonaDao.getZonas();
@@ -38,21 +39,60 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
         }
         return zonasArea;
     }
-    public int getNumZonasLibresByFecha(String fecha, int idArea){
-        return getZonasLibresByfecha(fecha,idArea).size();
+    @Override
+    public int getNumZonasLibresByFecha(String fecha, int idArea,int idFranjaHoraria){
+        int zonasOcupadas;
+        if(idFranjaHoraria<0){
+            zonasOcupadas = reservaDao.getReservasByFecha(fecha,idArea).size();
+            return (zonaDao.numZonas(idArea)*numFranjasHorariasCiudadano())-zonasOcupadas;
+        }
+        else{
+            FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
+            zonasOcupadas = reservaDao.getReservasByFecha(fecha,idArea,franja.getHoraInicio(),franja.getHoraFin()).size();
+            return (zonaDao.numZonas(idArea)*franjaHorariaDao.getFranjasReserva(franja.getHoraInicio(),franja.getHoraFin()).size())-zonasOcupadas;
+        }
+
+
     }
     //obtiene el numero de personas que han ocupado un area una fecha determinada
-    public int getPlazasOcupadasByFecha(String fecha, int idArea){
-        List<Reserva> reservas = reservaDao.getReservasByFecha(fecha, idArea);
+    @Override
+    public int ocupacionDiaArea(String fecha, int idArea, int idFranjaHoraria){
+        List<Reserva> reservas;
+        if(idFranjaHoraria<0){
+             reservas = reservaDao.getReservasByFecha(fecha, idArea);
+        }else{
+            FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
+            reservas = reservaDao.getReservasByFecha(fecha,idArea,franja.getHoraInicio(),franja.getHoraFin());
+        }
+
+
         int ocupacion = 0;
         for(Reserva r : reservas){
             ocupacion += r.getNumeroPersonas();
         }
         return ocupacion;
     }
-    public float getporcentajeOcupacion(String fecha, int idArea){
-        int plazasOcupadas = getPlazasOcupadasByFecha(fecha, idArea);
-        int plazasTotales = areaNaturalDao.getCapacidadTotal(idArea);
-        return ((plazasTotales-plazasOcupadas)/plazasTotales)*100;
+    @Override
+    public float getPorcentajeOcupacion(String fecha, int idArea,int idFranjaHoraria){
+        int plazasOcupadas = ocupacionDiaArea(fecha, idArea, idFranjaHoraria);
+        int plazasTotales = capacidadTotalAreaFranja(idArea,idFranjaHoraria);
+        return (float)Math.round(((float)plazasOcupadas/plazasTotales)*10000)/100;
     }
+    @Override
+    public int capacidadTotalArea(int idArea){
+        return areaNaturalDao.getCapacidadTotal(idArea);
+    }
+    @Override
+    public int capacidadTotalAreaDiaria(int idArea){
+        return areaNaturalDao.getCapacidadTotal(idArea)*numFranjasHorariasCiudadano();
+    }
+    public int capacidadTotalAreaFranja(int idArea, int idFranjaHoraria){
+        if(idFranjaHoraria<0) return capacidadTotalAreaDiaria(idArea);
+        FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
+        return areaNaturalDao.getCapacidadTotal(idArea)*franjaHorariaDao.getFranjasReserva(franja.getHoraInicio(),franja.getHoraFin()).size();
+    }
+    public int numFranjasHorariasCiudadano(){
+        return franjaHorariaDao.getFranjasReserva().size();
+    }
+
 }

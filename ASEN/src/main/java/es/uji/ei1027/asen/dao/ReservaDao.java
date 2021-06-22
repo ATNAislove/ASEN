@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,12 +122,35 @@ public class ReservaDao {
     //Obteener las reservas en una fecha determinada
     public List<Reserva> getReservasByFecha(String fecha, int idArea){
         try{
-            return jdbcTemplate.query("SELECT r.* FROM reserva AS r" +
+            return jdbcTemplate.query("SELECT r.* FROM reserva AS r " +
                     "INNER JOIN zona as z ON r.idZona=z.idZona" +
-                    "WHERE r.fecha=" + fecha+ "AND z.idArea='"+idArea+"'", new ReservaRowMapper());
+                    " WHERE r.fecha='" + fecha+ "' AND z.idArea="+idArea, new ReservaRowMapper());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<Reserva>();
         }
     }
+    //Obteener las reservas en una fecha determinada y una franjahoraria determinada
+    public List<Reserva> getReservasByFecha(String fecha, int idArea, LocalTime horaInicio,LocalTime horaFin){
+        try{
+            return jdbcTemplate.query("SELECT r.* FROM reserva AS r " +
+                    "INNER JOIN zona as z ON r.idZona=z.idZona INNER JOIN franjahoraria as f ON r.idfranjahoraria=f.idfranjahoraria" +
+                    " WHERE r.fecha='" + fecha+ "' AND z.idArea="+idArea+" AND f.horainicio BETWEEN '"+horaInicio+"' AND '"+horaFin+
+                    "' AND f.horafin BETWEEN '"+horaInicio+ "' AND '"+horaFin+"'", new ReservaRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Reserva>();
+        }
+    }
+
+    //obtener ocupacion del dia NO FUNCIONA BIEN
+    /*public int ocupacionDiaArea(int idArea,String fecha) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT sum(r.numeropersonas) FROM Reserva as r " +
+                    "INNER JOIN zona AS z ON z.idZona=r.idZona INNER JOIN areanatural AS a ON z.idArea=a.idArea " +
+                    "where a.idArea="+idArea+" AND r.fecha='"+fecha+"'", Integer.class);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }*/
 
 }

@@ -27,6 +27,14 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
         return franjaHorariaDao.getFranjasHorarias();
     }
     @Override
+    public List<FranjaHoraria> getFranjasReserva(){
+        return franjaHorariaDao.getFranjasReserva();
+    }
+    @Override
+    public List<FranjaHoraria> getFranjasServicio(){
+        return franjaHorariaDao.getFranjasServicio();
+    }
+    @Override
     public String transformarFecha(LocalDate fecha){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return formatter.format(fecha);

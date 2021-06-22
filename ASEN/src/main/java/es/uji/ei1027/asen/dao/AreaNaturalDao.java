@@ -67,13 +67,13 @@ public class AreaNaturalDao {
     //obtener la capacidad total de personas de un area
     public int getCapacidadTotal(int idArea){
         try {
-            return jdbcTemplate.queryForObject("SELECT sum(z.aforoMax) FROM areaNatural AS a" +
-                    "INNER JOIN zona AS z ON z.idArea=a.idArea WHERE idArea='" + idArea + "'", Integer.class);
+            return jdbcTemplate.queryForObject("SELECT sum(z.aforoMaximo) FROM areaNatural AS a" +
+                    " INNER JOIN zona AS z ON z.idArea=a.idArea WHERE a.idArea=" + idArea, Integer.class);
         }catch(EmptyResultDataAccessException e){
             return 0;
         }
     }
-    public List<AreaNatural> getAreasPorTipoArea_PorNombre(String tipoArea,String nombreArea){
+    public List<AreaNatural> getAreasPorTipoAreaPorNombre(String tipoArea,String nombreArea){
         try {
             return jdbcTemplate.query("SELECT * FROM AreaNatural WHERE tipoArea='" + tipoArea + "' and nombreArea='" + nombreArea +"'", new AreaNaturalRowMapper());
         }

@@ -8,5 +8,7 @@ import java.util.List;
 public interface GetFranjasHorariasService {
     public List<FranjaHoraria> getFranjasHorarias();
     public String getHorasFranja(int idFranjaHoraria);
+    public List<FranjaHoraria> getFranjasReserva();
+    public List<FranjaHoraria> getFranjasServicio();
     public String transformarFecha(LocalDate fecha);
 }

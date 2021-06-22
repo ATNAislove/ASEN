@@ -55,6 +55,33 @@
     </tr>
     </tbody>
 </table>
+    <form action="#" th:action="@{/areaNatural/consultarOcupacion}"
+          th:object="${filtro}" method="post">
+        <input type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"/>
+        <label>Selecciona una fecha para ver la ocupación de ese dia</label>
+        <input type="date" th:field="*{fecha}" required/> <!--th:onchange="this.form.submit()"-->
+        <p></p>
+        <td><label>Franja horaria</label></td>
+        <td><select th:field="*{idFranjaHoraria}">
+            <option th:each="franja: ${franjaHorariaService.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
+                    th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
+            </option>
+            <option th:value="-1" th:text="'Selecciona una franja'" selected></option>
+        </select>
+        <input type="submit"  class="btn btn-primary" value="Filtrar"/>
+    </form>
+
+    <div th:if="${dia!=null}">
+        <h5 th:text="'Datos de ocupación del dia '+${dia}"></h5>
+        <table>
+            <tr><td>Ocupación: <span th:text="${mostrarOcupacionSvc.ocupacionDiaArea(dia,areaNatural.idArea, franja)}"></span></td></tr>
+            <tr><td>Número de reservas/zonas libres: <span th:text="${mostrarOcupacionSvc.getNumZonasLibresByFecha(dia,areaNatural.idArea,franja)}"></span></td></tr>
+            <tr><td>Capacidad total al mismo tiempo: <span th:text="${mostrarOcupacionSvc.capacidadTotalArea(areaNatural.idArea)}"></span></td></tr>
+            <tr><td>Capacidad total en ese periodo de tiempo: <span th:text="${mostrarOcupacionSvc.capacidadTotalAreaFranja(areaNatural.idArea, franja)}"></span></td></tr>
+            <tr><td>Porcentaje de ocupación: <span th:text="${mostrarOcupacionSvc.getPorcentajeOcupacion(dia,areaNatural.idArea,franja)}"></span>%</td></tr>
+
+        </table>
+    </div>
 
 <!--<table>
     <tr>

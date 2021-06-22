@@ -90,7 +90,7 @@ public class DisponibilidadController {
         model.addAttribute("disponibilidad", new Disponibilidad());
         model.addAttribute("servicios", getTiposServicioService.getServiciosMunicipio(municipio));
         model.addAttribute("getTiposServicio", getTiposServicioService);
-        model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasHorarias());
+        model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasServicio());
 
         return "disponibilidad/add";
     }

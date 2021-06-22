@@ -50,7 +50,7 @@
         <tr>
             <td><label>Franja Horaria</label></td>
             <td><select th:field="*{idFranjaHoraria}" required>
-                <option th:each="franja: ${franjaHorariaService.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
+                <option th:each="franja: ${franjaHorariaService.getFranjasReserva()}" th:value="${franja.IdFranjaHoraria}"
                         th:text="${franja.horaInicio}+' '+${franja.horaFin}">
                 </option>
             </select>

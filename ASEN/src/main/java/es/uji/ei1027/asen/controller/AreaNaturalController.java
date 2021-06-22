@@ -2,6 +2,7 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.AreaNaturalDao;
 import es.uji.ei1027.asen.model.AreaNatural;
+import es.uji.ei1027.asen.model.FiltroOcupacion;
 import es.uji.ei1027.asen.model.Municipio;
 import es.uji.ei1027.asen.model.UserDetails;
 import es.uji.ei1027.asen.svc.*;
@@ -129,7 +130,30 @@ public class AreaNaturalController {
         model.addAttribute("servicios", getTiposServicioService.getServiciosArea(idArea));
         model.addAttribute("TipoServicioService", getTiposServicioService);
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        FiltroOcupacion filtro = new FiltroOcupacion();
+        filtro.setIdArea(idArea);
+        model.addAttribute("filtro",filtro);
         return "areaNatural/consultarOcupacion";
     }
+    @RequestMapping(value="/consultarOcupacion/{idArea}/{fecha}/{idFranjaHoraria}")
+    public String consultarOcupacionFiltrado(Model model, @PathVariable int idArea, @PathVariable String fecha,@PathVariable int idFranjaHoraria) {
+        model.addAttribute("areaNatural", areaNaturalDao.getAreaNatural(idArea));
+        model.addAttribute("municipio", mostrarOcupacionService.getMunicipiofromAreaNatural(idArea));
+        model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
+        model.addAttribute("servicios", getTiposServicioService.getServiciosArea(idArea));
+        model.addAttribute("TipoServicioService", getTiposServicioService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("dia",fecha);
+        model.addAttribute("franja",idFranjaHoraria);
+        FiltroOcupacion filtro = new FiltroOcupacion();
+        filtro.setIdArea(idArea);
+        model.addAttribute("filtro",filtro);
+        return "areaNatural/consultarOcupacion";
+    }
+    @RequestMapping(value="/consultarOcupacion", method = RequestMethod.POST)
+    public String consultarOcupacionPOST(@ModelAttribute FiltroOcupacion filtro) {
+        return "redirect:consultarOcupacion/"+filtro.getIdArea()+"/"+filtro.getFecha()+"/"+filtro.getIdFranjaHoraria();
+    }
+
 
 }
