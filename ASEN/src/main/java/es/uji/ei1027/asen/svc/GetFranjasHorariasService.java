@@ -11,4 +11,5 @@ public interface GetFranjasHorariasService {
     public List<FranjaHoraria> getFranjasReserva();
     public List<FranjaHoraria> getFranjasServicio();
     public String transformarFecha(LocalDate fecha);
+    public List<FranjaHoraria> getFranjaReservaLibres(String fecha,int idZona);
 }

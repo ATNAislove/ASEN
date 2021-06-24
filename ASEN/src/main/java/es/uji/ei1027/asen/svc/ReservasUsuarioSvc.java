@@ -41,4 +41,7 @@ public class ReservasUsuarioSvc implements ReservaService {
             return true;
         return false;
     }
+    public int maxPersonas(int idZona){
+        return zonaDao.getZona(idZona).getAforoMaximo();
+    }
 }

@@ -4,6 +4,7 @@ import com.google.zxing.WriterException;
 import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.Ciudadano;
+import es.uji.ei1027.asen.model.FiltroOcupacion;
 import es.uji.ei1027.asen.model.Reserva;
 import es.uji.ei1027.asen.model.UserDetails;
 import es.uji.ei1027.asen.svc.GeneradorQRService;
@@ -25,6 +26,8 @@ import org.thymeleaf.exceptions.TemplateInputException;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static java.lang.Integer.parseInt;
 
@@ -68,9 +71,32 @@ public class ReservaController{
     }
     @RequestMapping(value = "/add/{idZona}", method = RequestMethod.GET)
     public String addReserva(Model model, @PathVariable int idZona, HttpSession session) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         model.addAttribute("reserva", new Reserva());
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("maxPersonas", reservaService.maxPersonas(idZona));
         session.setAttribute("zona", idZona);
+        FiltroOcupacion filtro = new FiltroOcupacion();
+        filtro.setIdZona(idZona);
+        model.addAttribute("current_date", LocalDate.now().format(formatter));
+        model.addAttribute("filtro",filtro);
+        return "reserva/add";
+    }
+    @RequestMapping(value = "/add/{idZona}/{fecha}", method = RequestMethod.GET)
+    public String addReservaFecha(Model model, @PathVariable int idZona,@PathVariable String fecha, HttpSession session) {
+        Reserva reserva = new Reserva();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        reserva.setFecha(LocalDate.parse(fecha, formatter));
+        model.addAttribute("reserva", reserva);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("maxPersonas", reservaService.maxPersonas(idZona));
+        session.setAttribute("zona", idZona);
+        FiltroOcupacion filtro = new FiltroOcupacion();
+        filtro.setIdZona(idZona);
+        filtro.setFecha(LocalDate.parse(fecha, formatter));
+        model.addAttribute("filtro",filtro);
+        model.addAttribute("current_date", LocalDate.now().format(formatter));
+        model.addAttribute("dia",fecha);
         return "reserva/add";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -112,12 +138,42 @@ public class ReservaController{
         return "redirect:list";
     }
 
-    @RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int idReserva) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Reserva reserva = reservaDao.getReserva(idReserva);
         model.addAttribute("reserva", reserva);
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         model.addAttribute("reservaService", reservaService);
+        FiltroOcupacion filtro = new FiltroOcupacion();
+        filtro.setIdReserva(idReserva);
+        filtro.setIdZona(reserva.getIdZona());
+
+        filtro.setFecha(reserva.getFecha());
+
+        model.addAttribute("filtro",filtro);
+        model.addAttribute("current_date", LocalDate.now().format(formatter));
+        model.addAttribute("maxPersonas", reservaService.maxPersonas(reserva.getIdZona()));
+        return "reserva/update";
+    }*/
+    @RequestMapping(value = "/update/{idReserva}/{fecha}", method = RequestMethod.GET)
+    public String editReserva(Model model, @PathVariable int idReserva,@PathVariable String fecha) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Reserva reserva = reservaDao.getReserva(idReserva);
+        reserva.setFecha(LocalDate.parse(fecha, formatter));
+        model.addAttribute("reserva", reserva);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("reservaService", reservaService);
+        model.addAttribute("maxPersonas", reservaService.maxPersonas(reserva.getIdZona()));
+        FiltroOcupacion filtro = new FiltroOcupacion();
+        filtro.setIdReserva(idReserva);
+        filtro.setIdZona(reserva.getIdZona());
+        filtro.setFecha(LocalDate.parse(fecha, formatter));
+        if(reserva.getFecha().equals(reservaDao.getReserva(idReserva).getFecha()))
+            model.addAttribute("franjaActual",reserva.getIdFranjaHoraria());
+        model.addAttribute("filtro",filtro);
+        model.addAttribute("dia",fecha);
+        model.addAttribute("current_date", LocalDate.now().format(formatter));
         return "reserva/update";
     }
 
@@ -156,6 +212,14 @@ public class ReservaController{
     public String editHoraSalidaReserva(@PathVariable int idReserva) {
         reservaDao.updateHoraSalidaReserva(idReserva);
         return "redirect:../list";
+    }
+    @RequestMapping(value="/fecha", method = { RequestMethod.GET, RequestMethod.POST })
+    public String filtrarFechaReserva(@ModelAttribute FiltroOcupacion filtro){
+        return "redirect:add/"+filtro.getIdZona()+"/"+filtro.getFecha();
+    }
+    @RequestMapping(value="/fechaUpdate", method = { RequestMethod.GET, RequestMethod.POST })
+    public String filtrarFechaReservaUpdate(@ModelAttribute FiltroOcupacion filtro){
+        return "redirect:update/"+filtro.getIdReserva()+"/"+filtro.getFecha();
     }
 
 }

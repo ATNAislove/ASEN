@@ -9,6 +9,8 @@ public class FiltroOcupacion {
     LocalDate fecha;
     int idArea;
     int idFranjaHoraria;
+    int idZona;
+    int idReserva;
 
     public LocalDate getFecha() {
         return fecha;
@@ -32,5 +34,21 @@ public class FiltroOcupacion {
 
     public void setIdFranjaHoraria(int idFranjaHoraria) {
         this.idFranjaHoraria = idFranjaHoraria;
+    }
+
+    public int getIdZona() {
+        return idZona;
+    }
+
+    public void setIdZona(int idZona) {
+        this.idZona = idZona;
+    }
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
     }
 }

@@ -11,4 +11,5 @@ public interface ReservaService {
     public String recuperarNombreArea(int idReserva);
     public String recuperarIdCharNum(int idZona);
     public boolean existeReserva(Reserva reserva);
+    public int maxPersonas(int idZona);
 }

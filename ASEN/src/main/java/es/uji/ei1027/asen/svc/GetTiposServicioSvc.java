@@ -56,6 +56,8 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
             resultado += getFranjasHorariasService.getHorasFranja(disponibilidad.getIdFranjaHoraria());
             resultado += " , ";
         }
+        if(resultado.length()>0)
+            resultado = resultado.substring(0,resultado.length()-2);
         return resultado;
     }
 

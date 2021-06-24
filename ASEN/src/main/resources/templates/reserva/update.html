@@ -9,68 +9,82 @@
 <body>
 <div class="container">
 <h2>Modificar reserva</h2>
-<form action="#" th:action="@{/reserva/update}"
-      th:object="${reserva}" method="post">
-    <table>
-        <tr>
-            <td><label>idReserva</label></td>
-            <td><input type="number" th:field="*{idReserva}" readonly /></td>
-        </tr>
-        <tr>
-            <td><label>fecha</label></td>
-            <td><input type="date" th:field="*{fecha}" /></td>
-        </tr>
-        <tr>
-            <td><label>Numero Personas</label></td>
-            <td><input type="number" th:field="*{numeroPersonas}" /></td>
-        </tr>
-        <tr>
-            <td><label>hora Salida</label></td>
-            <td><input th:if="${reserva.horaSalida==null}" type="time" th:field="*{horaSalida}"/>
-                <input th:unless="${reserva.horaSalida==null}"type="time" th:field="*{horaSalida}" readonly/></td>
-        </tr>
-        <tr>
-            <td><label>fecha Creacion</label></td>
-            <td><input type="date" th:field="*{fechaCreacion}" readonly /></td>
-        </tr>
-        <tr th:if="${session.user.rol=='GestorMunicipal'}">
-            <td><label>Estado reserva</label></td>
-            <td><select th:field="*{estadoReserva}" required>
-                    <option th:value="usado" th:text="Usado"></option>
-                    <option th:value="enUso">En Uso</option>
-                    <option th:value="cancelado" th:text="Cancelado"></option>
-                    <option th:value="pendiente" th:text="Pendiente"></option>
+    <form action="#" th:action="@{/reserva/fechaUpdate}" th:object="${filtro}">
+        <table>
+            <tr>
+                <input type="hidden" th:field="*{idReserva}" th:value="${filtro.idReserva}"/>
+                <td><label>fecha</label></td>
+                <td><input type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()" required/></td>
+                <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>
+            </tr>
+        </table>
+    </form>
+    <form action="#" th:action="@{/reserva/update}"
+          th:object="${reserva}" method="post">
+        <table>
+            <tr>
+                <td><label>idReserva</label></td>
+                <td><input type="number" th:field="*{idReserva}" readonly /></td>
+            </tr>
+            <!--
+            <tr>
+                <td><label>fecha</label></td>
+                <td><input type="date" th:field="*{fecha}" /></td>
+            </tr>-->
+            <tr><td><input type="hidden" th:field="*{fecha}"/></td></tr>
+            <tr>
+                <td><label>Numero Personas</label></td>
+                <td><input type="number" th:field="*{numeroPersonas}" min="1" th:max="${maxPersonas}" /></td>
+            </tr>
+            <tr>
+                <td><label>hora Salida</label></td>
+                <td><input th:if="${reserva.horaSalida==null}" type="time" th:field="*{horaSalida}"/>
+                    <input th:unless="${reserva.horaSalida==null}"type="time" th:field="*{horaSalida}" readonly/></td>
+            </tr>
+            <tr>
+                <td><label>fecha Creacion</label></td>
+                <td><input type="date" th:field="*{fechaCreacion}" readonly /></td>
+            </tr>
+            <tr th:if="${session.user.rol=='GestorMunicipal'}">
+                <td><label>Estado reserva</label></td>
+                <td><select th:field="*{estadoReserva}" required>
+                        <option th:value="usado" th:text="Usado"></option>
+                        <option th:value="enUso">En Uso</option>
+                        <option th:value="cancelado" th:text="Cancelado"></option>
+                        <option th:value="pendiente" th:text="Pendiente"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>codigoQR</label></td>
+                <td><img style="max-width:100px;max-height:100px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
+            </tr>
+            <tr>
+                <td><label>Franja Horaria</label></td>
+                <td><select th:field="*{idFranjaHoraria}" required>
+                    <option th:if="${franjaActual!=null}" th:value="${franjaActual}" th:text="${franjaHorariaService.getHorasFranja(franjaActual)}"></option>
+                    <option th:each="franja: ${franjaHorariaService.getFranjaReservaLibres(dia,filtro.idZona)}" th:value="${franja.IdFranjaHoraria}"
+                            th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
+                    </option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td><label>codigoQR</label></td>
-            <td><img style="max-width:100px;max-height:100px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
-        </tr>
-        <tr>
-            <td><label>Franja Horaria</label></td>
-            <td><select th:field="*{idFranjaHoraria}" required>
-                <option th:each="franja: ${franjaHorariaService.getFranjasReserva()}" th:value="${franja.IdFranjaHoraria}"
-                        th:text="${franja.horaInicio}+' '+${franja.horaFin}">
-                </option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td><label>Área natural</label></td>
-            <td><input type="text" th:value="${reservaService.recuperarNombreArea(reserva.idZona)}" readonly /></td>
-        </tr>
-        <tr>
-            <td><label>Zona</label></td>
-            <td><input type="text" th:value="${reservaService.recuperarIdCharNum(reserva.idZona)}" readonly /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva" /></td>
-        </tr>
-    </table>
-    <br>
-    <a href="/reserva/list" class="btn btn-primary" role="button">VOLVER</a>
-</form>
+                </td>
+
+            </tr>
+            <tr>
+                <td><label>Área natural</label></td>
+                <td><input type="text" th:value="${reservaService.recuperarNombreArea(reserva.idZona)}" readonly /></td>
+            </tr>
+            <tr>
+                <td><label>Zona</label></td>
+                <td><input type="text" th:value="${reservaService.recuperarIdCharNum(reserva.idZona)}" readonly /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva" /></td>
+            </tr>
+        </table>
+        <br>
+        <a href="/reserva/list" class="btn btn-primary" role="button">VOLVER</a>
+    </form>
 </div>
 </body>
 </html>

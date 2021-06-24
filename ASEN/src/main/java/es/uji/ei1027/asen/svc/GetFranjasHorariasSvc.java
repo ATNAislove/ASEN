@@ -31,6 +31,10 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
         return franjaHorariaDao.getFranjasReserva();
     }
     @Override
+    public List<FranjaHoraria> getFranjaReservaLibres(String fecha,int idZona){
+        return franjaHorariaDao.getFranjasReserva(fecha,idZona);
+    }
+    @Override
     public List<FranjaHoraria> getFranjasServicio(){
         return franjaHorariaDao.getFranjasServicio();
     }

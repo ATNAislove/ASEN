@@ -3,12 +3,15 @@ package es.uji.ei1027.asen.dao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.FranjaHoraria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +64,17 @@ public class FranjaHorariaDao {
     public List<FranjaHoraria> getFranjasReserva() {
         try {
             return jdbcTemplate.query("SELECT * FROM FranjaHoraria WHERE (horafin-horainicio)<='1:00:00'", new FranjaHorariaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<FranjaHoraria>();
+        }
+    }
+    /* Obté totes les franjes horaries destinades a reservar zones, franjas libres. Torna una llista buida si no n'hi ha cap. */
+    public List<FranjaHoraria> getFranjasReserva(String fecha,int idZona) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM FranjaHoraria WHERE (horafin-horainicio)<='1:00:00'" +
+                    "EXCEPT select f.* from franjahoraria as f inner join reserva as r on f.idfranjahoraria=r.idfranjahoraria where " +
+                    "r.fecha='"+fecha+"' AND r.idZona="+idZona+" AND (horafin-horainicio)<='1:00:00' order by 1", new FranjaHorariaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<FranjaHoraria>();
