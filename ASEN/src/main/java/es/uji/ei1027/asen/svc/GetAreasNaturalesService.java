@@ -10,4 +10,5 @@ public interface GetAreasNaturalesService {
     public String getNombreArea(int idArea);
     public int getIdArea(int idZona);
     public List<AreaNatural> getAreasPueblo(int idMunicipio);
+    public AreaNatural getArea(int idArea);
 }

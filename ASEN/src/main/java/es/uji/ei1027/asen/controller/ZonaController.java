@@ -45,7 +45,7 @@ public class ZonaController {
     @RequestMapping(value="/list/{idArea}", method = RequestMethod.GET)
     public String listZonas(Model model,@PathVariable int idArea) {
         model.addAttribute("zonas", zonaDao.getZonasByArea(idArea));
-        model.addAttribute("area",getAreasNaturalesService.getNombreArea(idArea));
+        model.addAttribute("area",getAreasNaturalesService.getArea(idArea));
         return "zona/list";
     }
 

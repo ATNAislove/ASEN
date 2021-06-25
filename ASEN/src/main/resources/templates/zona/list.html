@@ -13,7 +13,7 @@
 <div class="container">
     <h1 th:if="*{user.rol=='Ciudadano'}"><a href="/ciudadano/menuCiudadano">ASEN</a> </h1>
     <h1 th:if="*{user.rol=='GestorMunicipal'}"><a href="/gestorMunicipal/menuGestorMunicipal">ASEN</a></h1>
-    <h1 th:text="'Lista de zonas del area '+${area}"></h1>
+    <h1 th:text="'Lista de zonas del area '+${area.nombreArea}"></h1>
     <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
          th:text="${mensaje}"
          class="alert alert-dismissible alert-danger">
@@ -39,7 +39,10 @@
             <td th:if="*{user.rol == 'GestorMunicipal'}"> <a th:href="@{/zona/update/{idZona}(idZona=${zona.idZona})}" class="btn btn-primary" role="button">Editar</a></td>
             <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/zona/delete/{idZona}(idZona=${zona.idZona})}"
                                                             th:onclick="return confirm('¿ Estás seguro de que quiere borrar la zona?');"id="borrar">Borrar</a></td>
-            <td th:if="*{user.rol == 'Ciudadano'}"><a th:href="@{/reserva/add/{idZona}(idZona=${zona.idZona})}" class="btn btn-primary" role="button">Reservar</a></td>
+            <td th:if="${area.tipoAcceso=='restringido' && (session.user.rol==null || session.user.rol=='Ciudadano')}">
+                <a th:if="*{user.rol == 'Ciudadano'}" th:href="@{/reserva/add/{idZona}(idZona=${zona.idZona})}" class="btn btn-primary" role="button">Reservar</a>
+                <a th:if="${session.user.rol==null}" th:href="@{/login}" class="btn btn-primary" role="button">Reservar</a>
+            </td>
         </tr>
         </tbody>
     </table>
