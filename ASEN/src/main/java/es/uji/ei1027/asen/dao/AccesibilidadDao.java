@@ -70,4 +70,13 @@ public class AccesibilidadDao {
             return new ArrayList<Accesibilidad>();
         }
     }
+    /* Obté totes les accesibilitats d'un area para una fecha concreta. Torna una llista buida si no n'hi ha cap. */
+    public List<Accesibilidad> getAccesibilidadesArea(int idArea, String fecha) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Accesibilidad where idArea="+idArea+" and '"+fecha+"' >= fechainicio and ('"+fecha+"' <= fechafin or fechafin IS null)", new AccesibilidadRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<Accesibilidad>();
+        }
+    }
 }

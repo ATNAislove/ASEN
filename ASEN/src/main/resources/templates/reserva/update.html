@@ -63,7 +63,7 @@
                 <td><label>Franja Horaria</label></td>
                 <td><select th:field="*{idFranjaHoraria}" required>
                     <option th:if="${franjaActual!=null}" th:value="${franjaActual}" th:text="${franjaHorariaService.getHorasFranja(franjaActual)}"></option>
-                    <option th:each="franja: ${franjaHorariaService.getFranjaReservaLibres(dia,filtro.idZona)}" th:value="${franja.IdFranjaHoraria}"
+                    <option th:each="franja: ${franjaHorariaService.getFranjaReservaLibreReservable(dia,filtro.idZona)}" th:value="${franja.IdFranjaHoraria}"
                             th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
                     </option>
                 </select>

@@ -1,7 +1,9 @@
 package es.uji.ei1027.asen.svc;
 
 import es.uji.ei1027.asen.dao.AccesibilidadDao;
+import es.uji.ei1027.asen.dao.AreaNaturalDao;
 import es.uji.ei1027.asen.dao.FranjaHorariaDao;
+import es.uji.ei1027.asen.dao.ZonaDao;
 import es.uji.ei1027.asen.model.Accesibilidad;
 import es.uji.ei1027.asen.model.FranjaHoraria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
     private FranjaHorariaDao franjaHorariaDao;
     @Autowired
     private AccesibilidadDao accesibilidadDao;
+    @Autowired
+    private ZonaDao zonaDao;
+    @Override
     public String getHorasFranja(int idFranjaHoraria){
         try {
             FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
@@ -39,6 +44,33 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
     @Override
     public List<FranjaHoraria> getFranjaReservaLibres(String fecha,int idZona){
         return franjaHorariaDao.getFranjasReserva(fecha,idZona);
+    }
+    @Override
+    public List<FranjaHoraria> getFranjaReservaLibreReservable(String fecha, int idZona){
+        List<FranjaHoraria> franjaslibres = getFranjaReservaLibres(fecha,idZona);
+        List<Accesibilidad> horariosArea = accesibilidadDao.getAccesibilidadesArea(zonaDao.getZona(idZona).getIdArea(),fecha);
+        List<FranjaHoraria> franjasArea = new ArrayList<>();
+        List<FranjaHoraria> resultado = new ArrayList<>();
+        for(Accesibilidad a : horariosArea){
+            franjasArea.add(franjaHorariaDao.getFranjaHoraria(a.getIdFranjaHoraria()));
+        }
+        Iterator<FranjaHoraria> iter = franjaslibres.iterator();
+        FranjaHoraria actual;
+        while(iter.hasNext()){
+            actual=iter.next();
+            for(FranjaHoraria f : franjasArea){
+                if(f.getHoraFin()==null && f.getHoraInicio().isBefore(actual.getHoraFin())){
+                    resultado.add(actual);
+                    break;
+                }
+                if(f.getHoraFin()!=null && (f.getHoraInicio().isBefore(actual.getHoraFin()) && f.getHoraFin().isAfter(actual.getHoraInicio()))){
+                    resultado.add(actual);
+                    break;
+                }
+            }
+        }
+
+        return resultado;
     }
     @Override
     public List<FranjaHoraria> getFranjasServicio(){
