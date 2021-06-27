@@ -30,6 +30,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -40,16 +41,18 @@
             <td th:text="${areaNatural.tipoTerreno}"></td>
             <td th:text="${areaNatural.tipoArea}"></td>
             <td th:text="${areaNatural.tipoAcceso}"></td>
-            <td th:if="*{user.rol == 'GestorMunicipal'}"> <a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Editar</a></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Editar</a></td>
             <td th:if="*{user.rol == 'GestorMunicipal'}">
                 <a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" id="borrar"
                    th:onclick="return confirm('¿ Estás seguro de que quiere borrar el area natural?');">Borrar</a></td>
             <td><a th:href="@{/zona/list/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Mostrar zonas</a></td>
+            <td><a th:href="@{/accesibilidad/verHorarios/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Ver horarios</a></td>
             <td><a th:href="@{/areaNatural/consultarOcupacion/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-secondary" role="button">Más info</a></td>
         </tr>
         </tbody>
     </table>
     <a th:if="*{user.rol == 'GestorMunicipal'}" href="add" class="btn btn-primary" role="button">+ Añadir Área Natural</a>
+
 </div>
 </body>
 </html>

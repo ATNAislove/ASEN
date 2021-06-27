@@ -1,7 +1,6 @@
 package es.uji.ei1027.asen.dao;
 
 import es.uji.ei1027.asen.model.Accesibilidad;
-import es.uji.ei1027.asen.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +21,8 @@ public class AccesibilidadDao {
 
     /* Afegeix l'accesibilidad a la base de dades */
     public void addAccesibilidad(Accesibilidad accesibilidad) {
-        jdbcTemplate.update("INSERT INTO Accesibilidad VALUES(?, ?)",accesibilidad.getIdFranjaHoraria(),accesibilidad.getIdArea());
+        jdbcTemplate.update("INSERT INTO Accesibilidad VALUES(?, ?, ?, ?)",
+                accesibilidad.getIdArea(),accesibilidad.getIdFranjaHoraria(),accesibilidad.getFechaInicio(),accesibilidad.getFechaFin());
     }
     /* Esborra l'accesibilidad de la base de dades */
     public void deleteAccesibilidad(Accesibilidad accesibilidad) {
@@ -30,23 +30,22 @@ public class AccesibilidadDao {
     }
 
     /* Esborra l'accesibilidad de la base de dades */
-    public void deleteAccesibilidad(int idFranjaHoraria,int idArea) {
-        jdbcTemplate.update("DELETE FROM municipio WHERE idFranjaHoraria=? and idArea=?", idFranjaHoraria,idArea);
+    public void deleteAccesibilidad(int idFranjaHoraria, int idArea, String fechaInicio) {
+        jdbcTemplate.update("DELETE FROM accesibilidad WHERE idFranjaHoraria=? and idArea=? and fechaInicio='"+fechaInicio+"'", idFranjaHoraria, idArea);
     }
 
-    /* Actualitza els atributs de la accesibilidad
-       (excepte el nom, que és la clau primària) */
-    /*
+    /* Actualitza la data final de accesibilidad, la resta no, son claus primaries */
     public void updateAccesibilidad(Accesibilidad accesibilidad) {
-        jdbcTemplate.update("UPDATE municipio SET idFranjaHoraria=?, idArea=? WHERE idMunicipio=? and idFranjaHoraria=?", );
+        jdbcTemplate.update("UPDATE accesibilidad SET fechaFin=? WHERE idArea=? and idFranjaHoraria=? and fechaInicio=?",
+                accesibilidad.getFechaFin(),accesibilidad.getIdArea(),accesibilidad.getIdFranjaHoraria(),accesibilidad.getFechaInicio() );
     }
-    */
+
 
     /* Obté l'accesibilidats amb el atributs donats. Torna null si no existeix. */
-    public Municipio getAccesibilidad(int idFranjaHoraria, int idArea) {
+    public Accesibilidad getAccesibilidad(int idFranjaHoraria, int idArea, String fechaInicio) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Municipio WHERE idMunicipio =" + idFranjaHoraria +"and idArea " +
-                    "="+ idArea, new MunicipioRowMapper());
+            return jdbcTemplate.queryForObject("SELECT * FROM accesibilidad WHERE idfranjahoraria=" + idFranjaHoraria +"and idArea="+
+                    idArea+" and fechaInicio='"+fechaInicio+"'", new AccesibilidadRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return null;
@@ -57,6 +56,15 @@ public class AccesibilidadDao {
     public List<Accesibilidad> getAccesibilidades() {
         try {
             return jdbcTemplate.query("SELECT * FROM Accesibilidad", new AccesibilidadRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<Accesibilidad>();
+        }
+    }
+    /* Obté totes les accesibilitats d'un area. Torna una llista buida si no n'hi ha cap. */
+    public List<Accesibilidad> getAccesibilidadesArea(int idArea) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Accesibilidad where idArea="+idArea, new AccesibilidadRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Accesibilidad>();

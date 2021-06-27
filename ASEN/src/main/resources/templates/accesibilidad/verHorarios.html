@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Horarios areas</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"
+          th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'Lista de horarios del area '+${getAreasNaturalesService.getNombreArea(area)}"></h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+
+            <th>Hora Inicio y Fin</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="accesibilidad: ${accesibilidades}">
+            <td th:text="${franjaHorariaService.getHorasFranja(accesibilidad.idFranjaHoraria)}"></td>
+            <td th:text="${accesibilidad.fechaInicio}"></td>
+            <td th:text="${accesibilidad.fechaFin}"></td>
+            <td><a th:href="@{/accesibilidad/update/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}" class="btn btn-primary" role="button">Editar</a></td>
+            <td><a th:href="@{/accesibilidad/deleteHorario/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}"
+                   th:onclick="return confirm('¿Estás seguro de que quiere borrar este horario?');"
+                   id="borrar">Borrar</a></td>
+            <td> </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:if="${session.user!=null && session.user.rol == 'GestorMunicipal'}" th:href="@{/accesibilidad/add/{idArea}(idArea=${area})}" class="btn btn-primary" role="button">+ Añadir Horario</a>
+    <a href="/areaNatural/list" class="btn btn-primary" role="button">VOLVER</a>
+</div>
+</body>
+</html>

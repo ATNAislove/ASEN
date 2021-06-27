@@ -7,6 +7,8 @@ import java.time.LocalDate;
 public class FiltroOcupacion {
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     LocalDate fecha;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    LocalDate fechaFin;
     int idArea;
     int idFranjaHoraria;
     int idZona;
@@ -19,6 +21,10 @@ public class FiltroOcupacion {
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
+
+    public LocalDate getFechaFin() { return fechaFin; }
+
+    public void setFechaFin(LocalDate fechaFin) { this.fechaFin = fechaFin; }
 
     public int getIdArea() {
         return idArea;
@@ -44,9 +50,7 @@ public class FiltroOcupacion {
         this.idZona = idZona;
     }
 
-    public int getIdReserva() {
-        return idReserva;
-    }
+    public int getIdReserva() { return idReserva; }
 
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;

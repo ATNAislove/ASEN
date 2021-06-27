@@ -1,30 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear una nueva Accesibilidad </title>
+    <title>Crear un nuevo horario de area </title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nueva Accesibilidad</h2><!-- formulario de franjahoraria-->
+<div class="container">
+<h2 th:text="'Nuevo horario en el area '+${getAreasNaturalesService.getNombreArea(accesibilidad.idArea)}"></h2>
+    <form action="#" th:action="@{/accesibilidad/filtrarDias}"
+          th:object="${filtro}" method="post">
+        <table>
+            <tr><td><input type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"></td></tr>
+
+            <tr>
+                <td><label>Fecha Inicio</label></td>
+                <td><input type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()"  required/></td>
+            </tr>
+            <tr>
+                <td><label>Fecha Fin</label></td>
+                <td><input type="date" th:field="*{fechaFin}" th:min="${current_date}"  th:onchange="this.form.submit()" /></td>
+            </tr>
+        </table>
+
+    </form>
 <form action="#" th:action="@{/accesibilidad/add}"
       th:object="${accesibilidad}" method="post">
     <table>
+        <tr><td><input type="number" th:field="*{idArea}" hidden></td></tr>
         <tr>
-            <td><label>idFranjaHoraria</label></td>
-            <td><input type="number" th:field="*{idFranjaHoraria}" required/></td>
+            <td><label>FranjaHoraria</label></td>
+            <td><select th:field="*{idFranjaHoraria}" required>
+                <option th:each="franja: ${franjasHorarias}" th:value="${franja.IdFranjaHoraria}"
+                        th:text="${franja.horaInicio}+' '+${franja.horaFin}">
+                </option>
+            </select>
+            </td>
         </tr>
         <tr>
-            <td><label>idArea</label></td>
-            <td><input type="number" th:field="*{idArea}" required/></td>
+            <!--<td><label>Fecha Inicio</label></td>-->
+            <td><input type="date" th:field="*{fechaInicio}" th:min="${current_date}" hidden/></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="CrearAccesibilidad" /></td>
+            <!--<td><label>Fecha Fin</label></td>-->
+            <td><input type="date" th:field="*{fechaFin}" th:min="${current_date}" hidden/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" class="btn btn-primary" role="button" value="Crear Horario" /></td>
         </tr>
     </table>
     <br>
-    <a href="n/">VOLVER</a>
+    <a th:href="@{/accesibilidad/verHorarios/{idArea}(idArea=${accesibilidad.idArea})}" class="btn btn-primary" role="button">VOLVER</a>
 </form>
+</div>
 </body>
 </html>
