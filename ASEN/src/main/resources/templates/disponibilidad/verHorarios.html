@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Horarios servicio</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/style.css"
-          th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<div class="container">
+<div class="container" layout:fragment="content">
     <h1>Lista de horarios del servicio</h1>
     <table class="table table-striped">
         <thead>

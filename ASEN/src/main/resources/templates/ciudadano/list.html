@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Ciudadanos</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+
     <link rel="stylesheet" type="text/css" href="/css/style.css"
           th:href="@{/css/style.css}"/>
 </head>
 <body>
-<div class="container">
+<div class="container" layout:fragment="content">
     <h1>Lista de Ciudadanos</h1>
     <table class="table table-striped">
         <thead>

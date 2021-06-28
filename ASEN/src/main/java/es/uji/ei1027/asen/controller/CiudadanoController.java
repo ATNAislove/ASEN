@@ -2,6 +2,7 @@ package es.uji.ei1027.asen.controller;
 
 import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.model.Ciudadano;
+import es.uji.ei1027.asen.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/ciudadano")
@@ -39,7 +42,8 @@ public class CiudadanoController {
     }
 
     @RequestMapping(value="/add")
-    public String addCiudadano(Model model) {
+    public String addCiudadano(Model model, HttpSession session) {
+        session.setAttribute("user", new UserDetails());
         model.addAttribute("ciudadano", new Ciudadano());
         return "ciudadano/add";
     }

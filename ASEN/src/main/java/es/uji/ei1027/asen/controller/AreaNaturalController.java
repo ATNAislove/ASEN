@@ -61,19 +61,24 @@ public class AreaNaturalController {
     @RequestMapping("/list")
     public String listAreasNaturales(Model model, HttpSession session) {
             UserDetails user = (UserDetails) session.getAttribute("user");
+        if(user==null){
+            session.setAttribute("user", new UserDetails());
+            model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
+        }else {
             if (user.getRol() == "GestorMunicipal") {
                 int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
                 model.addAttribute("areasNaturales", getAreasNaturalesService.getAreasPueblo(municipio));
             } else
                 model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
+        }
         return "areaNatural/list";
     }
-    @RequestMapping("/listNoRegister")
+    /*@RequestMapping("/listNoRegister")
     public String listAreasNaturalesNoRegister(Model model, HttpSession session) {
         model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
         session.setAttribute("user", new UserDetails());
         return "areaNatural/listNoRegister";
-    }
+    }*/
 
     @RequestMapping(value="/add")
     public String addAreaNatural(Model model, HttpSession session) {

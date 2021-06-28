@@ -1,78 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8">
     <title>gestores municipales</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<h2>Nuevo gestor municipal</h2>
-<form action="#" th:action="@{/gestorMunicipal/add}"
-      th:object="${gestorMunicipal}" method="post">
-    <table>
-        <tr>
-            <td><label>Dni</label></td>
-            <td><input type="text" th:field="*{dni}" /></td>
-        </tr>
-        <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" /></td>
-        </tr>
-        <tr>
-            <td><label>Apellidos</label></td>
-            <td><input type="text" th:field="*{apellidos}" /></td>
-        </tr>
-        <tr>
-            <td><label>Fecha Nacimiento</label></td>
-            <td><input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" /></td>
-        </tr>
-        <tr>
-            <td><label>correo Electronico</label></td>
-            <td><input type="text" th:field="*{correoElectronico}" /></td>
-        </tr>
-        <tr>
-            <td><label>usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" /></td>
-        </tr>
-        <tr>
-            <td><label>contraseña</label></td>
-            <td><input type="text" th:field="*{contrasenya}" /></td>
-        </tr>
-        <tr>
-            <td><label>direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" /></td>
-        </tr>
-        <tr>
-            <td><label>municipio Nacimiento</label></td>
-            <td><input type="text" th:field="*{municipioNacimiento}" /></td>
-        </tr>
-        <tr>
-            <td><label>pais</label></td>
-            <td><input type="text" th:field="*{pais}" /></td>
-        </tr>
-        <tr>
-            <td><label>telefono</label></td>
-            <td><input type="number" th:field="*{telefono}" /></td>
-        </tr>
-        <tr>
-            <td><label>fecha Registro</label></td>
-            <td><input type="date" id="fechaRegistro" th:field="*{fechaRegistro}" /></td>
-        </tr>
-        <tr>
-            <td><label>fecha Baja</label></td>
-            <td><input type="date" id="fechaBaja" th:field="*{fechaBaja}" /></td>
-        </tr>
-        <tr>
-            <td><label>id Municipio</label></td>
-            <td><input type="number" th:field="*{idMunicipio}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Crear gestor municipal" /></td>
-        </tr>
-    </table>
-    <br>
-    <a href="n/">VOLVER</a>
-</form>
+<div layout:fragment="content">
+    <h2>Nuevo gestor municipal</h2>
+    <form action="#" th:action="@{/gestorMunicipal/add}"
+          th:object="${gestorMunicipal}" method="post">
+        <table>
+            <tr>
+                <td><label>Dni</label></td>
+                <td><input type="text" th:field="*{dni}" /></td>
+            </tr>
+            <tr>
+                <td><label>Nombre</label></td>
+                <td><input type="text" th:field="*{nombre}" /></td>
+            </tr>
+            <tr>
+                <td><label>Apellidos</label></td>
+                <td><input type="text" th:field="*{apellidos}" /></td>
+            </tr>
+            <tr>
+                <td><label>Fecha Nacimiento</label></td>
+                <td><input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" /></td>
+            </tr>
+            <tr>
+                <td><label>correo Electronico</label></td>
+                <td><input type="text" th:field="*{correoElectronico}" /></td>
+            </tr>
+            <tr>
+                <td><label>usuario</label></td>
+                <td><input type="text" th:field="*{usuario}" /></td>
+            </tr>
+            <tr>
+                <td><label>contraseña</label></td>
+                <td><input type="text" th:field="*{contrasenya}" /></td>
+            </tr>
+            <tr>
+                <td><label>direccion</label></td>
+                <td><input type="text" th:field="*{direccion}" /></td>
+            </tr>
+            <tr>
+                <td><label>municipio Nacimiento</label></td>
+                <td><input type="text" th:field="*{municipioNacimiento}" /></td>
+            </tr>
+            <tr>
+                <td><label>pais</label></td>
+                <td><input type="text" th:field="*{pais}" /></td>
+            </tr>
+            <tr>
+                <td><label>telefono</label></td>
+                <td><input type="number" th:field="*{telefono}" /></td>
+            </tr>
+            <tr>
+                <td><label>fecha Registro</label></td>
+                <td><input type="date" id="fechaRegistro" th:field="*{fechaRegistro}" /></td>
+            </tr>
+            <tr>
+                <td><label>fecha Baja</label></td>
+                <td><input type="date" id="fechaBaja" th:field="*{fechaBaja}" /></td>
+            </tr>
+            <tr>
+                <td><label>id Municipio</label></td>
+                <td><input type="number" th:field="*{idMunicipio}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Crear gestor municipal" /></td>
+            </tr>
+        </table>
+        <br>
+        <a href="n/">VOLVER</a>
+    </form>
+</div>
 </body>
 </html>

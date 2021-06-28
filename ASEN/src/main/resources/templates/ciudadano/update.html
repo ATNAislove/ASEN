@@ -1,70 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <title>Crear un nuevo Ciudadano</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<h2>Nuevo Ciudadano</h2><!-- formulario de ciudadano-->
-<form action="#" th:action="@{/ciudadano/update}"
-      th:object="${ciudadano}" method="post">
-    <table>
-        <tr>
-            <td><label>usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" readonly /></td>
-        </tr>
-        <tr>
-            <td><label>codigo ciudadano</label></td>
-            <td><input type="text" th:field="*{codigoCiudadano}" readonly /></td>
-        </tr>
-        <tr>
-            <td><label>pin</label></td>
-            <td><input type="text" th:field="*{pin}" maxlength="15" /></td>
-        </tr>
-        <tr>
-            <td><label>fecha Nacimiento</label></td>
-            <td><input type="date" th:field="*{fechaNacimiento}" /></td>
-        </tr>
-        <tr>
-            <td><label>nombre</label></td>
-            <td><input type="text" th:field="*{nombre}"maxlength="20" /></td>
-        </tr>
-        <tr>
-            <td><label>apellidos</label></td>
-            <td><input type="text" th:field="*{apellidos}" maxlength="50" /></td>
-        </tr>
-        <tr>
-            <td><label>direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" maxlength="20" /></td>
-        </tr>
-        <tr>
-            <td><label>correoElectronico</label></td>
-            <td><input type="text" th:field="*{correoElectronico}" maxlength="30" /></td>
-        </tr>
-        <tr>
-            <td><label>municipio</label></td>
-            <td><input type="text" th:field="*{municipio}" maxlength="30" /></td>
-        </tr>
-        <tr>
-            <td><label>pais</label></td>
-            <td><input type="text" th:field="*{pais}" maxlength="30" /></td>
-        </tr>
-        <tr>
-            <td><label>fechaRegistro</label></td>
-            <td><input type="date" th:field="*{fechaRegistro}" /></td>
-        </tr>
-        <tr>
-            <td><label>fechaBaja</label></td>
-            <td><input type="date" th:field="*{fechaBaja}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Actualizar Ciudadano" /></td>
-        </tr>
-    </table>
-    <br>
-    <a href="n/">VOLVER</a>
-</form>
+<div layout:fragment="content">
+    <h2>Nuevo Ciudadano</h2><!-- formulario de ciudadano-->
+    <form action="#" th:action="@{/ciudadano/update}"
+          th:object="${ciudadano}" method="post">
+        <table>
+            <tr>
+                <td><label>usuario</label></td>
+                <td><input type="text" th:field="*{usuario}" readonly /></td>
+            </tr>
+            <tr>
+                <td><label>codigo ciudadano</label></td>
+                <td><input type="text" th:field="*{codigoCiudadano}" readonly /></td>
+            </tr>
+            <tr>
+                <td><label>pin</label></td>
+                <td><input type="text" th:field="*{pin}" maxlength="15" /></td>
+            </tr>
+            <tr>
+                <td><label>fecha Nacimiento</label></td>
+                <td><input type="date" th:field="*{fechaNacimiento}" /></td>
+            </tr>
+            <tr>
+                <td><label>nombre</label></td>
+                <td><input type="text" th:field="*{nombre}"maxlength="20" /></td>
+            </tr>
+            <tr>
+                <td><label>apellidos</label></td>
+                <td><input type="text" th:field="*{apellidos}" maxlength="50" /></td>
+            </tr>
+            <tr>
+                <td><label>direccion</label></td>
+                <td><input type="text" th:field="*{direccion}" maxlength="20" /></td>
+            </tr>
+            <tr>
+                <td><label>correoElectronico</label></td>
+                <td><input type="text" th:field="*{correoElectronico}" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td><label>municipio</label></td>
+                <td><input type="text" th:field="*{municipio}" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td><label>pais</label></td>
+                <td><input type="text" th:field="*{pais}" maxlength="30" /></td>
+            </tr>
+            <tr>
+                <td><label>fechaRegistro</label></td>
+                <td><input type="date" th:field="*{fechaRegistro}" /></td>
+            </tr>
+            <tr>
+                <td><label>fechaBaja</label></td>
+                <td><input type="date" th:field="*{fechaBaja}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Actualizar Ciudadano" /></td>
+            </tr>
+        </table>
+        <br>
+        <a href="n/">VOLVER</a>
+    </form>
+</div>
 </body>
 </html>

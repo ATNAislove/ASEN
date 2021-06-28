@@ -51,7 +51,8 @@ public class LoginController {
     }
 
     @RequestMapping("/login")
-    public String login(Model model) {
+    public String login(Model model,HttpSession session) {
+        session.setAttribute("user", new UserDetails());
         model.addAttribute("user", new UserDetails());
         return "login";
     }

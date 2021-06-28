@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:object="${session}">
+      th:object="${session}"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8">
     <title>Lista de areas naturales</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"
           th:href="@{/css/style.css}"/>
 </head>
 <body>
-<div class="container">
-    <h1 th:if="*{user.rol=='Ciudadano'}"><a href="/ciudadano/menuCiudadano">ASEN</a> </h1>
-    <h1 th:if="*{user.rol=='GestorMunicipal'}"><a href="/gestorMunicipal/menuGestorMunicipal">ASEN</a></h1>
+<div class="container" layout:fragment="content">
     <h1>Lista de áreas naturales</h1>
     <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
          th:text="${mensaje}"

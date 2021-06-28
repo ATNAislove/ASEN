@@ -50,10 +50,13 @@ public class ZonaController {
     }
 
 
-    @RequestMapping(value="/add")
-    public String addZona(Model model, HttpSession session) {
-        model.addAttribute("zona", new Zona());
+    @RequestMapping(value="/add/{idArea}")
+    public String addZona(Model model, @PathVariable int idArea,HttpSession session) {
+        Zona zona = new Zona();
+        zona.setIdArea(idArea);
+        model.addAttribute("zona", zona);
         UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("nombreArea", getAreasNaturalesService.getNombreArea(idArea));
         int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
         model.addAttribute("areas", getAreasNaturalesService.getAreasPueblo(municipio));
         return "zona/add";

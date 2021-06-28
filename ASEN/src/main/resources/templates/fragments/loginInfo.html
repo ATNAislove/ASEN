@@ -1,8 +1,8 @@
 <div class="loggeduser" th:object="${session}" xmlns:th="http://www.w3.org/1999/xhtml">
-    <span th:if="*{user == null}">
+    <span th:if="*{user.rol == null}">
         No identificado <a href="/login" th:href="@{/login}">Entrar</a>
     </span>
-    <span th:unless="*{user == null}">
+    <span th:unless="*{user.rol == null}">
         Identificado como <span th:text="*{user.username}"></span> <a
             href="/logout" th:href="@{/logout}">Salir</a>
     </span>

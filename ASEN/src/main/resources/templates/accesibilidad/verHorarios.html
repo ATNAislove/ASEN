@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:object="${session}"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Horarios areas</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+
     <link rel="stylesheet" type="text/css" href="/css/style.css"
           th:href="@{/css/style.css}"/>
 </head>
 <body>
-<div class="container">
+<div class="container" layout:fragment="content">
     <h1 th:text="'Lista de horarios del area '+${getAreasNaturalesService.getNombreArea(area)}"></h1>
     <table class="table table-striped">
         <thead>
@@ -28,8 +31,8 @@
             <td th:text="${franjaHorariaService.getHorasFranja(accesibilidad.idFranjaHoraria)}"></td>
             <td th:text="${accesibilidad.fechaInicio}"></td>
             <td th:text="${accesibilidad.fechaFin}"></td>
-            <td><a th:href="@{/accesibilidad/update/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}" class="btn btn-primary" role="button">Editar</a></td>
-            <td><a th:href="@{/accesibilidad/deleteHorario/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}"
+            <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/accesibilidad/update/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}" class="btn btn-primary" role="button">Editar</a></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/accesibilidad/deleteHorario/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}"
                    th:onclick="return confirm('¿Estás seguro de que quiere borrar este horario?');"
                    id="borrar">Borrar</a></td>
             <td> </td>

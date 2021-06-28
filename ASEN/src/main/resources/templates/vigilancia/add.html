@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <title>Vigilancia</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<h2>Nueva vigilancia</h2><!-- formulario de vigilancia-->
-<form action="#" th:action="@{/vigilancia/add}"
-      th:object="${vigilancia}" method="post">
-    <table>
-        <tr>
-            <td><label>DNI</label></td>
-            <td><input type="text" th:field="*{dni}" /></td>
-        </tr>
-        <tr>
-            <td><label>Identificativo de área</label></td>
-            <td><input type="number" th:field="*{idArea}" /></td>
-        </tr>
+<div layout:fragment="content">
+    <h2>Nueva vigilancia</h2><!-- formulario de vigilancia-->
+    <form action="#" th:action="@{/vigilancia/add}"
+          th:object="${vigilancia}" method="post">
+        <table>
+            <tr>
+                <td><label>DNI</label></td>
+                <td><input type="text" th:field="*{dni}" /></td>
+            </tr>
+            <tr>
+                <td><label>Identificativo de área</label></td>
+                <td><input type="number" th:field="*{idArea}" /></td>
+            </tr>
 
-        <tr>
-            <td colspan="2"><input type="submit" value="Crear vigilancia" /></td>
-        </tr>
-    </table>
-    <br>
-    <a href="n/">VOLVER</a>
-</form>
+            <tr>
+                <td colspan="2"><input type="submit" value="Crear vigilancia" /></td>
+            </tr>
+        </table>
+        <br>
+        <a href="n/">VOLVER</a>
+    </form>
+</div>
 </body>
 </html>

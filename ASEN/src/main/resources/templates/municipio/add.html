@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <title>Crear un nuevo municipio</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/litera/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<h2>Nuevo municipio</h2><!-- formulario de municipio-->
-<form action="#" th:action="@{/municipio/add}"
-      th:object="${municipio}" method="post">
-    <table>
-        <tr>
-            <td><label>idMunicipio</label></td>
-            <td><input type="number" th:field="*{idMunicipio}" /></td>
-        </tr>
-        <tr>
-            <td><label>Nombre Municipio</label></td>
-            <td><input type="text" th:field="*{nombreMunicipio}" /></td>
-        </tr>
-        <tr>
-            <td><label>Codigo Postal</label></td>
-            <td><input type="number" th:field="*{codigoPostal}" /></td>
-        </tr>
-        <tr>
-            <td><label>nombre Provincia</label></td>
-            <td><input type="text" th:field="*{nombreProvincia}" /></td>
-        </tr>
-        <tr>
-            <td><label>Poblacion</label></td>
-            <td><input type="number" th:field="*{numHabitantes}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Crear municipio" /></td>
-        </tr>
-    </table>
-    <br>
-    <a href="n/">VOLVER</a>
-</form>
+<div layout:fragment="content">
+    <h2>Nuevo municipio</h2><!-- formulario de municipio-->
+    <form action="#" th:action="@{/municipio/add}"
+          th:object="${municipio}" method="post">
+        <table>
+            <tr>
+                <td><label>idMunicipio</label></td>
+                <td><input type="number" th:field="*{idMunicipio}" /></td>
+            </tr>
+            <tr>
+                <td><label>Nombre Municipio</label></td>
+                <td><input type="text" th:field="*{nombreMunicipio}" /></td>
+            </tr>
+            <tr>
+                <td><label>Codigo Postal</label></td>
+                <td><input type="number" th:field="*{codigoPostal}" /></td>
+            </tr>
+            <tr>
+                <td><label>nombre Provincia</label></td>
+                <td><input type="text" th:field="*{nombreProvincia}" /></td>
+            </tr>
+            <tr>
+                <td><label>Poblacion</label></td>
+                <td><input type="number" th:field="*{numHabitantes}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Crear municipio" /></td>
+            </tr>
+        </table>
+        <br>
+        <a href="n/">VOLVER</a>
+    </form>
+</div>
 </body>
 </html>
