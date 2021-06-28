@@ -1,6 +1,7 @@
 package es.uji.ei1027.asen.svc;
 
 import es.uji.ei1027.asen.dao.AreaNaturalDao;
+import es.uji.ei1027.asen.dao.MunicipioDao;
 import es.uji.ei1027.asen.dao.ZonaDao;
 import es.uji.ei1027.asen.model.AreaNatural;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class GetAreasNaturalesSvc implements  GetAreasNaturalesService {
     private AreaNaturalDao areaNaturalDao;
     @Autowired
     private ZonaDao zonaDao;
+    @Autowired
+    private MunicipioDao municipioDao;
 
     @Override
     public List<AreaNatural> getAreas() {
@@ -37,6 +40,9 @@ public class GetAreasNaturalesSvc implements  GetAreasNaturalesService {
     public AreaNatural getArea(int idArea){
         return areaNaturalDao.getAreaNatural(idArea);
     }
-
+    @Override
+    public String getNombreMunicipio(int idMunicipio){
+        return municipioDao.getMunicipio(idMunicipio).getNombreMunicipio();
+    }
 
 }

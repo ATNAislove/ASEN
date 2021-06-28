@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/base}">
 <head>
@@ -72,11 +71,11 @@
             <td><input type="text" th:field="*{idMunicipio}" readonly/></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Crear area natural" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar area natural" /></td>
         </tr>
     </table>
     <br>
-    <a href="areaNatural/list" class="btn btn-primary">VOLVER</a>
+    <a href="/areaNatural/list" class="btn btn-primary">VOLVER</a>
 </form>
 </div>
 </body>

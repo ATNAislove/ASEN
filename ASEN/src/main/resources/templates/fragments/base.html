@@ -20,18 +20,23 @@
 
 </head>
 
-<body class="container">
+<body >
 <header class="page-header">
     <h1></h1>
-    <div th:replace="fragments/header"></div>
-    <div th:replace="fragments/loginInfo"></div>
+    <div class="container" >
+        <div th:replace="fragments/header"></div>
+        <div th:replace="fragments/loginInfo"></div>
+    </div>
+    <div th:replace="fragments/navbar"></div>
 </header>
-<div layout:fragment="content"></div>
-<footer>
-    <div th:replace="fragments/footer"></div>
+<div class="container">
+    <div layout:fragment="content"></div>
+    <footer>
+        <div th:replace="fragments/footer"></div>
 
-    <p class="text-muted">EI1027 - Disseny i Implementació de
-        Sistemes d'Informació</p>
-</footer>
+        <p class="text-muted">EI1027 - Disseny i Implementació de
+            Sistemes d'Informació</p>
+    </footer>
+</div>
 </body>
 </html>

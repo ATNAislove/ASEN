@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:object="${session}" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="navbar">
+        <div class="container-fluid">
+            <a th:if="*{user.rol == null}" class="navbar-brand" href="/">ASEN</a>
+            <a th:if="*{user.rol == 'Ciudadano'}" class="navbar-brand" href="/ciudadano/menuCiudadano">ASEN</a>
+            <a th:if="*{user.rol == 'GestorMunicipal'}" class="navbar-brand" href="/gestorMunicipal/menuGestorMunicipal">ASEN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/areaNatural/list">Áreas naturales</a>
+                    </li>
+                    <li th:if="*{user.rol == 'GestorMunicipal' || user.rol=='Ciudadano'}" class="nav-item">
+                        <a class="nav-link" href="/reserva/list">Reservas</a>
+                    </li>
+                    <li th:if="*{user.rol == 'GestorMunicipal'}" class="nav-item">
+                        <a class="nav-link" href="/servicio/list">Servicios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

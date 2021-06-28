@@ -61,6 +61,7 @@ public class AreaNaturalController {
     @RequestMapping("/list")
     public String listAreasNaturales(Model model, HttpSession session) {
             UserDetails user = (UserDetails) session.getAttribute("user");
+            model.addAttribute("AreaNaturalService",getAreasNaturalesService);
         if(user==null){
             session.setAttribute("user", new UserDetails());
             model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());

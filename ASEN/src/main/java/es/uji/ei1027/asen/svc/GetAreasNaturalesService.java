@@ -11,4 +11,5 @@ public interface GetAreasNaturalesService {
     public int getIdArea(int idZona);
     public List<AreaNatural> getAreasPueblo(int idMunicipio);
     public AreaNatural getArea(int idArea);
+    public String getNombreMunicipio(int idMunicipio);
 }

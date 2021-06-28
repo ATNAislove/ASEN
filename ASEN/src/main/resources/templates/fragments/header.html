@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
     <meta charset="UTF-8">
     <header>
-        <h1 th:if="*{user.rol==null}"> <a href="/" style="text-decoration:none;color:black;">ASEN</a></h1>
+        <h1 th:if="*{user==null || user.rol==null}"> <a href="/" style="text-decoration:none;color:black;">ASEN</a></h1>
         <h1 th:if="*{user!=null && user.rol=='Ciudadano'}"><a href="/ciudadano/menuCiudadano" style="text-decoration:none;color:black;">ASEN</a></h1>
         <h1 th:if="*{user!=null && user.rol=='GestorMunicipal'}"><a href="/gestorMunicipal/menuGestorMunicipal" style="text-decoration:none;color:black;">ASEN</a></h1>
     </header>
