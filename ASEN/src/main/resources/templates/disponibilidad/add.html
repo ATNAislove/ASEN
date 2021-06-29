@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<div layout:fragment="content"></div>
+<div layout:fragment="content">
 <h2>Nuevo Horario servicio</h2>
 <form action="#" th:action="@{/disponibilidad/add}"
       th:object="${disponibilidad}" method="post">
@@ -40,5 +40,7 @@
     <br>
     <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
 </form>
+</div>
 </body>
+
 </html>

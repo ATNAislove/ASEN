@@ -41,7 +41,7 @@
             <td th:text="${areaNatural.tipoArea}"></td>
             <td th:text="${areaNatural.tipoAcceso}"></td>
             <td th:text="${AreaNaturalService.getNombreMunicipio(areaNatural.idMunicipio)}"></td>
-            <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" class="btn btn-primary" role="button">Editar</a></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/areaNatural/update/{idArea}(idArea=${areaNatural.idArea})}" id="editar" role="button"></a></td>
             <td th:if="*{user.rol == 'GestorMunicipal'}">
                 <a th:href="@{/areaNatural/delete/{idArea}(idArea=${areaNatural.idArea})}" id="borrar"
                    th:onclick="return confirm('¿ Estás seguro de que quiere borrar el area natural?');">Borrar</a></td>
@@ -51,7 +51,7 @@
         </tr>
         </tbody>
     </table>
-    <a th:if="*{user.rol == 'GestorMunicipal'}" href="add" class="btn btn-primary" role="button">+ Añadir Área Natural</a>
+    <a th:if="*{user.rol == 'GestorMunicipal'}" href="add" id="añadir" role="button">+ Añadir Área Natural</a>
 
 </div>
 </body>
