@@ -16,20 +16,20 @@
       th:object="${zona}" method="post">
     <table>
         <tr>
-            <td><label>idCharNumero</label></td>
-            <td><input type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" /></td>
+            <td><label>IdentificadorZona</label></td>
+            <td><input class="form-control"  type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" /></td>
         </tr>
         <tr>
             <td><label>Nombre de la zona</label></td>
-            <td><input type="text" th:field="*{nombreZona}" /></td>
+            <td><input class="form-control"  type="text" th:field="*{nombreZona}" /></td>
         </tr>
         <tr>
             <td><label>Aforo máximo</label></td>
-            <td><input type="number" th:field="*{aforoMaximo}" /></td>
+            <td><input class="form-control"  type="number" th:field="*{aforoMaximo}" /></td>
         </tr>
         <tr>
             <td><label>Tipo de terreno</label></td>
-            <td><select th:field="*{tipoTerreno}">
+            <td><select class="form-control"  th:field="*{tipoTerreno}">
                 <option th:value="arena">arena</option>
                 <option th:value="hierba">hierba</option>
                 <option th:value="piedra">piedra</option>
@@ -46,7 +46,7 @@
                     </option>
                 </select>
             </td>-->
-            <td><input type="hidden" th:field="*{idArea}"/></td>
+            <td><input class="form-control" type="hidden" th:field="*{idArea}"/></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" class="btn btn-primary" value="+ Crear zona" /></td>

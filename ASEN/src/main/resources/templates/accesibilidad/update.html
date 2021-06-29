@@ -17,23 +17,23 @@
     <table>
         <tr>
             <td><label>Área</label></td>
-            <td><input type="text" th:value="${nombreArea}" disabled/></td>
-            <td><input type="text" th:field="*{idArea}"  hidden/></td>
+            <td><input class="form-control"  type="text" th:value="${nombreArea}" disabled/></td>
+            <td><input class="form-control"  type="text" th:field="*{idArea}"  hidden/></td>
         </tr>
         <tr>
             <td><label>FranjaHoraria</label></td>
-            <td><input type="text"  th:value="${horasFranja}" disabled/></td>
+            <td><input class="form-control"  type="text"  th:value="${horasFranja}" disabled/></td>
 
-            <td><input type="text" th:field="*{idFranjaHoraria}"  hidden/></td>
+            <td><input class="form-control"  type="text" th:field="*{idFranjaHoraria}"  hidden/></td>
         </tr>
         <tr>
             <td><label>Fecha Inicio</label></td>
-            <td><input type="date" th:field="*{fechaInicio}" disabled/></td>
-            <td><input type="date" th:field="*{fechaInicio}" hidden/></td>
+            <td><input class="form-control"  type="date" th:field="*{fechaInicio}" disabled/></td>
+            <td><input class="form-control"  type="date" th:field="*{fechaInicio}" hidden/></td>
         </tr>
         <tr>
             <td><label>Fecha Fin</label></td>
-            <td><input type="date" th:field="*{fechaFin}" th:min="${accesibilidad.fechaInicio}"/></td>
+            <td><input class="form-control"  type="date" th:field="*{fechaFin}" th:min="${accesibilidad.fechaInicio}"/></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" class="btn btn-primary" role="button" value="Actualizar Horario" /></td>

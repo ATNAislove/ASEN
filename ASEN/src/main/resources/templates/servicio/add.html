@@ -17,19 +17,19 @@
     <table>
         <tr>
             <td><label>Fecha Inicio</label></td>
-            <td><input type="date" th:field="*{fechaInicio}" /></td>
+            <td><input class="form-control" type="date" th:field="*{fechaInicio}" /></td>
         </tr>
         <tr>
             <td><label>Fecha Fin</label></td>
-            <td><input type="date" th:field="*{fechaFin}" /></td>
+            <td><input class="form-control" type="date" th:field="*{fechaFin}" /></td>
         </tr>
         <tr>
             <td><label>Periodicidad</label></td>
-            <td><input type="number" th:field="*{periodicidad}" /></td>
+            <td><input class="form-control" type="number" th:field="*{periodicidad}" /></td>
         </tr>
         <tr>
             <td><label>Tipo De Temporada</label></td>
-            <td><select th:field="*{tipoTemporada}">
+            <td><select class="form-control" th:field="*{tipoTemporada}">
                 <option th:value="fijo">fijo</option>
                 <option th:value="temporal">temporal</option>
             </select></td>
@@ -37,7 +37,7 @@
         <tr>
         <tr>
             <td><label>Tipo de Servicio</label></td>
-        <td><select th:field="*{idTipoServicio}">
+        <td><select class="form-control" th:field="*{idTipoServicio}">
             <option th:each="tipoServicio: ${tiposServicio}" th:value="${tipoServicio.idTipoServicio}"
                     th:text="${tipoServicio.nombre}">
             </option>
@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td><label>Area</label></td>
-            <td><select th:field="*{idArea}">
+            <td><select class="form-control" th:field="*{idArea}">
                 <option th:each="areaNatural: ${areasNaturales}" th:value="${areaNatural.idArea}"
                         th:text="${areaNatural.nombreArea}">
                 </option>
@@ -53,6 +53,7 @@
         </tr>
         <br>
         <tr>
+            <a>* La periodicidad es el número de días para el cual tarda el servicio a volverse a activar desde la fechaFin establecida</a>
             <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear servicio" /></td>
         </tr>
     </table>

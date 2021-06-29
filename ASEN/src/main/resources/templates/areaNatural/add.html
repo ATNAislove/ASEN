@@ -18,19 +18,19 @@
     <table>
         <tr>
             <td><label>NombreArea</label></td>
-            <td><input type="text" th:field="*{nombreArea}" /></td>
+            <td><input class="form-control" type="text" th:field="*{nombreArea}" /></td>
         </tr>
         <tr>
             <td><label>descripcion</label></td>
-            <td><textarea type="text" th:field="*{descripcion}" /></td>
+            <td><textarea class="form-control" style="margin: 0px; width: 394px; height: 200px;" type="text" th:field="*{descripcion}" /></td>
         </tr>
         <tr>
             <td><label>imagen</label></td>
-            <td><input type="text" th:field="*{imagen}" placeholder="Introduce la url" /></td>
+            <td><input class="form-control" type="text" th:field="*{imagen}" placeholder="Introduce la url" /></td>
         </tr>
         <tr>
             <td><label>Tipo de terreno</label></td>
-            <td><select th:field="*{tipoTerreno}">
+            <td><select class="form-control" th:field="*{tipoTerreno}">
                     <option th:value="arena">arena</option>
                     <option th:value="hierba">hierba</option>
                     <option th:value="piedra">piedra</option>
@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <td><label>Tipo de area</label></td>
-            <td><select th:field="*{tipoArea}">
+            <td><select class="form-control" th:field="*{tipoArea}">
                     <option th:value="playa">playa</option>
                     <option th:value="montaña">montaña</option>
                     <option th:value="lago">lago</option>
@@ -57,7 +57,7 @@
         <tr>
             <td><label>Tipo de acceso</label></td>
             <td>
-            <select th:field="*{tipoAcceso}">
+            <select class="form-control" th:field="*{tipoAcceso}">
                 <option th:value="abierto">abierto</option>
                 <option th:value="restringido">restringido</option>
                 <option th:value="cerrado">cerrado</option>
@@ -65,7 +65,7 @@
         </tr>
         <tr>
             <td><label>Municipio</label></td>
-            <td><select th:field="*{idMunicipio}">
+            <td><select class="form-control" th:field="*{idMunicipio}">
                 <option th:value="${municipio.idMunicipio}"
                         th:text="${municipio.nombreMunicipio}">
                 </option>

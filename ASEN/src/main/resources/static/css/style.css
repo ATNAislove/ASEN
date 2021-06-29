@@ -45,6 +45,9 @@ h5{
     font-size: 14;
     font-family: Helvetica;
 }
+#fondo{
+background-size: cover;
+}
 
 p{
     color: black;

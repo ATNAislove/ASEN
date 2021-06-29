@@ -15,9 +15,9 @@
     <form action="#" th:action="@{/reserva/fecha}" th:object="${filtro}">
         <table>
             <tr>
-                <input type="hidden" th:field="*{idZona}" th:value="${filtro.idZona}"/>
+                <input class="form-control" type="hidden" th:field="*{idZona}" th:value="${filtro.idZona}"/>
                 <td><label>fecha</label></td>
-                <td><input type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()" required/></td>
+                <td><input class="form-control"  type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()" required/></td>
                 <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>
             </tr>
         </table>
@@ -33,18 +33,18 @@
             <tr>
 
                 <td><label>Numero Personas</label></td>
-                <td><input type="number" th:field="*{numeroPersonas}"  min="1" th:max="${maxPersonas}" required/></td>
+                <td><input class="form-control" type="number" th:field="*{numeroPersonas}"  min="1" th:max="${maxPersonas}" required/></td>
             </tr>
 
             <tr>
                 <td><label>Franja Horaria</label></td>
-                <td th:if="${dia!=null}"><select th:field="*{idFranjaHoraria}" required>
+                <td th:if="${dia!=null}"><select class="form-control" th:field="*{idFranjaHoraria}" required>
                         <option th:each="franja: ${franjaHorariaService.getFranjaReservaLibreReservable(dia,session.zona)}" th:value="${franja.IdFranjaHoraria}"
                                 th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
                         </option>
                     </select>
                 </td>
-                <td th:if="${dia==null}"><select th:field="*{idFranjaHoraria}" required>
+                <td th:if="${dia==null}"><select class="form-control" th:field="*{idFranjaHoraria}" required>
                     <option th:each="franja: ${franjaHorariaService.getFranjasReserva()}" th:value="${franja.IdFranjaHoraria}"
                             th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
                     </option>

@@ -15,15 +15,15 @@
     <form action="#" th:action="@{/accesibilidad/filtrarDias}"
           th:object="${filtro}" method="post">
         <table>
-            <tr><td><input type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"></td></tr>
+            <tr><td><input class="form-control"  type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"></td></tr>
 
             <tr>
                 <td><label>Fecha Inicio</label></td>
-                <td><input type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()"  required/></td>
+                <td><input class="form-control"  type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()"  required/></td>
             </tr>
             <tr>
                 <td><label>Fecha Fin</label></td>
-                <td><input type="date" th:field="*{fechaFin}" th:min="${current_date}"  th:onchange="this.form.submit()" /></td>
+                <td><input class="form-control"  type="date" th:field="*{fechaFin}" th:min="${current_date}"  th:onchange="this.form.submit()" /></td>
             </tr>
         </table>
 
@@ -34,7 +34,7 @@
         <tr><td><input type="number" th:field="*{idArea}" hidden></td></tr>
         <tr>
             <td><label>FranjaHoraria</label></td>
-            <td><select th:field="*{idFranjaHoraria}" required>
+            <td><select class="form-control"  th:field="*{idFranjaHoraria}" required>
                 <option th:each="franja: ${franjasHorarias}" th:value="${franja.IdFranjaHoraria}"
                         th:text="${franja.horaInicio}+' '+${franja.horaFin}">
                 </option>
@@ -43,11 +43,11 @@
         </tr>
         <tr>
             <!--<td><label>Fecha Inicio</label></td>-->
-            <td><input type="date" th:field="*{fechaInicio}" th:min="${current_date}" hidden/></td>
+            <td><input class="form-control"  type="date" th:field="*{fechaInicio}" th:min="${current_date}" hidden/></td>
         </tr>
         <tr>
             <!--<td><label>Fecha Fin</label></td>-->
-            <td><input type="date" th:field="*{fechaFin}" th:min="${current_date}" hidden/></td>
+            <td><input class="form-control"  type="date" th:field="*{fechaFin}" th:min="${current_date}" hidden/></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" class="btn btn-primary" role="button" value="Crear Horario" /></td>

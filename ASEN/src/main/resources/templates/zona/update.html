@@ -17,23 +17,23 @@
     <table>
         <tr>
             <td><label>Id zona</label></td>
-            <td><input type="number" th:field="*{idZona}" placeholder="ejemplo: 12" readonly/></td>
+            <td><input class="form-control"  type="number" th:field="*{idZona}" placeholder="ejemplo: 12" readonly/></td>
         </tr>
         <tr>
-            <td><label>idCharNumero</label></td>
-            <td><input type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" readonly/></td>
+            <td><label>IdentificadorZona</label></td>
+            <td><input class="form-control"  type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" readonly/></td>
         </tr>
         <tr>
             <td><label>Nombre de la zona</label></td>
-            <td><input type="text" th:field="*{nombreZona}" /></td>
+            <td><input class="form-control"  type="text" th:field="*{nombreZona}" /></td>
         </tr>
         <tr>
             <td><label>Aforo máximo</label></td>
-            <td><input type="number" th:field="*{aforoMaximo}" /></td>
+            <td><input class="form-control"  type="number" th:field="*{aforoMaximo}" /></td>
         </tr>
         <tr>
             <td><label>Tipo de terreno</label></td>
-            <td><select th:field="*{tipoTerreno}">
+            <td><select class="form-control"  th:field="*{tipoTerreno}">
                 <option th:value="arena">arena</option>
                 <option th:value="hierba">hierba</option>
                 <option th:value="piedra">piedra</option>
@@ -44,7 +44,7 @@
         </tr>
         <tr>
             <td><label>Area</label></td>
-            <td><select th:field="*{idArea}">
+            <td><select class="form-control"  th:field="*{idArea}">
                 <option th:each="area: ${areas}" th:value="${area.idArea}"
                         th:text="${area.nombreArea}">
                 </option>
