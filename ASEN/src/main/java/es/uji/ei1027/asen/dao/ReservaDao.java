@@ -3,6 +3,7 @@ package es.uji.ei1027.asen.dao;
 import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,11 +27,20 @@ public class ReservaDao {
 
     /* Afegeix la Reserva a la base de dades */
 
-    public void addReserva(Reserva reserva) {
-        jdbcTemplate.update("INSERT INTO Reserva (fecha, numeroPersonas, horaSalida, fechaCreacion, codigoQr, estadoReserva, usuario,idFranjaHoraria,idZona) VALUES( ?, ?, ?, ?, ?, ?, ?, ?,?)"
+    public int addReserva(Reserva reserva) {
+        /*jdbcTemplate.update("INSERT INTO Reserva (fecha, numeroPersonas, horaSalida, fechaCreacion, codigoQr, estadoReserva, usuario,idFranjaHoraria) VALUES( ?, ?, ?, ?, ?, ?, ?,?)"
                 ,reserva.getFecha(),reserva.getNumeroPersonas()
                 ,reserva.getHoraSalida(), LocalDate.now(),reserva.getCodigoQR(),"pendiente"
-                ,reserva.getUsuario(),reserva.getIdFranjaHoraria(),reserva.getIdZona());
+                ,reserva.getUsuario(),reserva.getIdFranjaHoraria());*/
+        try{
+            return jdbcTemplate.queryForObject("INSERT INTO Reserva (fecha, numeroPersonas, horaSalida, fechaCreacion, codigoQr, estadoReserva, usuario," +
+                    "idFranjaHoraria) VALUES('"+reserva.getFecha()+"',"+reserva.getNumeroPersonas()+", null, '"+LocalDate.now()+"', '"+reserva.getCodigoQR()+
+                    "', 'pendiente', '"+reserva.getUsuario()+"',"+reserva.getIdFranjaHoraria()+") RETURNING idReserva", Integer.class);
+        }catch(EmptyResultDataAccessException e) {
+            return -1;
+        }catch(DataIntegrityViolationException e){
+            return -1;
+        }
     }
 
     /*Cancelar una reserva*/
@@ -96,7 +106,7 @@ public class ReservaDao {
             return new ArrayList<Reserva>();
         }
     }
-    public List<Reserva> getReservasConcretas(Reserva reserva,String usuario){
+    /*public List<Reserva> getReservasConcretas(Reserva reserva,String usuario){
         try {
             return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario+"' AND estadoReserva NOT IN ('cancelado')" +
                             " AND fecha='"+reserva.getFecha()+"' AND idfranjahoraria="+reserva.getIdFranjaHoraria()+

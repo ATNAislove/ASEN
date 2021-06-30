@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Reserva {
     private int idReserva;
@@ -18,6 +19,7 @@ public class Reserva {
     private String estadoReserva;
     private String usuario;
     private int idFranjaHoraria;
+    private List<Integer> zonas;
     private int idZona;
 
     public Reserva() {
@@ -101,6 +103,14 @@ public class Reserva {
         this.idZona = idZona;
     }
 
+    public List<Integer> getZonas() {
+        return zonas;
+    }
+
+    public void setZonas(List<Integer> zonas) {
+        this.zonas = zonas;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
@@ -114,6 +124,7 @@ public class Reserva {
                 ", usuario='" + usuario + '\'' +
                 ", idFranjaHoraria=" + idFranjaHoraria +
                 ", idZona="+idZona+
+                ", zonas="+zonas.toString()+
                 '}';
     }
 }

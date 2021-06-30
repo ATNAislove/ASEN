@@ -61,14 +61,53 @@ public class ZonaDao {
             return new ArrayList<Zona>();
         }
     }
-    /* Obté totes les zones en un area. Torna una llista buida si no n'hi ha cap. */
-    public List<Zona> getZonasByArea(int idArea) {
+    //obtiene las zonas de un area
+    public List<Zona> getZonas(int idArea){
         try {
-            return jdbcTemplate.query("SELECT * FROM Zona WHERE idArea='"+idArea+"'", new ZonaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM Zona where idArea="+idArea, new ZonaRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Zona>();
         }
     }
+    /* Obté tots els zonas lliures un dia y a una franja horaria. Torna una llista buida si no n'hi ha cap. */
+    public List<Zona> getZonas(String fecha, int idFranjaHoraria, int idArea) {
+        try {
+            return jdbcTemplate.query("select * from zona where idArea="+idArea+
+                    " except select z.* from zona as z inner join ocupacion as o on z.idzona=o.idzona " +
+                    "inner join reserva as r  ON r.idReserva=o.idReserva " +
+                    "where r.fecha='"+fecha+"' and r.idFranjaHoraria="+idFranjaHoraria+" order by 2", new ZonaRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Zona>();
+        }
+    }
+
+
+
+    /* Obté totes les zones en un area. Torna una llista buida si no n'hi ha cap. */
+    public List<Zona> getZonasByArea(int idArea) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Zona WHERE idArea="+idArea+" order by 2", new ZonaRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Zona>();
+        }
+    }
+    //obtener el numero de personas de un area
+    public int getMaximoPersonasArea(int idArea){
+        try{
+            return jdbcTemplate.queryForObject("SELECT sum(aforomaximo) from zona where idArea="+idArea,Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+    //obtener el numero de personas de una zona
+    public int getMaximoPersonas(int idZona){
+        try{
+            return jdbcTemplate.queryForObject("SELECT aforomaximo from zona where idZona="+idZona,Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
     //Obtener el numero de zonas de un area
     public int numZonas(int idArea){
         try {

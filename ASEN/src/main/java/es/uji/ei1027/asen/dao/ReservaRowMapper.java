@@ -4,12 +4,16 @@ import es.uji.ei1027.asen.model.Ciudadano;
 import es.uji.ei1027.asen.model.Reserva;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public final class ReservaRowMapper implements RowMapper<Reserva> {
     public Reserva mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -23,7 +27,10 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
         reserva.setEstadoReserva(rs.getString("estadoReserva"));
         reserva.setUsuario(rs.getString("usuario"));
         reserva.setIdFranjaHoraria(rs.getInt("idFranjaHoraria"));
-        reserva.setIdZona(rs.getInt("idZona"));
+        /*Array array = rs.getArray("zonas");
+        List lista = new ArrayList<>();
+        Collections.addAll(lista, array);
+        reserva.setZonas(lista);*/
         return reserva;
     }
 }

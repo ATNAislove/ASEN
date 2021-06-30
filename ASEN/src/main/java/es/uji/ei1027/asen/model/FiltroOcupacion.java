@@ -2,7 +2,9 @@ package es.uji.ei1027.asen.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Array;
 import java.time.LocalDate;
+import java.util.List;
 
 public class FiltroOcupacion {
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
@@ -13,6 +15,7 @@ public class FiltroOcupacion {
     int idFranjaHoraria;
     int idZona;
     int idReserva;
+    List<Integer> zonas;
 
     public LocalDate getFecha() {
         return fecha;
@@ -54,5 +57,13 @@ public class FiltroOcupacion {
 
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
+    }
+
+    public List<Integer> getZonas() {
+        return zonas;
+    }
+
+    public void setZonas(List<Integer> zonas) {
+        this.zonas = zonas;
     }
 }
