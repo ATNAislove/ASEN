@@ -16,44 +16,44 @@
       th:object="${ciudadano}" method="post">
     <table>
         <tr>
-            <td><label>usuario*</label></td>
+            <td><label>Usuario*</label></td>
             <td><input class="form-control" type="text" th:field="*{usuario}" maxlength="15" required/></td>
         </tr>
         <tr>
-            <td><label>codigo ciudadano*</label></td>
+            <td><label>Codigo ciudadano*</label></td>
             <td><input class="form-control" type="text" th:field="*{codigoCiudadano}" maxlength="50" required/></td>
         </tr>
         <tr>
-            <td><label>pin*</label></td>
+            <td><label>Pin*</label></td>
             <td><input class="form-control" type="text" th:field="*{pin}" maxlength="15" required/></td>
         </tr>
         <tr>
-            <td><label>fecha Nacimiento*</label></td>
+            <td><label>Fecha Nacimiento*</label></td>
             <td><input class="form-control" type="date" th:field="*{fechaNacimiento}" required/></td>
             <td th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></td>
         </tr>
         <tr>
-            <td><label>nombre*</label></td>
+            <td><label>Nombre*</label></td>
             <td><input class="form-control" type="text" th:field="*{nombre}" maxlength="20" required/></td>
         </tr>
         <tr>
-            <td><label>apellidos*</label></td>
+            <td><label>Apellidos*</label></td>
             <td><input class="form-control" type="text" th:field="*{apellidos}" maxlength="50" required/></td>
         </tr>
         <tr>
-            <td><label>direccion*</label></td>
+            <td><label>Direccion*</label></td>
             <td><input class="form-control" type="text" th:field="*{direccion}" maxlength="20" required/></td>
         </tr>
         <tr>
-            <td><label>correoElectronico*</label></td>
+            <td><label>CorreoElectronico*</label></td>
             <td><input class="form-control" type="text" th:field="*{correoElectronico}" maxlength="30" required/></td>
         </tr>
         <tr>
-            <td><label>municipio*</label></td>
+            <td><label>Municipio*</label></td>
             <td><input class="form-control" type="text" th:field="*{municipio}" maxlength="30" required/></td>
         </tr>
         <tr>
-            <td><label>pais*</label></td>
+            <td><label>Pais*</label></td>
             <td><input class="form-control" type="text" th:field="*{pais}" maxlength="30" required/></td>
         </tr>
         <!--<tr>

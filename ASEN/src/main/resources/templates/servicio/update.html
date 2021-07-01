@@ -20,11 +20,12 @@
         </tr>
         <tr>
             <td><label>fecha Inicio</label></td>
-            <td><input class="form-control" type="date" th:field="*{fechaInicio}" /></td>
+            <td><input class="form-control" type="date" th:field="*{fechaInicio}"  th:min="${current_date}" /></td>
         </tr>
         <tr>
             <td><label>fecha Fin</label></td>
-            <td><input class="form-control" type="date" th:field="*{fechaFin}" /></td>
+            <td><input class="form-control" type="date" th:field="*{fechaFin}"  th:min="${current_date}" /></td>
+            <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}"></td>
         </tr>
         <tr>
             <td><label>Periodicidad</label></td>

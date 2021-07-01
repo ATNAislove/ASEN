@@ -11,54 +11,55 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-<h2>Nuevo servicio</h2>
-<form action="#" th:action="@{/servicio/add}"
-      th:object="${servicio}" method="post">
-    <table>
-        <tr>
-            <td><label>Fecha Inicio</label></td>
-            <td><input class="form-control" type="date" th:field="*{fechaInicio}" /></td>
-        </tr>
-        <tr>
-            <td><label>Fecha Fin</label></td>
-            <td><input class="form-control" type="date" th:field="*{fechaFin}" /></td>
-        </tr>
-        <tr>
-            <td><label>Periodicidad</label></td>
-            <td><input class="form-control" type="number" th:field="*{periodicidad}" /></td>
-        </tr>
-        <tr>
-            <td><label>Tipo De Temporada</label></td>
-            <td><select class="form-control" th:field="*{tipoTemporada}">
-                <option th:value="fijo">fijo</option>
-                <option th:value="temporal">temporal</option>
-            </select></td>
-        </tr>
-        <tr>
-        <tr>
-            <td><label>Tipo de Servicio</label></td>
-        <td><select class="form-control" th:field="*{idTipoServicio}">
-            <option th:each="tipoServicio: ${tiposServicio}" th:value="${tipoServicio.idTipoServicio}"
-                    th:text="${tipoServicio.nombre}">
-            </option>
-        </select></td>
-        </tr>
-        <tr>
-            <td><label>Area</label></td>
-            <td><select class="form-control" th:field="*{idArea}">
-                <option th:each="areaNatural: ${areasNaturales}" th:value="${areaNatural.idArea}"
-                        th:text="${areaNatural.nombreArea}">
-                </option>
-            </select></td>
-        </tr>
+    <h2>Nuevo servicio</h2>
+    <form action="#" th:action="@{/servicio/add}"
+          th:object="${servicio}" method="post">
+        <table>
+            <tr>
+                <td><label>Fecha Inicio</label></td>
+                <td><input class="form-control" type="date" th:field="*{fechaInicio}" th:min="${current_date}" /></td>
+            </tr>
+            <tr>
+                <td><label>Fecha Fin</label></td>
+                <td><input class="form-control" type="date" th:field="*{fechaFin}" th:min="${current_date}" /></td>
+                <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}"></td>
+            </tr>
+            <tr>
+                <td><label>Periodicidad</label></td>
+                <td><input class="form-control" type="number" min="1" th:field="*{periodicidad}" /></td>
+            </tr>
+            <tr>
+                <td><label>Tipo De Temporada</label></td>
+                <td><select class="form-control" th:field="*{tipoTemporada}">
+                    <option th:value="fijo">fijo</option>
+                    <option th:value="temporal">temporal</option>
+                </select></td>
+            </tr>
+            <tr>
+            <tr>
+                <td><label>Tipo de Servicio</label></td>
+                <td><select class="form-control" th:field="*{idTipoServicio}">
+                    <option th:each="tipoServicio: ${tiposServicio}" th:value="${tipoServicio.idTipoServicio}"
+                            th:text="${tipoServicio.nombre}">
+                    </option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><label>Area</label></td>
+                <td><select class="form-control" th:field="*{idArea}">
+                    <option th:each="areaNatural: ${areasNaturales}" th:value="${areaNatural.idArea}"
+                            th:text="${areaNatural.nombreArea}">
+                    </option>
+                </select></td>
+            </tr>
+            <br>
+            <tr>
+                <a>* La periodicidad es el número de días para el cual tarda el servicio a volverse a activar desde la fechaFin establecida</a>
+                <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear servicio" /></td>
+            </tr>
+        </table>
         <br>
-        <tr>
-            <a>* La periodicidad es el número de días para el cual tarda el servicio a volverse a activar desde la fechaFin establecida</a>
-            <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear servicio" /></td>
-        </tr>
-    </table>
-    <br>
-    <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
-</form></div>
+        <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
+    </form></div>
 </body>
 </html>

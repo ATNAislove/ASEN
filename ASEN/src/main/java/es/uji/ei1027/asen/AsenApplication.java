@@ -12,7 +12,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 
 @SpringBootApplication
 public class AsenApplication{
-//hola
     private static final Logger log = Logger.getLogger(AsenApplication .class.getName());
 
     public static void main(String[] args) {

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/servicio")
@@ -67,11 +69,13 @@ public class ServicioController {
 
     @RequestMapping(value="/add")
     public String addServicio(Model model, HttpSession session) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         UserDetails user = (UserDetails) session.getAttribute("user");
         int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
         model.addAttribute("servicio", new Servicio());
         model.addAttribute("tiposServicio",getTiposServicioService.getTiposServicioService());
         model.addAttribute("areasNaturales",getAreasNaturalesService.getAreasPueblo(municipio));
+        model.addAttribute("current_date", LocalDate.now().format(formatter));
         return "servicio/add";
     }
 
@@ -79,21 +83,28 @@ public class ServicioController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("servicio") Servicio servicio,
                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        ServicioValidator servicioValidator = new ServicioValidator();
+        servicioValidator.validate(servicio,bindingResult);
+        if (bindingResult.hasErrors()) {
             return "servicio/add";
+        }
         servicioDao.addServicio(servicio);
         return "redirect:list";
     }
 
     @RequestMapping(value="/update/{idServicio}", method = RequestMethod.GET)
     public String editServicio(Model model, @PathVariable int idServicio) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         model.addAttribute("servicio", servicioDao.getServicio(idServicio));
+        model.addAttribute("current_date", LocalDate.now().format(formatter));
         return "servicio/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("servicio") Servicio servicio,
                                       BindingResult bindingResult) {
+        ServicioValidator servicioValidator = new ServicioValidator();
+        servicioValidator.validate(servicio,bindingResult);
         if (bindingResult.hasErrors())
             return "servicio/update";
         servicioDao.updateServicio(servicio);
