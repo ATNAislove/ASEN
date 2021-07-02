@@ -20,7 +20,6 @@ public class Reserva {
     private String usuario;
     private int idFranjaHoraria;
     private List<Integer> zonas;
-    private int idZona;
 
     public Reserva() {
     }
@@ -61,7 +60,6 @@ public class Reserva {
         return idFranjaHoraria;
     }
 
-    public int getIdZona() { return idZona; }
 
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
@@ -99,10 +97,6 @@ public class Reserva {
         this.idFranjaHoraria = idFranjaHoraria;
     }
 
-    public void setIdZona(int idZona) {
-        this.idZona = idZona;
-    }
-
     public List<Integer> getZonas() {
         return zonas;
     }
@@ -123,7 +117,6 @@ public class Reserva {
                 ", estadoReserva='" + estadoReserva + '\'' +
                 ", usuario='" + usuario + '\'' +
                 ", idFranjaHoraria=" + idFranjaHoraria +
-                ", idZona="+idZona+
                 ", zonas="+zonas.toString()+
                 '}';
     }

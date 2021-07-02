@@ -5,6 +5,7 @@ import es.uji.ei1027.asen.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
     private ReservaDao reservaDao;
     @Autowired
     private FranjaHorariaDao franjaHorariaDao;
+    @Autowired
+    private OcupacionDao ocupacionDao;
 
     @Override
     public String getMunicipiofromAreaNatural(int idArea){
@@ -41,35 +44,42 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
     }
     @Override
     public int getNumZonasLibresByFecha(String fecha, int idArea,int idFranjaHoraria){
-       /* int zonasOcupadas;
+        int zonasOcupadas;
         if(idFranjaHoraria<0){
-            zonasOcupadas = reservaDao.getReservasByFecha(fecha,idArea).size();
+            List<Ocupacion> ocupaciones = new ArrayList<>();
+            List<Reserva> reservas = reservaDao.getReservasByFecha(fecha,idArea);
+            for(Reserva r : reservas){
+                ocupaciones.addAll(ocupacionDao.getOcupaciones(r.getIdReserva()));
+            }
+            zonasOcupadas = ocupaciones.size();
             return (zonaDao.numZonas(idArea)*numFranjasHorariasCiudadano())-zonasOcupadas;
-        }
-        else{
+        }else{
+            List<Ocupacion> ocupaciones = new ArrayList<>();
+
             FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
-            zonasOcupadas = reservaDao.getReservasByFecha(fecha,idArea,franja.getHoraInicio(),franja.getHoraFin()).size();
+            List<Reserva> reservas =  reservaDao.getReservasByFecha(fecha,idArea,franja.getHoraInicio(),franja.getHoraFin());
+            for(Reserva r : reservas){
+                ocupaciones.addAll(ocupacionDao.getOcupaciones(r.getIdReserva()));
+            }
+            zonasOcupadas = ocupaciones.size();
             return (zonaDao.numZonas(idArea)*franjaHorariaDao.getFranjasReserva(franja.getHoraInicio(),franja.getHoraFin()).size())-zonasOcupadas;
         }
-    */
-        return 0;
     }
     //obtiene el numero de personas que han ocupado un area una fecha determinada
     @Override
     public int ocupacionDiaArea(String fecha, int idArea, int idFranjaHoraria){
         List<Reserva> reservas;
-        /*if(idFranjaHoraria<0){
+        if(idFranjaHoraria<0){
              reservas = reservaDao.getReservasByFecha(fecha, idArea);
         }else{
             FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
             reservas = reservaDao.getReservasByFecha(fecha,idArea,franja.getHoraInicio(),franja.getHoraFin());
         }
 
-        */
         int ocupacion = 0;
-        /*for(Reserva r : reservas){
+        for(Reserva r : reservas){
             ocupacion += r.getNumeroPersonas();
-        }*/
+        }
         return ocupacion;
     }
     @Override
@@ -80,16 +90,19 @@ public class MostrarOcupacionSvc implements MostrarOcupacionService{
     }
     @Override
     public int capacidadTotalArea(int idArea){
-        return areaNaturalDao.getCapacidadTotal(idArea);
+        Integer resultado = areaNaturalDao.getCapacidadTotal(idArea);
+        if(resultado==null)
+            return 0;
+        return resultado;
     }
     @Override
     public int capacidadTotalAreaDiaria(int idArea){
-        return areaNaturalDao.getCapacidadTotal(idArea)*numFranjasHorariasCiudadano();
+        return capacidadTotalArea(idArea)*numFranjasHorariasCiudadano();
     }
     public int capacidadTotalAreaFranja(int idArea, int idFranjaHoraria){
         if(idFranjaHoraria<0) return capacidadTotalAreaDiaria(idArea);
         FranjaHoraria franja = franjaHorariaDao.getFranjaHoraria(idFranjaHoraria);
-        return areaNaturalDao.getCapacidadTotal(idArea)*franjaHorariaDao.getFranjasReserva(franja.getHoraInicio(),franja.getHoraFin()).size();
+        return capacidadTotalArea(idArea)*franjaHorariaDao.getFranjasReserva(franja.getHoraInicio(),franja.getHoraFin()).size();
     }
     public int numFranjasHorariasCiudadano(){
         return franjaHorariaDao.getFranjasReserva().size();

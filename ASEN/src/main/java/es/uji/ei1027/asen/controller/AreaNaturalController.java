@@ -72,6 +72,7 @@ public class AreaNaturalController {
             } else
                 model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
         }
+        session.removeAttribute("filtro");
         return "areaNatural/list";
     }
     /*@RequestMapping("/listNoRegister")
@@ -142,7 +143,8 @@ public class AreaNaturalController {
         return "areaNatural/consultarOcupacion";
     }
     @RequestMapping(value="/consultarOcupacion/{idArea}/{fecha}/{idFranjaHoraria}")
-    public String consultarOcupacionFiltrado(Model model, @PathVariable int idArea, @PathVariable String fecha,@PathVariable int idFranjaHoraria) {
+    public String consultarOcupacionFiltrado(Model model, @PathVariable int idArea, @PathVariable String fecha,@PathVariable int idFranjaHoraria,
+                                             HttpSession session) {
         model.addAttribute("areaNatural", areaNaturalDao.getAreaNatural(idArea));
         model.addAttribute("municipio", mostrarOcupacionService.getMunicipiofromAreaNatural(idArea));
         model.addAttribute("mostrarOcupacionSvc", mostrarOcupacionService);
@@ -151,13 +153,18 @@ public class AreaNaturalController {
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         model.addAttribute("dia",fecha);
         model.addAttribute("franja",idFranjaHoraria);
-        FiltroOcupacion filtro = new FiltroOcupacion();
+        FiltroOcupacion filtro;
+        if(session.getAttribute("filtro")!=null)
+            filtro = (FiltroOcupacion) session.getAttribute("filtro");
+        else
+            filtro = new FiltroOcupacion();
         filtro.setIdArea(idArea);
         model.addAttribute("filtro",filtro);
         return "areaNatural/consultarOcupacion";
     }
     @RequestMapping(value="/consultarOcupacion", method = RequestMethod.POST)
-    public String consultarOcupacionPOST(@ModelAttribute FiltroOcupacion filtro) {
+    public String consultarOcupacionPOST(@ModelAttribute FiltroOcupacion filtro, HttpSession session) {
+        session.setAttribute("filtro",filtro);
         return "redirect:consultarOcupacion/"+filtro.getIdArea()+"/"+filtro.getFecha()+"/"+filtro.getIdFranjaHoraria();
     }
 

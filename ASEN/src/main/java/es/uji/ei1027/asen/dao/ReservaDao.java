@@ -128,12 +128,13 @@ public class ReservaDao {
             return new ArrayList<Reserva>();
         }
     }
-
+    */
     //Obteener las reservas en una fecha determinada
     public List<Reserva> getReservasByFecha(String fecha, int idArea){
         try{
-            return jdbcTemplate.query("SELECT r.* FROM reserva AS r " +
-                    "INNER JOIN zona as z ON r.idZona=z.idZona" +
+            return jdbcTemplate.query("SELECT DISTINCT r.* FROM reserva AS r " +
+                    "INNER JOIN ocupacion as o ON r.idReserva=o.idReserva "+
+                    "INNER JOIN zona as z ON o.idZona=z.idZona" +
                     " WHERE r.fecha='" + fecha+ "' AND z.idArea="+idArea, new ReservaRowMapper());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<Reserva>();
@@ -142,8 +143,9 @@ public class ReservaDao {
     //Obteener las reservas en una fecha determinada y una franjahoraria determinada
     public List<Reserva> getReservasByFecha(String fecha, int idArea, LocalTime horaInicio,LocalTime horaFin){
         try{
-            return jdbcTemplate.query("SELECT r.* FROM reserva AS r " +
-                    "INNER JOIN zona as z ON r.idZona=z.idZona INNER JOIN franjahoraria as f ON r.idfranjahoraria=f.idfranjahoraria" +
+            return jdbcTemplate.query("SELECT DISTINCT r.* FROM reserva AS r " +
+                    "INNER JOIN ocupacion as o ON r.idReserva=o.idReserva "+
+                    "INNER JOIN zona as z ON o.idZona=z.idZona INNER JOIN franjahoraria as f ON r.idfranjahoraria=f.idfranjahoraria" +
                     " WHERE r.fecha='" + fecha+ "' AND z.idArea="+idArea+" AND f.horainicio BETWEEN '"+horaInicio+"' AND '"+horaFin+
                     "' AND f.horafin BETWEEN '"+horaInicio+ "' AND '"+horaFin+"'", new ReservaRowMapper());
         }catch(EmptyResultDataAccessException e){

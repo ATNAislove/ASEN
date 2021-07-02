@@ -65,7 +65,7 @@ public class AreaNaturalDao {
         }
     }
     //obtener la capacidad total de personas de un area
-    public int getCapacidadTotal(int idArea){
+    public Integer getCapacidadTotal(int idArea){
         try {
             return jdbcTemplate.queryForObject("SELECT sum(z.aforoMaximo) FROM areaNatural AS a" +
                     " INNER JOIN zona AS z ON z.idArea=a.idArea WHERE a.idArea=" + idArea, Integer.class);

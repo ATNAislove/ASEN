@@ -76,7 +76,7 @@
         <h5 th:text="'Datos de ocupación del dia '+${dia}"></h5>
         <table>
             <tr><td>Ocupación: <span th:text="${mostrarOcupacionSvc.ocupacionDiaArea(dia,areaNatural.idArea, franja)}"></span></td></tr>
-            <tr><td>Número de reservas/zonas libres: <span th:text="${mostrarOcupacionSvc.getNumZonasLibresByFecha(dia,areaNatural.idArea,franja)}"></span></td></tr>
+            <tr><td>Número de zonas libres: <span th:text="${mostrarOcupacionSvc.getNumZonasLibresByFecha(dia,areaNatural.idArea,franja)}"></span></td></tr>
             <tr><td>Capacidad total al mismo tiempo: <span th:text="${mostrarOcupacionSvc.capacidadTotalArea(areaNatural.idArea)}"></span></td></tr>
             <tr><td>Capacidad total en ese periodo de tiempo: <span th:text="${mostrarOcupacionSvc.capacidadTotalAreaFranja(areaNatural.idArea, franja)}"></span></td></tr>
             <tr><td>Porcentaje de ocupación: <span th:text="${mostrarOcupacionSvc.getPorcentajeOcupacion(dia,areaNatural.idArea,franja)}"></span>%</td></tr>
