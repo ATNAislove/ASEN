@@ -26,7 +26,8 @@ public class CiudadanoDao implements UserDao {
     /* Afegeix el Ciudadano a la base de dades */
 
     public void addCiudadano(Ciudadano ciudadano) {
-        jdbcTemplate.update("INSERT INTO ciudadano VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",ciudadano.getCodigoCiudadano(),
+        jdbcTemplate.update("INSERT INTO ciudadano (usuario, pin, fechanacimiento,nombre,apellidos,direccion," +
+                        "correoelectronico, municipio, pais,fecharegistro) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 ciudadano.getUsuario(),ciudadano.getPin(),
                 ciudadano.getFechaNacimiento(),ciudadano.getNombre(),ciudadano.getApellidos(),
                 ciudadano.getDireccion(),ciudadano.getCorreoElectronico(),ciudadano.getMunicipio()
@@ -45,9 +46,9 @@ public class CiudadanoDao implements UserDao {
     /* Actualitza els atributs del ciudadano
        (excepte el usuario, que és la clau primària) */
     public void updateCiudadano(Ciudadano ciudadano) {
-        jdbcTemplate.update("UPDATE ciudadano SET codigociudadano=?, pin=?, fechanacimiento=?, nombre=?, " +
+        jdbcTemplate.update("UPDATE ciudadano SET  pin=?, fechanacimiento=?, nombre=?, " +
                         "apellidos=?, direccion=?, correoelectronico=?, municipio=?, pais=?, fecharegistro=?," +
-                        "fechabaja=? WHERE usuario=?", ciudadano.getCodigoCiudadano(),ciudadano.getPin(),
+                        "fechabaja=? WHERE usuario=?", ciudadano.getPin(),
                 ciudadano.getFechaNacimiento(),ciudadano.getNombre(), ciudadano.getApellidos(),
                 ciudadano.getDireccion(),ciudadano.getCorreoElectronico(),ciudadano.getMunicipio(),ciudadano.getPais(),
                 ciudadano.getFechaRegistro(),ciudadano.getFechaBaja(), ciudadano.getUsuario());
