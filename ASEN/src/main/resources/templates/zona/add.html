@@ -17,15 +17,15 @@
     <table>
         <tr>
             <td><label>IdentificadorZona</label></td>
-            <td><input class="form-control"  type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" /></td>
+            <td><input class="form-control"  type="text" th:field="*{idCharNumero}" placeholder="ejemplo: B6" required/></td>
         </tr>
         <tr>
             <td><label>Nombre de la zona</label></td>
-            <td><input class="form-control"  type="text" th:field="*{nombreZona}" /></td>
+            <td><input class="form-control"  type="text" th:field="*{nombreZona}" required/></td>
         </tr>
         <tr>
             <td><label>Aforo máximo</label></td>
-            <td><input class="form-control"  type="number" th:field="*{aforoMaximo}" /></td>
+            <td><input class="form-control" min="1"  type="number" th:field="*{aforoMaximo}" /></td>
         </tr>
         <tr>
             <td><label>Tipo de terreno</label></td>

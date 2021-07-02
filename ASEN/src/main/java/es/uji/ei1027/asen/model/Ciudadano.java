@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Ciudadano {
 
     private String usuario;
-    private String codigoCiudadano;
+    private int codigoCiudadano;
     private String pin;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate fechaNacimiento;
@@ -34,11 +34,11 @@ public class Ciudadano {
         this.usuario = usuario;
     }
 
-    public String getCodigoCiudadano() {
+    public int getCodigoCiudadano() {
         return codigoCiudadano;
     }
 
-    public void setCodigoCiudadano(String codigoCiudadano) {
+    public void setCodigoCiudadano(int codigoCiudadano) {
         this.codigoCiudadano = codigoCiudadano;
     }
 

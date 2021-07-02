@@ -11,8 +11,8 @@ import java.time.LocalDate;
 public final class CiudadanoRowMapper implements RowMapper<Ciudadano> {
     public Ciudadano mapRow(ResultSet rs, int rowNum) throws SQLException {
         Ciudadano ciudadano = new Ciudadano();
+        ciudadano.setCodigoCiudadano(rs.getInt("codigoCiudadano"));
         ciudadano.setUsuario(rs.getString("usuario"));
-        ciudadano.setCodigoCiudadano(rs.getString("codigoCiudadano"));
         ciudadano.setPin(rs.getString("pin"));
         ciudadano.setFechaNacimiento(rs.getObject("fechaNacimiento",LocalDate.class));
         ciudadano.setNombre(rs.getString("nombre"));
