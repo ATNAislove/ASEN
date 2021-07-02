@@ -182,12 +182,10 @@ public class ReservaController{
         if(filtro.getZonas()!= null && filtro.getZonas().size()>0){
             reserva.setZonas(filtro.getZonas());
 
-            System.out.println(filtro.getZonas().toString());
             model.addAttribute("maxpersonas",reservaService.maxPersonas(filtro.getZonas()));
         }else{
             session.setAttribute("zonasOriginales",reserva.getZonas());
             filtro.setZonas(reserva.getZonas());
-            System.out.println("otro: "+filtro.getZonas().toString());
             model.addAttribute("maxpersonas",reservaService.maxPersonas(reserva.getZonas()));
         }
 

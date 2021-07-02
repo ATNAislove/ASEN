@@ -80,7 +80,6 @@ public class ReservasUsuarioSvc implements ReservaService {
         int resultado = 0;
         for(int i : zonas)
             resultado += zonaDao.getMaximoPersonas(i);
-        System.out.println(resultado);
         return resultado;
     }
 
