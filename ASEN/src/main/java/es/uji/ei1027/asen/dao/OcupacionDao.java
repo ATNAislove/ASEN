@@ -32,11 +32,14 @@ public class OcupacionDao {
     }
     /* Esborra la ocupacio de la base de dades */
     public void deleteOcupacio(int idReserva,int idZona) {
-        jdbcTemplate.update("DELETE FROM ciudadano WHERE idReserva=?, idZona=?",idReserva,idZona);
+        jdbcTemplate.update("DELETE FROM ocupacion WHERE idReserva=?, idZona=?",idReserva,idZona);
     }
-
+    /* Esborra la ocupacio de la base de dades */
+    public void deleteOcupacio(int idReserva) {
+        jdbcTemplate.update("DELETE FROM ocupacion WHERE idReserva=?",idReserva);
+    }
     public void deleteOcupacio(Ocupacion ocupacion) {
-        jdbcTemplate.update("DELETE FROM ciudadano WHERE idReserva=?, idZona=?",ocupacion.getIdReserva(),ocupacion.getIdZona());
+        jdbcTemplate.update("DELETE FROM ocupacion WHERE idReserva=?, idZona=?",ocupacion.getIdReserva(),ocupacion.getIdZona());
     }
 
     //No hay que actualizar la ocupacion.
@@ -45,7 +48,7 @@ public class OcupacionDao {
 
     public Ocupacion getOcupacio(int idReserva,String idZona) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Prova WHERE idReserva =? and idZona=? ",
+            return jdbcTemplate.queryForObject("SELECT * FROM ocupacion WHERE idReserva =? and idZona=? ",
                     new OcupacionRowMapper(),idReserva,idZona);
         }
         catch(EmptyResultDataAccessException e) {

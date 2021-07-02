@@ -38,7 +38,7 @@
                 <input class="form-control" type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"/>
                 <input type="hidden" th:field="*{fecha}" th:value="${filtro.fecha}"/>
                 <input type="hidden" th:field="*{idFranjaHoraria}" th:value="${filtro.idFranjaHoraria}"/>
-                <td><label>Elige zona(s)</label></td>
+                <td><label>Elige zona(s)*</label></td>
                 <td th:if="*{fecha==null}"><select th:onchange="this.form.submit()" class="form-control" th:field="*{zonas}" multiple>
                     <option th:each="zona: ${reservaService.getZonas(filtro.idArea)}" th:value="${zona.idZona}"
                             th:text="${zona.idCharNumero}"></option>
@@ -92,6 +92,7 @@
 
             </tr>
             <tr>
+                <a>* Para seleccionar más de una zona, presiona la tecla control</a>
                 <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear Reserva" /></td>
             </tr>
         </table>

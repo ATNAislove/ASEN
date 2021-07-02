@@ -12,14 +12,21 @@
 <body>
 <div class="container" layout:fragment="content">
 <h2>Modificar reserva</h2>
-    <form action="#" th:action="@{/reserva/fechaUpdate}" th:object="${filtro}">
+    <form action="#" th:action="@{/reserva/zonaUpdate}" th:object="${filtro}">
         <table>
             <tr>
+                <input class="form-control" type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"/>
                 <input class="form-control" type="hidden" th:field="*{idReserva}" th:value="${filtro.idReserva}"/>
-                <td><label>fecha</label></td>
-                <td><input class="form-control" type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()" required/></td>
-                <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>
+                <td><label>zona(s)</label></td>
+                <!--<td><input class="form-control" type="date" th:field="*{fecha}" th:min="${current_date}"  th:onchange="this.form.submit()" required/></td>
+                <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>-->
+                <td><select th:onchange="this.form.submit()" class="form-control" th:field="*{zonas}" multiple>
+                    <option th:each="idZona: ${session.zonasOriginales}" th:value="${idZona}" th:text="${reservaService.recuperarNombreZona(idZona)}"></option>
+                    <option th:each="zona: ${reservaService.getZonas(reserva.fecha, reserva.idFranjaHoraria,filtro.idArea)}" th:value="${zona.idZona}"
+                            th:text="${zona.idCharNumero}"></option>
+                </select></td>
             </tr>
+
         </table>
     </form>
     <form action="#" th:action="@{/reserva/update}"
@@ -37,7 +44,7 @@
             <tr><td><input type="hidden" th:field="*{fecha}"/></td></tr>
             <tr>
                 <td><label>Numero Personas</label></td>
-                <td><input class="form-control" type="number" th:field="*{numeroPersonas}" min="1" th:max="${maxPersonas}" /></td>
+                <td><input class="form-control" type="number" th:field="*{numeroPersonas}" min="1" th:max="${maxpersonas}" /></td>
             </tr>
             <tr>
                 <td><label>hora Salida</label></td>
@@ -60,27 +67,34 @@
             </tr>
             <tr>
                 <td><label>codigoQR</label></td>
-                <td><img style="max-width:100px;max-height:100px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
+                <td><img style="max-width:120px;max-height:120px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
             </tr>
             <tr>
                 <td><label>Franja Horaria</label></td>
-                <td><select class="form-control" th:field="*{idFranjaHoraria}" required>
+                <td><input class="form-control" type="text" th:field="*{idFranjaHoraria}" readonly />
+                    <!--<select class="form-control" th:field="*{idFranjaHoraria}" required>
                     <option th:if="${franjaActual!=null}" th:value="${franjaActual}" th:text="${franjaHorariaService.getHorasFranja(franjaActual)}"></option>
                     <option th:each="franja: ${franjaHorariaService.getFranjaReservaLibreReservable(dia,filtro.idZona)}" th:value="${franja.IdFranjaHoraria}"
                             th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
                     </option>
-                </select>
+                </select>-->
                 </td>
 
             </tr>
             <tr>
                 <td><label>Área natural</label></td>
-                <td><input class="form-control" type="text" th:value="${reservaService.recuperarNombreArea(reserva.idZona)}" readonly /></td>
+                <td><input class="form-control" type="text" th:value="${reservaService.recuperarNombreArea(reserva.idReserva)}" readonly /></td>
             </tr>
             <tr>
+                <td><select class="form-control" th:field="*{zonas}" multiple style="visibility:hidden">
+                    <option th:each="zona: ${reservaService.getZonas(filtro.idArea)}" th:value="${zona.idZona}"
+                            th:text="${zona.idCharNumero}"></option>
+                </select></td>
+            </tr>
+            <!--<tr>
                 <td><label>Zona</label></td>
                 <td><input class="form-control" type="text" th:value="${reservaService.recuperarIdCharNum(reserva.idZona)}" readonly /></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva" /></td>
             </tr>

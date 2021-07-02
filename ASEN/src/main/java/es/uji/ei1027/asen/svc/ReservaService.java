@@ -19,5 +19,7 @@ public interface ReservaService {
     public List<Zona> getZonas();
     public List<Zona> getZonas(int idArea);
     public List<Zona> getZonas(LocalDate fecha, int idFranjaHoraria, int idArea);
-
+    public void borrarOcupaciones(int idReserva);
+    public List<Integer> listaZonas(int idReserva);
+    public int recuperarArea(int idReserva);
 }

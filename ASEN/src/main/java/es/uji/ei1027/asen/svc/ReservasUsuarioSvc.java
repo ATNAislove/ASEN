@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -30,7 +31,7 @@ public class ReservasUsuarioSvc implements ReservaService {
 
     @Override
     public String recuperarNombreZona(int idZona){
-        return zonaDao.getZona(idZona).getNombreZona();
+        return zonaDao.getZona(idZona).getIdCharNumero();
     }
     @Override
     public String recuperarZonas(int idReserva){
@@ -43,6 +44,14 @@ public class ReservasUsuarioSvc implements ReservaService {
             res = res.substring(0,res.length()-2);
         return res;
     }
+    public List<Integer> listaZonas(int idReserva){
+        List<Ocupacion> ocupaciones = ocupacionDao.getOcupaciones(idReserva);
+        List<Integer> lista = new ArrayList<>();
+        for(Ocupacion o : ocupaciones){
+            lista.add(o.getIdZona());
+        }
+        return lista;
+    }
     @Override
     public String recuperarNombreArea(int idReserva){
         List<Ocupacion> ocupaciones = ocupacionDao.getOcupaciones(idReserva);
@@ -50,6 +59,14 @@ public class ReservasUsuarioSvc implements ReservaService {
             return areaNaturalDao.getAreaNatural(zonaDao.getZona(ocupaciones.get(0).getIdZona()).getIdArea()).getNombreArea();
         }
         return "";
+    }
+    @Override
+    public int recuperarArea(int idReserva){
+        List<Ocupacion> ocupaciones = ocupacionDao.getOcupaciones(idReserva);
+        if(ocupaciones.size()>0){
+            return zonaDao.getZona(ocupaciones.get(0).getIdZona()).getIdArea();
+        }
+        return -1;
     }
     public boolean existeReserva(Reserva reserva){
        /* if(reservaDao.existeReserva(reserva).size()>0)
@@ -63,12 +80,14 @@ public class ReservasUsuarioSvc implements ReservaService {
         int resultado = 0;
         for(int i : zonas)
             resultado += zonaDao.getMaximoPersonas(i);
+        System.out.println(resultado);
         return resultado;
     }
 
     public void insertarOcupacion(int idReserva, int idZona){
         ocupacionDao.addOcupacio(idReserva,idZona);
     }
+    public void borrarOcupaciones(int idReserva){ocupacionDao.deleteOcupacio(idReserva);}
     @Autowired
     public List<Zona> getZonas(){
         return zonaDao.getZonas();

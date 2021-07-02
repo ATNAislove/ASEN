@@ -1,14 +1,9 @@
 package es.uji.ei1027.asen.controller;
 
 import com.google.zxing.WriterException;
-import es.uji.ei1027.asen.dao.CiudadanoDao;
 import es.uji.ei1027.asen.dao.ReservaDao;
-import es.uji.ei1027.asen.model.Ciudadano;
-import es.uji.ei1027.asen.model.FiltroOcupacion;
-import es.uji.ei1027.asen.model.Reserva;
-import es.uji.ei1027.asen.model.UserDetails;
+import es.uji.ei1027.asen.model.*;
 import es.uji.ei1027.asen.svc.GeneradorQRService;
-import es.uji.ei1027.asen.svc.GeneradorQRSvc;
 import es.uji.ei1027.asen.svc.GetFranjasHorariasService;
 import es.uji.ei1027.asen.svc.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +23,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import static java.lang.Integer.parseInt;
 
 @Controller
 @RequestMapping("/reserva")
@@ -65,6 +58,7 @@ public class ReservaController{
         }else{
             model.addAttribute("reservas", reservaDao.getReservas());
         }
+        session.removeAttribute("filtro");
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         model.addAttribute("reservaService", reservaService);
         return "reserva/list";
@@ -139,7 +133,7 @@ public class ReservaController{
                 throw new AsenApplicationException(
                         "Ya existe una reserva para esa hora en esa zona ", "Reserva repetida","danger");
             }*/
-            String datos = "zona="+reserva.getIdZona()+"; fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria();
+            String datos = "fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria()+"; zonas="+reserva.getZonas().toString();
             reserva.setCodigoQR(generadorQRService.crearQR(datos,100,100));
             int idReserva = reservaDao.addReserva(reserva);
             if(idReserva>=0) {
@@ -166,25 +160,46 @@ public class ReservaController{
         return "redirect:list";
     }
 
-    /*@RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
-    public String editReserva(Model model, @PathVariable int idReserva) {
+    @RequestMapping(value = "/update/{idReserva}", method = RequestMethod.GET)
+    public String editReserva(Model model, @PathVariable int idReserva,HttpSession session) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Reserva reserva = reservaDao.getReserva(idReserva);
-        model.addAttribute("reserva", reserva);
-        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        reserva.setZonas(reservaService.listaZonas(reserva.getIdReserva()));
+        //model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         model.addAttribute("reservaService", reservaService);
-        FiltroOcupacion filtro = new FiltroOcupacion();
-        filtro.setIdReserva(idReserva);
-        filtro.setIdZona(reserva.getIdZona());
+        FiltroOcupacion filtro;
 
-        filtro.setFecha(reserva.getFecha());
+        if(session.getAttribute("filtro")!=null){
+            filtro = (FiltroOcupacion) session.getAttribute("filtro");
+
+        }else{
+            filtro = new FiltroOcupacion();
+            filtro.setIdReserva(idReserva);
+            filtro.setIdArea(reservaService.recuperarArea(idReserva));
+            filtro.setIdFranjaHoraria(reserva.getIdFranjaHoraria());
+
+        }
+        if(filtro.getZonas()!= null && filtro.getZonas().size()>0){
+            reserva.setZonas(filtro.getZonas());
+
+            System.out.println(filtro.getZonas().toString());
+            model.addAttribute("maxpersonas",reservaService.maxPersonas(filtro.getZonas()));
+        }else{
+            session.setAttribute("zonasOriginales",reserva.getZonas());
+            filtro.setZonas(reserva.getZonas());
+            System.out.println("otro: "+filtro.getZonas().toString());
+            model.addAttribute("maxpersonas",reservaService.maxPersonas(reserva.getZonas()));
+        }
+
+
+        //filtro.setFecha(reserva.getFecha());
 
         model.addAttribute("filtro",filtro);
         model.addAttribute("current_date", LocalDate.now().format(formatter));
-        model.addAttribute("maxPersonas", reservaService.maxPersonas(reserva.getIdZona()));
+        model.addAttribute("reserva", reserva);
         return "reserva/update";
-    }*/
-    @RequestMapping(value = "/update/{idReserva}/{fecha}", method = RequestMethod.GET)
+    }
+    /*@RequestMapping(value = "/update/{idReserva}/{fecha}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int idReserva,@PathVariable String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Reserva reserva = reservaDao.getReserva(idReserva);
@@ -203,7 +218,7 @@ public class ReservaController{
         model.addAttribute("dia",fecha);
         model.addAttribute("current_date", LocalDate.now().format(formatter));
         return "reserva/update";
-    }
+    }*/
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("reserva") Reserva reserva,
@@ -212,7 +227,7 @@ public class ReservaController{
             return "reserva/update";
         UserDetails user = (UserDetails) session.getAttribute("user");
         try{
-            String datos = "zona="+reserva.getIdZona()+"; fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria();
+            String datos = "fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria()+"; zonas="+reserva.getZonas().toString();
             reserva.setCodigoQR(generadorQRService.crearQR(datos,100,100));
         }catch(WriterException e){
             throw new AsenApplicationException("Error al crear al QR", "errorfecha","danger");
@@ -223,6 +238,13 @@ public class ReservaController{
             reservaDao.updateReserva(reserva);
         else
             reservaDao.updateReservaEstado(reserva);
+        if(reserva.getZonas().size()>0) {
+            reservaService.borrarOcupaciones(reserva.getIdReserva());
+            for(int zona : reserva.getZonas()){
+                reservaService.insertarOcupacion(reserva.getIdReserva(),zona);
+            }
+        }
+        session.removeAttribute("filtro");
         return "redirect:list";
     }
     @RequestMapping(value="/cancel/{idReserva}")
@@ -246,9 +268,11 @@ public class ReservaController{
         session.setAttribute("filtro",filtro);
         return "redirect:add/"+filtro.getIdArea()+"/"+filtro.getFecha();
     }
-    @RequestMapping(value="/fechaUpdate", method = { RequestMethod.GET, RequestMethod.POST })
-    public String filtrarFechaReservaUpdate(@ModelAttribute FiltroOcupacion filtro){
-        return "redirect:update/"+filtro.getIdReserva()+"/"+filtro.getFecha();
+    @RequestMapping(value="/zonaUpdate", method = { RequestMethod.GET, RequestMethod.POST })
+    public String filtrarFechaReservaUpdate(@ModelAttribute FiltroOcupacion filtro, HttpSession session){
+        //return "redirect:update/"+filtro.getIdReserva()+"/"+filtro.getFecha();
+        session.setAttribute("filtro", filtro);
+        return "redirect:update/"+filtro.getIdReserva();
     }
     @RequestMapping(value="/zonas", method = { RequestMethod.GET, RequestMethod.POST })
     public String filtrarZonas(@ModelAttribute FiltroOcupacion filtro, HttpSession session){
