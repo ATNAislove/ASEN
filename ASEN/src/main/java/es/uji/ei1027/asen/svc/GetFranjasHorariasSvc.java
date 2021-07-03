@@ -78,6 +78,8 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
     }
     @Override
     public List<FranjaHoraria> getFranjasAccesible(int idArea, LocalDate fechaInicio){
+        if(fechaInicio==null)
+            return new ArrayList<>();
         List<FranjaHoraria> franjasServicio = getFranjasServicio();
         List<FranjaHoraria> franjasOcupadas = new ArrayList<>();
         List<Accesibilidad> accesibilidadesArea = accesibilidadDao.getAccesibilidadesArea(idArea);
@@ -100,6 +102,7 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
                 for (FranjaHoraria franjaOc : franjasOcupadas) {
                     if ((!franjaOc.getHoraFin().isBefore(franja.getHoraInicio())) && (!franjaOc.getHoraInicio().isAfter(franja.getHoraFin()))) {
                         iter.remove();
+                        break;
                     }
                 }
             }
@@ -108,6 +111,8 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
     }
     @Override
     public List<FranjaHoraria> getFranjasAccesible(int idArea, LocalDate fechaInicio,LocalDate fechaFin){
+        if(fechaInicio==null || (fechaFin!=null && fechaFin.isBefore(fechaInicio)))
+            return new ArrayList<>();
         List<FranjaHoraria> franjasServicio = getFranjasServicio();
         List<FranjaHoraria> franjasOcupadas = new ArrayList<>();
         List<Accesibilidad> accesibilidadesArea = accesibilidadDao.getAccesibilidadesArea(idArea);
@@ -131,6 +136,7 @@ public class GetFranjasHorariasSvc implements GetFranjasHorariasService{
                 for(FranjaHoraria franjaOc : franjasOcupadas){
                     if((!franjaOc.getHoraFin().isBefore(franja.getHoraInicio())) && (!franjaOc.getHoraInicio().isAfter(franja.getHoraFin()))){
                         iter.remove();
+                        break;
                     }
                 }
             }

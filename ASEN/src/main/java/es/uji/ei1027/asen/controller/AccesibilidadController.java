@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
@@ -62,39 +63,40 @@ public class AccesibilidadController {
         model.addAttribute("area", idArea);
         model.addAttribute("getAreasNaturalesService",getAreasNaturalesService);
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
-        session.setAttribute("filtro",null);
+        session.removeAttribute("filtro");
         return "accesibilidad/verHorarios";
     }
 
 
     @RequestMapping(value = "/add/{idArea}")
-    public String addFranjaHoraria(Model model,@PathVariable int idArea ,HttpSession session) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        UserDetails user = (UserDetails) session.getAttribute("user");
-        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
-        Accesibilidad accesibilidad = new Accesibilidad();
-        accesibilidad.setIdArea(idArea);
-        FiltroOcupacion filtro = (FiltroOcupacion) session.getAttribute("filtro");
-        if(filtro!=null){
-            filtro.setIdArea(idArea);
-            accesibilidad.setFechaInicio(filtro.getFecha());
-            accesibilidad.setFechaFin(filtro.getFechaFin());
-            model.addAttribute("filtro",filtro);
-            if(filtro.getFechaFin()==null){
-                model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasAccesible(idArea,filtro.getFecha()));
-            }else{
-                model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasAccesible(idArea,filtro.getFecha(),filtro.getFechaFin()));
-            }
+    public String addFranjaHoraria(Model model, @PathVariable int idArea , HttpSession session) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            UserDetails user = (UserDetails) session.getAttribute("user");
+            int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+            Accesibilidad accesibilidad = new Accesibilidad();
+            accesibilidad.setIdArea(idArea);
+            FiltroOcupacion filtro = (FiltroOcupacion) session.getAttribute("filtro");
+            if (filtro != null) {
+                filtro.setIdArea(idArea);
+                accesibilidad.setFechaInicio(filtro.getFecha());
+                accesibilidad.setFechaFin(filtro.getFechaFin());
+                model.addAttribute("filtro", filtro);
+                if (filtro.getFechaFin() == null) {
+                    model.addAttribute("franjasHorarias", getFranjasHorariasService.getFranjasAccesible(idArea, filtro.getFecha()));
+                } else {
+                    model.addAttribute("franjasHorarias", getFranjasHorariasService.getFranjasAccesible(idArea, filtro.getFecha(), filtro.getFechaFin()));
+                }
 
-        }else{
-            FiltroOcupacion filtro2 = new FiltroOcupacion();
-            filtro2.setIdArea(idArea);
-            model.addAttribute("filtro",filtro2);
-            model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasServicio());
-        }
-        model.addAttribute("accesibilidad", accesibilidad);
-        model.addAttribute("getAreasNaturalesService",getAreasNaturalesService);
-        model.addAttribute("current_date", LocalDate.now().format(formatter));
+            } else {
+                FiltroOcupacion filtro2 = new FiltroOcupacion();
+                filtro2.setIdArea(idArea);
+                model.addAttribute("filtro", filtro2);
+                model.addAttribute("franjasHorarias", getFranjasHorariasService.getFranjasServicio());
+            }
+            model.addAttribute("accesibilidad", accesibilidad);
+            model.addAttribute("getAreasNaturalesService", getAreasNaturalesService);
+            model.addAttribute("current_date", LocalDate.now().format(formatter));
+
         return "accesibilidad/add";
     }
     @RequestMapping(value="/filtrarDias", method = { RequestMethod.GET, RequestMethod.POST })
@@ -105,9 +107,15 @@ public class AccesibilidadController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("accesibilidad") Accesibilidad accesibilidad,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "accesibilidad/add";
+        if(accesibilidad.getFechaInicio()==null){
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Elije una fecha de inicio")
+                    .addFlashAttribute("clase", "danger");
+            return "redirect:add/"+accesibilidad.getIdArea();
+        }
         accesibilidadDao.addAccesibilidad(accesibilidad);
         return "redirect:verHorarios/"+accesibilidad.getIdArea();
     }
