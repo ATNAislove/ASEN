@@ -93,7 +93,8 @@
             </tr>
             <tr>
                 <a>* Para seleccionar más de una zona, presiona la tecla control</a>
-                <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear Reserva" /></td>
+                <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear Reserva"
+                                       th:onclick="return confirm('¿ Está seguro de que quiere hacer esta reserva con los datos introducidos? \'');" /></td>
             </tr>
         </table>
         <br>

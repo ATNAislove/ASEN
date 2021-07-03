@@ -96,7 +96,9 @@
                 <td><input class="form-control" type="text" th:value="${reservaService.recuperarIdCharNum(reserva.idZona)}" readonly /></td>
             </tr>-->
             <tr>
-                <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva" /></td>
+                <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar Reserva"
+                                       th:onclick="return confirm('¿ Está seguro de que quiere actualizar esta Reserva? \'');"
+                /></td>
             </tr>
         </table>
         <br>

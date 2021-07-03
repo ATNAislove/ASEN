@@ -36,7 +36,9 @@
             <td><input class="form-control"  type="date" th:field="*{fechaFin}" th:min="${accesibilidad.fechaInicio}"/></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" class="btn btn-primary" role="button" value="Actualizar Horario" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-primary" role="button" value="Actualizar Horario"
+                                   th:onclick="return confirm('¿ Está seguro de que quiere actualizar este horario? \'');"
+            /></td>
         </tr>
     </table>
     <br>

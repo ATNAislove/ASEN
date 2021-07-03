@@ -71,7 +71,9 @@
             <td><input class="form-control" type="text" th:field="*{idMunicipio}" readonly/></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar area natural" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar area natural"
+                                   th:onclick="return confirm('¿ Está seguro de que quiere actualizar los datos de este area natural? \'');"
+            /></td>
         </tr>
     </table>
     <br>

@@ -13,7 +13,7 @@ public class ServicioValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Servicio servicio = (Servicio) o;
-        if(servicio.getFechaInicio().compareTo(servicio.getFechaFin()) > 0){
+        if(servicio.getFechaFin() != null && servicio.getFechaInicio().compareTo(servicio.getFechaFin()) > 0){
             errors.rejectValue("fechaFin","n","La fecha fin no puede ser anterior a la fecha inicio");
         }
     }

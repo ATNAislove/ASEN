@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td><label>Periodicidad</label></td>
-                <td><input class="form-control" type="number" min="1" th:field="*{periodicidad}" /></td>
+                <td><input class="form-control" type="number" min="0" th:field="*{periodicidad}" /></td>
             </tr>
             <tr>
                 <td><label>Tipo De Temporada</label></td>
@@ -55,7 +55,9 @@
             <br>
             <tr>
                 <a>* La periodicidad es el número de días para el cual tarda el servicio a volverse a activar desde la fechaFin establecida</a>
-                <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear servicio" /></td>
+                <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear servicio"
+                                       th:onclick="return confirm('¿ Está seguro de que quiere registrar este Servicio? \'');"
+                /></td>
             </tr>
         </table>
         <br>

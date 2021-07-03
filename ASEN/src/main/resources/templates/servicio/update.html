@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td><label>Periodicidad</label></td>
-            <td><input class="form-control" type="number" th:field="*{periodicidad}" /></td>
+            <td><input class="form-control" type="number" min="0" th:field="*{periodicidad}" /></td>
         </tr>
         <tr>
             <td><label>Tipo Temporada</label></td>
@@ -47,7 +47,10 @@
             <td><input class="form-control" type="number" th:field="*{idArea}" readonly /></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit"  class="btn btn-primary" value="Actualizar Servicio" /></td>
+            <a>* La periodicidad es el número de días para el cual tarda el servicio a volverse a activar desde la fechaFin establecida</a>
+            <td colspan="2"><input type="submit"  class="btn btn-primary" value="Actualizar Servicio"
+                                   th:onclick="return confirm('¿ Está seguro de que quiere actualizar los datos de este Servicio? \'');"
+            /></td>
         </tr>
     </table>
     <br>

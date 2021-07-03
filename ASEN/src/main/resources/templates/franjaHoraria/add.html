@@ -28,7 +28,8 @@
                 <td><input type="time" th:field="*{horaFin}" required/></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="CrearFranjaHoraria" /></td>
+                <td colspan="2"><input type="submit" value="CrearFranjaHoraria"
+                                       th:onclick="return confirm('¿ Está seguro de que quiere crear una franjaHoraria con esos datos? \'');" /></td>
             </tr>
         </table>
         <br>

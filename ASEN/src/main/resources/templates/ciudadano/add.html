@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td><label>Pin*</label></td>
-            <td><input class="form-control" type="text" th:field="*{pin}" maxlength="15" required/></td>
+            <td><input class="form-control" type="password" th:field="*{pin}" maxlength="15" required/></td>
         </tr>
         <tr>
             <td><label>Fecha Nacimiento*</label></td>
@@ -65,7 +65,9 @@
             <td>    <h5>Los campos con * son obligatorios </h5> </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" class="btn btn-primary" value="Registrarse" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-primary" value="Registrarse"
+                                   th:onclick="return confirm('¿ Estás seguro de que quiere registrarse con estos datos introducidos? \'');"
+            /></td>
         </tr>
     </table>
     <br>
