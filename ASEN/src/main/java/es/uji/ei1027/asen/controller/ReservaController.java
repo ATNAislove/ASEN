@@ -5,6 +5,7 @@ import es.uji.ei1027.asen.dao.ReservaDao;
 import es.uji.ei1027.asen.model.*;
 import es.uji.ei1027.asen.svc.GeneradorQRService;
 import es.uji.ei1027.asen.svc.GetFranjasHorariasService;
+import es.uji.ei1027.asen.svc.GetMunicipiosService;
 import es.uji.ei1027.asen.svc.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -32,6 +33,11 @@ public class ReservaController{
     private ReservaService reservaService;
     private GetFranjasHorariasService getFranjasHorariasService;
     private GeneradorQRService generadorQRService;
+    private GetMunicipiosService getMunicipiosService;
+    @Autowired
+    public void setGetMunicipiosService(GetMunicipiosService getMunicipiosService){
+        this.getMunicipiosService=getMunicipiosService;
+    }
     @Autowired
     public void setGeneradorQRService(GeneradorQRService generadorQRService){
         this.generadorQRService=generadorQRService;
@@ -55,8 +61,11 @@ public class ReservaController{
         if(user.getRol()=="Ciudadano") {
             model.addAttribute("reservas", reservaDao.getReservasUsuario(user.getUsername()));
 
+        }else if(user.getRol()=="GestorMunicipal"){
+            model.addAttribute("reservas",reservaDao.getReservasMunicipio(getMunicipiosService.getMunicipioGestor(user.getUsername())));
         }else{
             model.addAttribute("reservas", reservaDao.getReservas());
+
         }
         session.removeAttribute("filtro");
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);

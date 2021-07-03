@@ -18,6 +18,7 @@
         <thead>
         <tr>
             <th>Fecha</th>
+            <th th:if="*{user.rol == 'GestorMunicipal'}">Usuario</th>
             <th>Número Personas</th>
             <th>Hora Salida</th>
             <th>Fecha Creación</th>
@@ -33,6 +34,7 @@
         <tbody>
         <tr th:each="reserva: ${reservas}">
             <td th:text="${franjaHorariaService.transformarFecha(reserva.fecha)}"></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}" th:text="${reserva.usuario}"></td>
             <td th:text="${reserva.numeroPersonas}"></td>
             <td th:text="${reserva.horaSalida}"></td>
             <td th:text="${franjaHorariaService.transformarFecha(reserva.fechaCreacion)}"></td>

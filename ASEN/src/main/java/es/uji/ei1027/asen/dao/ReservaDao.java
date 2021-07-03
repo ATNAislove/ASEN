@@ -100,7 +100,17 @@ public class ReservaDao {
     }
     public List<Reserva> getReservasUsuario(String usuario) {
         try {
-            return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario +"' AND estadoReserva NOT IN ('cancelado')", new ReservaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario +"' AND estadoReserva NOT IN ('cancelado') order by 2", new ReservaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<Reserva>();
+        }
+    }
+    public List<Reserva> getReservasMunicipio(int idMunicipio) {
+        try {
+            return jdbcTemplate.query("SELECT DISTINCT r.* FROM Reserva as r INNER JOIN ocupacion as o ON r.idReserva=o.idReserva " +
+                    "INNER JOIN zona as z ON o.idZona=z.idZona INNER JOIN areaNatural as a ON a.idArea=z.idArea " +
+                    "where a.idMunicipio = "+idMunicipio+" order by 2;", new ReservaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Reserva>();
