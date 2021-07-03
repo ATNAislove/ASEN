@@ -9,7 +9,9 @@ import java.util.List;
 public interface GetTiposServicioService {
     public List<TipoServicio> getTiposServicioService();
     public String getTipoServicio(int idTipoServicio);
+    public String getTipoServicioDelServicio(int idServicio);
     public List<Servicio> getServiciosMunicipio(int idMunicipio);
     public List<Servicio> getServiciosArea(int idArea);
     public List<Disponibilidad> getHorariosServicio(int IdServicio);
+    public Servicio getServicio(int idService);
 }

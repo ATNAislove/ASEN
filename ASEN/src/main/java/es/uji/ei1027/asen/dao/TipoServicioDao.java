@@ -37,7 +37,7 @@ public class TipoServicioDao {
     /* Obté el tipoServicio amb el id donat. Torna null si no existeix. */
     public TipoServicio getTipoServicio(int idTipoServicio) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM tipoServicio WHERE idTipoServicio = '"+ idTipoServicio + "'", new TipoServicioRowMapper());
+            return jdbcTemplate.queryForObject("SELECT * FROM tipoServicio WHERE idTipoServicio = "+ idTipoServicio , new TipoServicioRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return null;

@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <h1>Lista de horarios del servicio</h1>
+    <h2 th:text="'Lista de horarios del servicio de '+${tipoServicio} +' de '+ ${area}"></h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -35,6 +35,7 @@
         </tr>
         </tbody>
     </table>
+    <a th:href="@{/disponibilidad/add/{idServicio}(idServicio=${idServicio})}" id="añadir" role="button">Agregar Horario</a>
     <a href="/servicio/list" class="btn btn-primary" role="button">VOLVER</a>
 </div>
 </body>

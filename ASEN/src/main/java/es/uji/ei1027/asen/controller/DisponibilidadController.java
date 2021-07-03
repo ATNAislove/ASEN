@@ -28,6 +28,11 @@ public class DisponibilidadController {
     private GetTiposServicioService getTiposServicioService;
     private GetMunicipiosService getMunicipiosService;
     private GetFranjasHorariasService getFranjasHorariasService;
+    private GetAreasNaturalesService getAreasNaturalesService;
+    @Autowired
+    public void setAreasNaturalesService(GetAreasNaturalesService getAreasNaturalesService){
+        this.getAreasNaturalesService=getAreasNaturalesService;
+    }
     @Autowired
     public void setGetFranjasHorariasService(GetFranjasHorariasService getFranjasHorariasService){
         this.getFranjasHorariasService=getFranjasHorariasService;
@@ -80,10 +85,13 @@ public class DisponibilidadController {
     public String listHorarios(Model model, @PathVariable int idServicio) {
         model.addAttribute("disponibilidades", getTiposServicioService.getHorariosServicio(idServicio));
         model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("idServicio",idServicio);
+        model.addAttribute("tipoServicio",getTiposServicioService.getTipoServicioDelServicio(idServicio));
+        model.addAttribute("area",getAreasNaturalesService.getNombreArea(getTiposServicioService.getServicio(idServicio).getIdArea()));
         return "/disponibilidad/verHorarios";
     }
 
-    @RequestMapping(value="/add")
+    /*@RequestMapping(value="/add")
     public String addHorarioServicio(Model model, HttpSession session) {
         UserDetails user = (UserDetails) session.getAttribute("user");
         int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
@@ -91,6 +99,23 @@ public class DisponibilidadController {
         model.addAttribute("servicios", getTiposServicioService.getServiciosMunicipio(municipio));
         model.addAttribute("getTiposServicio", getTiposServicioService);
         model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasServicio());
+
+        return "disponibilidad/add";
+    }*/
+    @RequestMapping(value="/add/{idServicio}")
+    public String addHorarioServicio(Model model,@PathVariable int idServicio, HttpSession session) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
+        Disponibilidad disponibilidad = new Disponibilidad();
+        disponibilidad.setIdServicio(idServicio);
+        model.addAttribute("disponibilidad", disponibilidad);
+        model.addAttribute("servicios", getTiposServicioService.getServiciosMunicipio(municipio));
+        //model.addAttribute("getTiposServicio", getTiposServicioService);
+        model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasServicio());
+        model.addAttribute("tipoServicio",getTiposServicioService.getTipoServicioDelServicio(idServicio));
+        model.addAttribute("area",getAreasNaturalesService.getNombreArea(getTiposServicioService.getServicio(idServicio).getIdArea()));
+
+
 
         return "disponibilidad/add";
     }

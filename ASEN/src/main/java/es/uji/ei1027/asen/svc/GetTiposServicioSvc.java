@@ -26,9 +26,14 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
         return tipoServicioDao.getTipoServicios();
     }
 
+
     @Override
     public String getTipoServicio(int idTipoServicio) {
         return tipoServicioDao.getTipoServicio(idTipoServicio).getNombre();
+    }
+    @Override
+    public String getTipoServicioDelServicio(int idServicio){
+        return tipoServicioDao.getTipoServicio(servicioDao.getServicio(idServicio).getIdTipoServicio()).getNombre();
     }
     @Override
     public List<Servicio> getServiciosMunicipio(int idMunicipio){
@@ -59,6 +64,9 @@ public class GetTiposServicioSvc implements GetTiposServicioService {
         if(resultado.length()>0)
             resultado = resultado.substring(0,resultado.length()-2);
         return resultado;
+    }
+    public Servicio getServicio(int idService){
+        return servicioDao.getServicio(idService);
     }
 
 }
