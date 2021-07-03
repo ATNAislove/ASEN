@@ -10,7 +10,11 @@
 
 </head>
 <body><div class="container" layout:fragment="content">
-<h2>Servicio</h2><!-- formulario de Reserva-->
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+         th:text="${mensaje}"
+         class="alert">
+    </div>
+<h2>Modificar servicio</h2>
 <form action="#" th:action="@{/servicio/update}"
       th:object="${servicio}" method="post">
     <table>
@@ -20,7 +24,8 @@
         </tr>
         <tr>
             <td><label>fecha Inicio</label></td>
-            <td><input class="form-control" type="date" th:field="*{fechaInicio}"  th:min="${current_date}" /></td>
+            <td><input class="form-control" type="date" th:field="*{fechaInicio}"  th:min="${current_date}" required/></td>
+
         </tr>
         <tr>
             <td><label>fecha Fin</label></td>

@@ -11,13 +11,17 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+         th:text="${mensaje}"
+         class="alert">
+    </div>
     <h2>Nuevo servicio</h2>
     <form action="#" th:action="@{/servicio/add}"
           th:object="${servicio}" method="post">
         <table>
             <tr>
                 <td><label>Fecha Inicio</label></td>
-                <td><input class="form-control" type="date" th:field="*{fechaInicio}" th:min="${current_date}" /></td>
+                <td><input class="form-control" type="date" th:field="*{fechaInicio}" th:min="${current_date}" required/></td>
             </tr>
             <tr>
                 <td><label>Fecha Fin</label></td>

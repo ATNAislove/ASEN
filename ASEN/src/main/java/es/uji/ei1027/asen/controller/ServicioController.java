@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
@@ -73,6 +74,7 @@ public class ServicioController {
         UserDetails user = (UserDetails) session.getAttribute("user");
         int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
         model.addAttribute("servicio", new Servicio());
+
         model.addAttribute("tiposServicio",getTiposServicioService.getTiposServicioService());
         model.addAttribute("areasNaturales",getAreasNaturalesService.getAreasPueblo(municipio));
         model.addAttribute("current_date", LocalDate.now().format(formatter));
@@ -82,12 +84,16 @@ public class ServicioController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("servicio") Servicio servicio,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         ServicioValidator servicioValidator = new ServicioValidator();
         servicioValidator.validate(servicio,bindingResult);
         if (bindingResult.hasErrors()) {
-            return "servicio/add";
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Fecha fin debe ser posterior a fecha inicio")
+                    .addFlashAttribute("clase", "danger");
+            return "redirect:add";
         }
+
         servicioDao.addServicio(servicio);
         return "redirect:list";
     }
@@ -102,11 +108,16 @@ public class ServicioController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("servicio") Servicio servicio,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         ServicioValidator servicioValidator = new ServicioValidator();
         servicioValidator.validate(servicio,bindingResult);
-        if (bindingResult.hasErrors())
-            return "servicio/update";
+        if (bindingResult.hasErrors()){
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Fecha fin debe ser posterior a fecha inicio")
+                    .addFlashAttribute("clase", "danger");
+            return "redirect:update/"+servicio.getIdServicio();
+        }
+
         servicioDao.updateServicio(servicio);
         return "redirect:list";
     }
