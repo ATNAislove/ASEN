@@ -11,6 +11,11 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+         th:text="${mensaje}"
+         class="alert">
+    </div>
+
 <h2>Registro</h2><!-- formulario de ciudadano-->
 <form action="#" th:action="@{/ciudadano/add}"
       th:object="${ciudadano}" method="post">
@@ -25,8 +30,8 @@
         </tr>
         <tr>
             <td><label>Fecha Nacimiento*</label></td>
-            <td><input class="form-control" type="date" th:field="*{fechaNacimiento}" required/></td>
-            <td th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></td>
+            <td><input class="form-control" type="date" th:field="*{fechaNacimiento}" th:max="${maxi}" required/></td>
+            <td th:if="${#fields.hasErrors('fechaNacimiento')}"  th:errors="*{fechaNacimiento}"></td>
         </tr>
         <tr>
             <td><label>Nombre*</label></td>

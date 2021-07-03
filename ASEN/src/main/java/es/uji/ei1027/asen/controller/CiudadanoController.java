@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/ciudadano")
@@ -45,12 +45,14 @@ public class CiudadanoController {
     public String addCiudadano(Model model, HttpSession session) {
         session.setAttribute("user", new UserDetails());
         model.addAttribute("ciudadano", new Ciudadano());
+        LocalDate maxi = LocalDate.now().minusYears(18);
+        model.addAttribute("maxi",maxi);
         return "ciudadano/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("ciudadano") Ciudadano ciudadano,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         CiudadanoValidator ciudadanoValidator = new CiudadanoValidator();
         ciudadanoValidator.validate(ciudadano,bindingResult);
         if (bindingResult.hasErrors())
@@ -58,10 +60,13 @@ public class CiudadanoController {
         try{
             ciudadanoDao.addCiudadano(ciudadano);
         }
-        catch(DuplicateKeyException e){
-            throw new AsenApplicationException(
-                    "Ya existe un usuario con este nombre "
-                            +ciudadano.getUsuario(), "nombreUsuarioRepetido","danger"); }
+        catch(DuplicateKeyException e) {
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "ya existe un usuario con este nombre de usuario")
+                    .addFlashAttribute("clase", "danger");
+            return "redirect:add";
+        }
+
         catch(DataAccessException e) {
             throw new AsenApplicationException(
                     "Error en el acceso a la base de datos", "ErrorAcceder","danger");
