@@ -36,6 +36,10 @@
                 <td><label>idReserva</label></td>
                 <td><input class="form-control" type="number" th:field="*{idReserva}" readonly /></td>
             </tr>
+            <tr th:if="${session.user.rol == 'GestorMunicipal'}">
+                <td><label>Usuario</label></td>
+                <td><input class="form-control" type="text" th:field="*{usuario}" readonly/></td>
+            </tr>
             <!--
             <tr>
                 <td><label>fecha</label></td>
@@ -102,7 +106,7 @@
             </tr>
         </table>
         <br>
-        <a href="/reserva/list" class="btn btn-primary" role="button">VOLVER</a>
+        <a href="/reserva/list" id="atras" role="button">VOLVER</a>
     </form>
 </div>
 </body>

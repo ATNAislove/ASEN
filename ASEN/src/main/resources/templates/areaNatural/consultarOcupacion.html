@@ -24,12 +24,23 @@
 </form>-->
 <h3 th:text="${areaNatural.nombreArea}"></h3>
 <p th:text="${areaNatural.descripcion}"></p>
-<img style="max-width:250px;max-height:250px" th:src="${areaNatural.imagen}" alt="No disponible">
-<p>Tipo de terreno: <span th:text="${areaNatural.tipoTerreno}"/></p>
-<p>Tipo de area: <span th:text="${areaNatural.tipoArea}"/></p>
-<p>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/></p>
+<img style="display:block;margin:auto;max-width:250px;max-height:250px" th:src="${areaNatural.imagen}" alt="No disponible">
+    <br>
+    <table align="center" style="width:auto;">
+        <tr>
+            <td>Tipo de terreno: <span th:text="${areaNatural.tipoTerreno}"/>&nbsp</td>
+            <td>&nbsp &nbsp Tipo de area: <span th:text="${areaNatural.tipoArea}"/></td>
+        </tr>
+        <tr>
+            <td>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/>&nbsp</td>
+            <td>&nbsp &nbsp Municipio: <span th:text="${municipio}"/></td>
+        </tr>
+    </table>
 
-<p>Municipio: <span th:text="${municipio}"/></p>
+
+
+
+
 
 <h4>Lista de Servicios disponibles</h4>
 <table class="table table-striped">

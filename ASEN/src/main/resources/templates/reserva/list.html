@@ -44,8 +44,8 @@
             <td th:text="${reservaService.recuperarNombreArea(reserva.idReserva)}"></td>
             <td th:text="${reservaService.recuperarZonas(reserva.idReserva)}"></td>
             <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" id="editar" role="button">Editar</a></td>
-            <td> <a th:if="${reserva.horaSalida == null}" th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" class="btn btn-primary" role="button">Escanear Qr</a></td>
-            <td> <a th:href="@{/reserva/cancel/{idReserva}(idReserva=${reserva.idReserva})}"
+            <td> <a th:if="${reserva.horaSalida == null}" th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" id="escanearQR" role="button">Escanear Qr</a></td>
+            <td> <a th:if="${reserva.estadoReserva != 'cancelado'}" th:href="@{/reserva/cancel/{idReserva}(idReserva=${reserva.idReserva})}"
                    th:onclick="return confirm('¿ Estás seguro de que quiere cancelar la reserva con código \''
                     + [[${reserva.idReserva}]] + '\'?');"
                    id="borrar">Cancelar</a></td>
