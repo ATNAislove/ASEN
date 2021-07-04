@@ -62,7 +62,7 @@ public class AreaNaturalController {
     public String listAreasNaturales(Model model, HttpSession session) {
             UserDetails user = (UserDetails) session.getAttribute("user");
             model.addAttribute("AreaNaturalService",getAreasNaturalesService);
-        if(user==null){
+        if(user==null || user.getRol()==null){
             session.setAttribute("user", new UserDetails());
             model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
         }else {
@@ -94,10 +94,13 @@ public class AreaNaturalController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("areaNatural") AreaNatural areaNatural,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "areaNatural/add";
         areaNaturalDao.addAreaNatural(areaNatural);
+        redirectAttrs
+                    .addFlashAttribute("mensaje", "Se ha creado el área correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:list";
     }
 
@@ -109,10 +112,13 @@ public class AreaNaturalController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("areaNatural") AreaNatural areaNatural,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "areaNatural/update";
         areaNaturalDao.updateAreaNatural(areaNatural);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha modificado el área  correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:list";
     }
 
@@ -120,10 +126,13 @@ public class AreaNaturalController {
     public String processDelete(@PathVariable int idArea, RedirectAttributes redirectAttrs) {
         try {
             areaNaturalDao.deleteAreaNatural(idArea);
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Se ha eliminado el área correctamente")
+                    .addFlashAttribute("clase", "success");
         }catch(DataIntegrityViolationException e){
             redirectAttrs
                     .addFlashAttribute("mensaje", "No se puede eliminar el area, pues tiene zonas asignadas")
-                    .addFlashAttribute("clase", "error");
+                    .addFlashAttribute("clase", "danger");
             return "redirect:../list";
         }
         return "redirect:../list";

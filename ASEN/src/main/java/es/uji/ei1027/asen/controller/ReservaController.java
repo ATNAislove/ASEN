@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpSession;
@@ -128,7 +129,7 @@ public class ReservaController{
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
-                                   BindingResult bindingResult,HttpSession session) {
+                                   BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttrs) {
         try {
             ReservaValidator reservaValidator = new ReservaValidator();
 
@@ -150,6 +151,9 @@ public class ReservaController{
                     reservaService.insertarOcupacion(idReserva, i);
                 }
             }
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Se ha creado la reserva correctamente")
+                    .addFlashAttribute("clase", "success");
             session.removeAttribute("filtro");
         } catch (DuplicateKeyException e) {
             throw new AsenApplicationException(
@@ -228,8 +232,8 @@ public class ReservaController{
     }*/
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("reserva") Reserva reserva,
-                                      BindingResult bindingResult, HttpSession session) {
+    public String processUpdateSubmit(@ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult,
+                                      HttpSession session, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "reserva/update";
         UserDetails user = (UserDetails) session.getAttribute("user");
@@ -251,12 +255,18 @@ public class ReservaController{
                 reservaService.insertarOcupacion(reserva.getIdReserva(),zona);
             }
         }
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha modificado la reserva correctamente")
+                .addFlashAttribute("clase", "success");
         session.removeAttribute("filtro");
         return "redirect:list";
     }
     @RequestMapping(value="/cancel/{idReserva}")
-    public String processCancel(@PathVariable int idReserva){
+    public String processCancel(@PathVariable int idReserva, RedirectAttributes redirectAttrs){
         reservaDao.cancelarReserva(idReserva);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha cancelado la reserva correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:../list";
     }
     @RequestMapping(value = "/delete/{idReserva}")
@@ -266,8 +276,11 @@ public class ReservaController{
     }
 
     @RequestMapping(value = "/updateHoraSalida/{idReserva}")
-    public String editHoraSalidaReserva(@PathVariable int idReserva) {
+    public String editHoraSalidaReserva(@PathVariable int idReserva, RedirectAttributes redirectAttrs) {
         reservaDao.updateHoraSalidaReserva(idReserva);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha actualizado la hora de salida correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:../list";
     }
     @RequestMapping(value="/fecha", method = { RequestMethod.GET, RequestMethod.POST })

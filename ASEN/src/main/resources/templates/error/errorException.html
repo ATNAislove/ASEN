@@ -12,12 +12,13 @@
         <h3 th:text="${message}"></h3>
         <p>Pulse el siguiente botón para volver al inicio, o en la flecha de arriba a la izquierda para corregir el error</p>
     </div>-->
-    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${message != null}"
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${message != null}"
          th:text="${message}" class="alert alert-dismissible ">
         <p>Pulse el siguiente botón para volver al inicio, o vuelva atrás para corregir el error</p></div>
     <div th:align="center">
         <a th:if="*{user!=null && user.rol=='Ciudadano'}" href="/ciudadano/menuCiudadano" class="btn btn-primary" th:align="left">Inicio</a>
         <a th:if="*{user!=null && user.rol=='GestorMunicipal'}"  href="/gestorMunicipal/menuGestorMunicipal" class="btn btn-primary" th:align="left">Inicio</a>
     </div>
+
 </body>
 </html>

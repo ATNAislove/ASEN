@@ -13,9 +13,9 @@
 <body>
 <div class="container" layout:fragment="content">
     <h1 th:text="'Lista de zonas del area '+${area.nombreArea}"></h1>
-    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
          th:text="${mensaje}"
-         class="alert alert-dismissible alert-danger">
+         class="alert">
     </div>
     <table class="table table-striped">
         <thead>

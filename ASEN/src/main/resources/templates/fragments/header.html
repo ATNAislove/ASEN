@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <header>
         <h1 th:if="*{user==null || user.rol==null}"> <a href="/" style="text-decoration:none;color:black;">ASEN</a></h1>
-        <h1 th:if="*{user!=null && user.rol=='Ciudadano'}"><a href="/ciudadano/menuCiudadano" style="text-decoration:none;color:black;">ASEN</a></h1>
-        <h1 th:if="*{user!=null && user.rol=='GestorMunicipal'}"><a href="/gestorMunicipal/menuGestorMunicipal" style="text-decoration:none;color:black;">ASEN</a></h1>
+        <h1 th:if="*{user!=null && user.rol=='Ciudadano'}"><a href="/areaNatural/list" style="text-decoration:none;color:black;">ASEN</a></h1>
+        <h1 th:if="*{user!=null && user.rol=='GestorMunicipal'}"><a href="/areaNatural/list" style="text-decoration:none;color:black;">ASEN</a></h1>
     </header>
 </head>
 <body>

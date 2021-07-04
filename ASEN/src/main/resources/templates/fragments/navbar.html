@@ -2,8 +2,8 @@
     <div class="navbar">
         <div class="container-fluid">
             <a th:if="*{user.rol == null}" class="navbar-brand" href="/">ASEN</a>
-            <a th:if="*{user.rol == 'Ciudadano'}" class="navbar-brand" href="/ciudadano/menuCiudadano">ASEN</a>
-            <a th:if="*{user.rol == 'GestorMunicipal'}" class="navbar-brand" href="/gestorMunicipal/menuGestorMunicipal">ASEN</a>
+            <a th:if="*{user.rol == 'Ciudadano'}" class="navbar-brand" href="/areaNatural/list">ASEN</a>
+            <a th:if="*{user.rol == 'GestorMunicipal'}" class="navbar-brand" href="/areaNatural/list">ASEN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
