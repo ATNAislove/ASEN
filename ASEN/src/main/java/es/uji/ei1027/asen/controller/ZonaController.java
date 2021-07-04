@@ -65,10 +65,13 @@ public class ZonaController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("zona") Zona zona,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "zona/add";
         zonaDao.addZona(zona);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha creado la zona correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:../zona/list/"+ zona.getIdArea();
     }
 
@@ -83,10 +86,13 @@ public class ZonaController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("zona") Zona zona,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "zona/update";
         zonaDao.updateZona(zona);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha actualizado la zona correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:../zona/list/"+ zona.getIdArea();
     }
 
@@ -95,11 +101,14 @@ public class ZonaController {
         int area = getAreasNaturalesService.getIdArea(idZona);
         try {
             zonaDao.deleteZona(idZona);
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Se ha eliminado la zona correctamente")
+                    .addFlashAttribute("clase", "success");
             return "redirect:../list/" + area;
         }catch(DataIntegrityViolationException e){
             redirectAttrs
                     .addFlashAttribute("mensaje", "No se puede eliminar la zona, pues tiene reservas asignadas")
-                    .addFlashAttribute("clase", "error");
+                    .addFlashAttribute("clase", "danger");
             return "redirect:../list/" + area;
         }
     }

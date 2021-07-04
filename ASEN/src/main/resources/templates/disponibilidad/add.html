@@ -21,7 +21,7 @@
                         th:text="${getTiposServicio.getTipoServicio(__(${servicio.idTipoServicio})__)}+' - '+${servicio.idServicio}">
                 </option>
             </select>-->
-            <input type="hidden" th:field="${idServicio}"/></td>
+            <input type="hidden" th:field="*{idServicio}"/></td>
         </tr>
         <tr>
             <td><label>Franja Horaria</label></td>

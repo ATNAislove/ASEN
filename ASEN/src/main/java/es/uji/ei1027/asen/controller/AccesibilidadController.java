@@ -115,8 +115,12 @@ public class AccesibilidadController {
                     .addFlashAttribute("mensaje", "Elije una fecha de inicio")
                     .addFlashAttribute("clase", "danger");
             return "redirect:add/"+accesibilidad.getIdArea();
+
         }
         accesibilidadDao.addAccesibilidad(accesibilidad);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha creado el horario correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:verHorarios/"+accesibilidad.getIdArea();
     }
 
@@ -131,16 +135,22 @@ public class AccesibilidadController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("accesibilidad") Accesibilidad accesibilidad,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "accesibilidad/update";
         accesibilidadDao.updateAccesibilidad(accesibilidad);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha modificado el horario correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:verHorarios/"+accesibilidad.getIdArea();
     }
 
     @RequestMapping(value = "/deleteHorario/{idFranjaHoraria}/{idArea}/{fechaInicio}")
-    public String processDelete(@PathVariable int idFranjaHoraria,@PathVariable int idArea,@PathVariable String fechaInicio) {
+    public String processDelete(@PathVariable int idFranjaHoraria,@PathVariable int idArea,@PathVariable String fechaInicio, RedirectAttributes redirectAttrs) {
         accesibilidadDao.deleteAccesibilidad(idFranjaHoraria,idArea,fechaInicio);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha eliminado el horario correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:../../../verHorarios/"+idArea;
     }
 }

@@ -95,6 +95,9 @@ public class ServicioController {
         }
 
         servicioDao.addServicio(servicio);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha creado el servicio correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:list";
     }
 
@@ -119,12 +122,18 @@ public class ServicioController {
         }
 
         servicioDao.updateServicio(servicio);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha actualizado el servicio correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:list";
     }
 
     @RequestMapping(value="/delete/{idServicio}")
-    public String processDelete(@PathVariable int idServicio) {
+    public String processDelete(@PathVariable int idServicio, RedirectAttributes redirectAttrs) {
         servicioDao.deleteServicio(idServicio);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha eliminado el servicio correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:../list";
     }
 

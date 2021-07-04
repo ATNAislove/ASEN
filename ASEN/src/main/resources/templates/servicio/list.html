@@ -11,6 +11,10 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+         th:text="${mensaje}"
+         class="alert">
+    </div>
     <h1>Lista de Servicios</h1>
     <table class="table table-striped">
         <thead>

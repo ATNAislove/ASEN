@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -69,17 +70,23 @@ public class DisponibilidadController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("disponibilidad") Disponibilidad disponibilidad,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "disponibilidad/update";
         disponibilidadDao.updateDisponibilidad(disponibilidad);
-        return "redirect:list";
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha modificado el horario correctamente")
+                .addFlashAttribute("clase", "success");
+        return "redirect:/disponibilidad/verHorarios/"+disponibilidad.getIdServicio();
     }
 
     @RequestMapping(value="/delete/{idFranjaHoraria}/{idServicio}")
-    public String processDelete(@PathVariable int idFranjaHoraria) {
-        disponibilidadDao.deleteDisponibilidad(idFranjaHoraria);
-        return "redirect:../list";
+    public String processDelete(@PathVariable int idFranjaHoraria, @PathVariable int idServicio, RedirectAttributes redirectAttrs) {
+        disponibilidadDao.deleteDisponibilidad(idFranjaHoraria, idServicio);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha eliminado el horario correctamente")
+                .addFlashAttribute("clase", "success");
+        return "redirect:/disponibilidad/verHorarios/"+idServicio;
     }
     @RequestMapping(value="/verHorarios/{idServicio}")
     public String listHorarios(Model model, @PathVariable int idServicio) {
@@ -121,10 +128,13 @@ public class DisponibilidadController {
     }
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("disponibilidad") Disponibilidad disponibilidad,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors())
             return "disponibilidad/add";
         disponibilidadDao.addDisponibilidad(disponibilidad);
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Se ha creado el horario correctamente")
+                .addFlashAttribute("clase", "success");
         return "redirect:/disponibilidad/verHorarios/"+disponibilidad.getIdServicio();
     }
 

@@ -27,7 +27,10 @@ public class DisponibilidadDao {
     public void deleteDisponibilidad(Disponibilidad disponibilidad) {
         jdbcTemplate.update("DELETE FROM disponibilidad WHERE idFranjaHoraria=?",disponibilidad.getIdFranjaHoraria());
     }
-
+    /* Esborra la disponibilitat de la base de dades */
+    public void deleteDisponibilidad(int idFranjaHoraria, int idServicio) {
+        jdbcTemplate.update("DELETE FROM disponibilidad WHERE idFranjaHoraria=? and idServicio=?", idFranjaHoraria,idServicio);
+    }
     /* Esborra la disponibilitat de la base de dades */
     public void deleteDisponibilidad(int idFranjaHoraria) {
         jdbcTemplate.update("DELETE FROM disponibilidad WHERE idFranjaHoraria=?", idFranjaHoraria);

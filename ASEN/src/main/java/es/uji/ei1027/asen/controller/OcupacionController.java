@@ -44,7 +44,6 @@ public class OcupacionController {
         return "redirect:list";
     }
 
-    //Hay que hacer update?
    /* @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editCiudadano(Model model, @PathVariable String usuario) {
         model.addAttribute("ciudadano", ciudadanoDao.getCiudadano(usuario));

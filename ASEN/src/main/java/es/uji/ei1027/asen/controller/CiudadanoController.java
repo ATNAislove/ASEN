@@ -59,6 +59,9 @@ public class CiudadanoController {
             return "ciudadano/add";
         try{
             ciudadanoDao.addCiudadano(ciudadano);
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Se ha registrado correctamente")
+                    .addFlashAttribute("clase", "success");
         }
         catch(DuplicateKeyException e) {
             redirectAttrs
