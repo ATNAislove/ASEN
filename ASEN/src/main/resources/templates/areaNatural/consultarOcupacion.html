@@ -12,16 +12,7 @@
 <body>
 <div class="container" layout:fragment="content">
 <h2>Consultar Ocupacion</h2>
-<!--<form action="#" th:action="@{/areaNatural/consultarOcupacion}"
-      th:object="${areaNatural}" method="post">
-    <label>Tipo acceso</label></td>
-    <td><select class="form_control" type="text" th:field="*{tipoAcceso}">
-        <option value="No seleccionado">Selecciona el tipo de acceso</option>
-        <option value="abierto">Abierto</option>
-        <option value="restringido">Restringido</option>
-        <option value="cerrado">Cerrado</option>
-    </select>
-</form>-->
+
 <h3 th:text="${areaNatural.nombreArea}"></h3>
 <p th:text="${areaNatural.descripcion}"></p>
 <img style="display:block;margin:auto;max-width:250px;max-height:250px" th:src="${areaNatural.imagen}" alt="No disponible">
@@ -36,10 +27,6 @@
             <td>&nbsp &nbsp Municipio: <span th:text="${municipio}"/></td>
         </tr>
     </table>
-
-
-
-
 
 
 <h4>Lista de Servicios disponibles</h4>
@@ -94,22 +81,8 @@
 
         </table>
     </div>
+    <a href="/areaNatural/list" id="atras">VOLVER</a>
 
-<!--<table>
-    <tr>
-        <td><label>Fecha</label></td>
-        <td><input type="date" /></td>
-    </tr>
-    <tr>
-        <td><label>Franja horaria</label></td>
-        <td><select> //th:field="*{franjaHoraria}"
-            <option th:each="franja: ${mostrarOcupacionSvc.getFranjasHorarias()}" th:value="${franja.IdFranjaHoraria}"
-                    th:text="${franja.horaInicio}+' '+${franja.horaFin}">
-            </option>
-        </select>
-        </td>
-    </tr>
-</table>-->
 </div>
 </body>
 </html>

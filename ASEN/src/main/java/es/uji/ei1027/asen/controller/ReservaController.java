@@ -94,6 +94,7 @@ public class ReservaController{
         model.addAttribute("reservaService",reservaService);
 
         model.addAttribute("current_date", LocalDate.now().format(formatter));
+        session.setAttribute("filtro",filtro);
         model.addAttribute("filtro",filtro);
         return "reserva/add";
     }
@@ -137,14 +138,30 @@ public class ReservaController{
             reservaValidator.validate(reserva, bindingResult);
             FiltroOcupacion filtro = (FiltroOcupacion) session.getAttribute("filtro");
             if (bindingResult.hasErrors()) {
-                return "reserva/add/{"+filtro.getIdArea()+"}";
+                return "reserva/add/"+filtro.getIdArea();
             }
+
+
+            if(reserva.getFecha()==null){
+                redirectAttrs
+                        .addFlashAttribute("mensaje", "Rellena todos los campos y pulsa el boton buscar zonas disponibles")
+                        .addFlashAttribute("clase", "danger");
+                return "redirect:add/"+filtro.getIdArea();
+            }
+            if(reserva.getZonas()==null || reserva.getZonas().size()==0){
+                redirectAttrs
+                        .addFlashAttribute("mensaje", "Selecciona al menos una zona, por favor")
+                        .addFlashAttribute("clase", "danger");
+                return "redirect:add/"+filtro.getIdArea();
+            }
+
             /*if(reservaService.existeReserva(reserva)) {
                 throw new AsenApplicationException(
                         "Ya existe una reserva para esa hora en esa zona ", "Reserva repetida","danger");
             }*/
             String datos = "fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria()+"; zonas="+reserva.getZonas().toString();
             reserva.setCodigoQR(generadorQRService.crearQR(datos,100,100));
+
             int idReserva = reservaDao.addReserva(reserva);
             if(idReserva>=0) {
                 for (int i : reserva.getZonas()) {
@@ -168,6 +185,12 @@ public class ReservaController{
             throw new AsenApplicationException("Error al crear al QR", "errorfecha","danger");
         }catch(IOException e){
             throw new AsenApplicationException("Error al convertir el QR ", "errorQR","warning");
+        }catch(NullPointerException e){
+            FiltroOcupacion filtro = (FiltroOcupacion) session.getAttribute("filtro");
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Rellena todos los campos y pulsa el boton buscar zonas disponibles")
+                    .addFlashAttribute("clase", "danger");
+            return "redirect:add/"+filtro.getIdArea();
         }
 
         return "redirect:list";
@@ -246,6 +269,10 @@ public class ReservaController{
             throw new AsenApplicationException("Error al convertir el QR ", "errorQR","warning");
         }
         if(user.getRol()=="Ciudadano")
+            if(reserva.getHoraSalida()!=null){
+                reserva.setEstadoReserva("usado");
+                reservaDao.updateReservaEstado(reserva);
+            }else
             reservaDao.updateReserva(reserva);
         else
             reservaDao.updateReservaEstado(reserva);

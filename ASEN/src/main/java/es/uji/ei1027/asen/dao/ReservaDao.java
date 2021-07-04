@@ -75,9 +75,10 @@ public class ReservaDao {
     }
 
     public void updateHoraSalidaReserva(int idReserva) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         jdbcTemplate.update("UPDATE reserva SET  horaSalida=?, estadoReserva=?" +
                         "WHERE idReserva=?",
-                LocalTime.now(),"usado",idReserva);
+                LocalTime.parse(LocalTime.now().format(formatter)),"usado",idReserva);
     }
     /* Obté la reserva amb el idReserva donat. Torna null si no existeix. */
     public Reserva getReserva(int idReserva) {

@@ -33,8 +33,9 @@
         <tbody>
         <tr th:each="accesibilidad: ${accesibilidades}">
             <td th:text="${franjaHorariaService.getHorasFranja(accesibilidad.idFranjaHoraria)}"></td>
-            <td th:text="${accesibilidad.fechaInicio}"></td>
-            <td th:text="${accesibilidad.fechaFin}"></td>
+            <td th:text="${franjaHorariaService.transformarFecha(accesibilidad.fechaInicio)}"></td>
+            <td th:if="${accesibilidad.fechaFin!=null}" th:text="${franjaHorariaService.transformarFecha(accesibilidad.fechaFin)}"></td>
+            <td th:if="${accesibilidad.fechaFin==null}" th:text="${accesibilidad.fechaFin}"></td>
             <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/accesibilidad/update/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}" id="editar" role="button">Editar</a></td>
             <td th:if="*{user.rol == 'GestorMunicipal'}"><a th:href="@{/accesibilidad/deleteHorario/{idFranjaHoraria}/{idArea}/{fechaInicio}(idFranjaHoraria=${accesibilidad.idFranjaHoraria},idArea=${accesibilidad.idArea},fechaInicio=${accesibilidad.fechaInicio})}"
                    th:onclick="return confirm('¿Estás seguro de que quiere borrar este horario?');"

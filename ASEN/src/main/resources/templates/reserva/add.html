@@ -12,6 +12,10 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
+    <div th:classappend="'alert alert-dismissible alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+         th:text="${mensaje}"
+         class="alert">
+    </div>
     <h2>Nueva Reserva</h2>
     <form action="#" th:action="@{/reserva/fecha}" th:object="${filtro}">
         <table>
@@ -28,7 +32,7 @@
                             th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
                     </option>
                 </select></td>
-                <td><input type="submit" class="btn btn-primary" value="Buscar Áreas Disponibles" /></td>
+                <td><input type="submit" class="btn btn-primary" value="Buscar Zonas Disponibles" /></td>
             </tr>
         </table>
     </form>

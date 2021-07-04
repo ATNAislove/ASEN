@@ -46,6 +46,7 @@
         <a th:if="${session.user.rol==null}" th:href="@{/login}" class="btn btn-primary" role="button">Reservar</a>
     </div>
     <a th:if="*{user.rol == 'GestorMunicipal'}" th:href="@{/zona/add/{idArea}(idArea=${area.idArea})}" id="añadir"  role="button">+ Añadir zona</a>
+    <br><br><a href="/areaNatural/list" id="atras" role="button">VOLVER</a>
 </div>
 </body>
 </html>

@@ -53,7 +53,7 @@
             <tr>
                 <td><label>hora Salida</label></td>
                 <td><input class="form-control" th:if="${reserva.horaSalida==null}" type="time" th:field="*{horaSalida}"/>
-                    <input class="form-control" th:unless="${reserva.horaSalida==null}"type="time" th:field="*{horaSalida}" readonly/></td>
+                    <input class="form-control" th:unless="${reserva.horaSalida==null}" type="text" th:field="*{horaSalida}" readonly/></td>
             </tr>
             <tr>
                 <td><label>fecha Creacion</label></td>
