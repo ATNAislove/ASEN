@@ -21,7 +21,7 @@
         <table>
             <tr>
                 <input class="form-control" type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"/>
-                <td><label>fecha</label></td><!--th:onchange="this.form.submit()" -->
+                <td><label>Fecha</label></td><!--th:onchange="this.form.submit()" -->
                 <td><input class="form-control"  type="date" th:field="*{fecha}" th:min="${current_date}" required/></td>
                 <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></td>
             </tr>
@@ -64,31 +64,13 @@
             <tr th:if="${dia!=null}"><td><input type="hidden" th:field="*{fecha}"/></td></tr>
             <tr>
 
-                <td><label>Numero Personas</label></td>
+                <td><label>Numero de Personas</label></td>
                 <td><input class="form-control" type="number" th:field="*{numeroPersonas}"  min="1" th:max="${maxpersonas}" required/></td>
             </tr>
 
-            <tr>
-                <!--<td><label>Franja Horaria</label></td>
-                <td th:if="${dia!=null}"><select class="form-control" th:field="*{idFranjaHoraria}" required>
-                        <option th:each="franja: ${franjaHorariaService.getFranjaReservaLibreReservable(dia,session.zona)}" th:value="${franja.IdFranjaHoraria}"
-                                th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
-                        </option>
-                    </select>
-                </td>
-                <td th:if="${dia==null}"><select class="form-control" th:field="*{idFranjaHoraria}" required>
-                    <option th:each="franja: ${franjaHorariaService.getFranjasReserva()}" th:value="${franja.IdFranjaHoraria}"
-                            th:text="${franja.horaInicio}+' - '+${franja.horaFin}">
-                    </option>
-                </select>
-                </td>-->
 
-
-            </tr>
             <tr th:if="${dia!=null}"><td><input type="hidden" th:field="*{idFranjaHoraria}"/></td></tr>
-            <tr><!--
-                <td><label>Elige zona(s)</label></td>
-                -->
+            <tr>
                 <td><select class="form-control" th:field="*{zonas}" multiple style="visibility:hidden">
                     <option th:each="zona: ${reservaService.getZonas(filtro.idArea)}" th:value="${zona.idZona}"
                     th:text="${zona.idCharNumero}"></option>
@@ -96,13 +78,15 @@
 
             </tr>
             <tr>
-                <a>* Para seleccionar más de una zona, presiona la tecla control</a>
+
                 <td colspan="2"><input type="submit" class="btn btn-primary" value="Crear Reserva"
-                                       th:onclick="return confirm('¿ Está seguro de que quiere hacer esta reserva con los datos introducidos? \'');" /></td>
+                                       th:onclick="return confirm('¿ Está seguro de que quiere hacer esta reserva con los datos introducidos? ');" /></td>
+
             </tr>
         </table>
-        <br>
-        <a href="/areaNatural/list" id="atras" role="button">VOLVER</a>
+        <span>* Para seleccionar más de una zona, presiona la tecla control</span>
+        <p></p><p></p>
+        <a href="/reserva/list" id="atras" role="button">VOLVER</a>
 
     </form>
 </div>

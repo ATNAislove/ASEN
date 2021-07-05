@@ -32,6 +32,7 @@ public class ServicioController {
     private GetAreasNaturalesService getAreasNaturalesService;
     private GetMunicipiosService getMunicipiosService;
     private GetFranjasHorariasService getFranjasHorariasService;
+
     @Autowired
     public void setGetFranjasHorariasService(GetFranjasHorariasService getFranjasHorariasService){
         this.getFranjasHorariasService=getFranjasHorariasService;
@@ -105,6 +106,8 @@ public class ServicioController {
     public String editServicio(Model model, @PathVariable int idServicio) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         model.addAttribute("servicio", servicioDao.getServicio(idServicio));
+        model.addAttribute("tiposServicioService",getTiposServicioService);
+        model.addAttribute("areasNaturalesService",getAreasNaturalesService);
         model.addAttribute("current_date", LocalDate.now().format(formatter));
         return "servicio/update";
     }

@@ -28,10 +28,6 @@ public class ReservaDao {
     /* Afegeix la Reserva a la base de dades */
 
     public int addReserva(Reserva reserva) {
-        /*jdbcTemplate.update("INSERT INTO Reserva (fecha, numeroPersonas, horaSalida, fechaCreacion, codigoQr, estadoReserva, usuario,idFranjaHoraria) VALUES( ?, ?, ?, ?, ?, ?, ?,?)"
-                ,reserva.getFecha(),reserva.getNumeroPersonas()
-                ,reserva.getHoraSalida(), LocalDate.now(),reserva.getCodigoQR(),"pendiente"
-                ,reserva.getUsuario(),reserva.getIdFranjaHoraria());*/
         try{
             return jdbcTemplate.queryForObject("INSERT INTO Reserva (fecha, numeroPersonas, horaSalida, fechaCreacion, codigoQr, estadoReserva, usuario," +
                     "idFranjaHoraria) VALUES('"+reserva.getFecha()+"',"+reserva.getNumeroPersonas()+", null, '"+LocalDate.now()+"', '"+reserva.getCodigoQR()+
@@ -61,17 +57,17 @@ public class ReservaDao {
        (excepte el idReserva, que és la clau primària) */
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE reserva SET fecha=?, numeroPersonas=?, horaSalida=?, " +
-                          "idFranjaHoraria=?, codigoqr=? WHERE idReserva=?",
+                          " codigoqr=? WHERE idReserva=?",
                 reserva.getFecha(),reserva.getNumeroPersonas(), reserva.getHoraSalida(),
-                reserva.getIdFranjaHoraria(),reserva.getCodigoQR(),reserva.getIdReserva());
+                reserva.getCodigoQR(),reserva.getIdReserva());
     }
     /* Actualitza els atributs de la reserva si ets un gestor
        (excepte el idReserva, que és la clau primària) */
     public void updateReservaEstado(Reserva reserva) {
         jdbcTemplate.update("UPDATE reserva SET fecha=?, numeroPersonas=?, horaSalida=?, estadoReserva=?, " +
-                        "idFranjaHoraria=?, codigoqr=? WHERE idReserva=?",
+                        " codigoqr=? WHERE idReserva=?",
                 reserva.getFecha(),reserva.getNumeroPersonas(), reserva.getHoraSalida(),reserva.getEstadoReserva(),
-                reserva.getIdFranjaHoraria(),reserva.getCodigoQR(),reserva.getIdReserva());
+                reserva.getCodigoQR(),reserva.getIdReserva());
     }
 
     public void updateHoraSalidaReserva(int idReserva) {
@@ -117,29 +113,7 @@ public class ReservaDao {
             return new ArrayList<Reserva>();
         }
     }
-    /*public List<Reserva> getReservasConcretas(Reserva reserva,String usuario){
-        try {
-            return jdbcTemplate.query("SELECT * FROM Reserva where usuario= '"+usuario+"' AND estadoReserva NOT IN ('cancelado')" +
-                            " AND fecha='"+reserva.getFecha()+"' AND idfranjahoraria="+reserva.getIdFranjaHoraria()+
-                            " AND fechacreacion='"+reserva.getFechaCreacion()+"' AND idZona="+reserva.getIdZona()
-                    , new ReservaRowMapper());
-        }
-        catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Reserva>();
-        }
-    }
-    public List<Reserva> existeReserva(Reserva reserva){
-        try {
-            return jdbcTemplate.query("SELECT * FROM Reserva where estadoReserva NOT IN ('cancelado')" +
-                            " AND fecha='"+reserva.getFecha().toString()+"' AND idfranjahoraria="+reserva.getIdFranjaHoraria()+
-                            "  AND idZona="+reserva.getIdZona()
-                    , new ReservaRowMapper());
-        }
-        catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Reserva>();
-        }
-    }
-    */
+
     //Obteener las reservas en una fecha determinada
     public List<Reserva> getReservasByFecha(String fecha, int idArea){
         try{
@@ -164,16 +138,5 @@ public class ReservaDao {
         }
     }
 
-    //obtener ocupacion del dia NO FUNCIONA BIEN
-    /*public int ocupacionDiaArea(int idArea,String fecha) {
-        try {
-            return jdbcTemplate.queryForObject("SELECT sum(r.numeropersonas) FROM Reserva as r " +
-                    "INNER JOIN zona AS z ON z.idZona=r.idZona INNER JOIN areanatural AS a ON z.idArea=a.idArea " +
-                    "where a.idArea="+idArea+" AND r.fecha='"+fecha+"'", Integer.class);
-        }
-        catch(EmptyResultDataAccessException e) {
-            return 0;
-        }
-    }*/
 
 }

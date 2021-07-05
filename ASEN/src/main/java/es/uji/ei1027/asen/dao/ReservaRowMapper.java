@@ -27,10 +27,6 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
         reserva.setEstadoReserva(rs.getString("estadoReserva"));
         reserva.setUsuario(rs.getString("usuario"));
         reserva.setIdFranjaHoraria(rs.getInt("idFranjaHoraria"));
-        /*Array array = rs.getArray("zonas");
-        List lista = new ArrayList<>();
-        Collections.addAll(lista, array);
-        reserva.setZonas(lista);*/
         return reserva;
     }
 }

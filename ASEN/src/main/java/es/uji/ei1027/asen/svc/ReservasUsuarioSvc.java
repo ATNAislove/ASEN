@@ -68,11 +68,7 @@ public class ReservasUsuarioSvc implements ReservaService {
         }
         return -1;
     }
-    public boolean existeReserva(Reserva reserva){
-       /* if(reservaDao.existeReserva(reserva).size()>0)
-            return true;*/
-        return false;
-    }
+
     public int maxPersonas(int idArea){
         return zonaDao.getMaximoPersonasArea(idArea);
     }

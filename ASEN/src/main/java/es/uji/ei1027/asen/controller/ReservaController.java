@@ -155,10 +155,6 @@ public class ReservaController{
                 return "redirect:add/"+filtro.getIdArea();
             }
 
-            /*if(reservaService.existeReserva(reserva)) {
-                throw new AsenApplicationException(
-                        "Ya existe una reserva para esa hora en esa zona ", "Reserva repetida","danger");
-            }*/
             String datos = "fecha="+reserva.getFecha()+"; franja="+reserva.getIdFranjaHoraria()+"; zonas="+reserva.getZonas().toString();
             reserva.setCodigoQR(generadorQRService.crearQR(datos,100,100));
 
@@ -201,7 +197,7 @@ public class ReservaController{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Reserva reserva = reservaDao.getReserva(idReserva);
         reserva.setZonas(reservaService.listaZonas(reserva.getIdReserva()));
-        //model.addAttribute("franjaHorariaService", getFranjasHorariasService);
+        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
         model.addAttribute("reservaService", reservaService);
         FiltroOcupacion filtro;
 
@@ -233,26 +229,6 @@ public class ReservaController{
         model.addAttribute("reserva", reserva);
         return "reserva/update";
     }
-    /*@RequestMapping(value = "/update/{idReserva}/{fecha}", method = RequestMethod.GET)
-    public String editReserva(Model model, @PathVariable int idReserva,@PathVariable String fecha) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Reserva reserva = reservaDao.getReserva(idReserva);
-        reserva.setFecha(LocalDate.parse(fecha, formatter));
-        model.addAttribute("reserva", reserva);
-        model.addAttribute("franjaHorariaService", getFranjasHorariasService);
-        model.addAttribute("reservaService", reservaService);
-        model.addAttribute("maxPersonas", reservaService.maxPersonas(reserva.getIdZona()));
-        FiltroOcupacion filtro = new FiltroOcupacion();
-        filtro.setIdReserva(idReserva);
-        filtro.setIdZona(reserva.getIdZona());
-        filtro.setFecha(LocalDate.parse(fecha, formatter));
-        if(reserva.getFecha().equals(reservaDao.getReserva(idReserva).getFecha()))
-            model.addAttribute("franjaActual",reserva.getIdFranjaHoraria());
-        model.addAttribute("filtro",filtro);
-        model.addAttribute("dia",fecha);
-        model.addAttribute("current_date", LocalDate.now().format(formatter));
-        return "reserva/update";
-    }*/
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult,

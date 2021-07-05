@@ -19,46 +19,50 @@
       th:object="${servicio}" method="post">
     <table>
         <tr>
-            <td><label>idServicio</label></td>
-            <td><input class="form-control" type="number" th:field="*{idServicio}" readonly /></td>
+            <td><label>Identificador</label></td>
+            <td><input class="form-control" type="hidden" th:field="*{idServicio}"  />
+                <input class="form-control" type="number" th:field="*{idServicio}" disabled /></td>
         </tr>
         <tr>
-            <td><label>fecha Inicio</label></td>
+            <td><label>Fecha de Inicio</label></td>
             <td><input class="form-control" type="date" th:field="*{fechaInicio}"  th:min="${current_date}" required/></td>
 
         </tr>
         <tr>
-            <td><label>fecha Fin</label></td>
+            <td><label>Fecha de Fin</label></td>
             <td><input class="form-control" type="date" th:field="*{fechaFin}"  th:min="${current_date}" /></td>
             <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}"></td>
         </tr>
         <tr>
-            <td><label>Periodicidad</label></td>
+            <td><label>Periodicidad*</label></td>
             <td><input class="form-control" type="number" min="0" th:field="*{periodicidad}" /></td>
         </tr>
         <tr>
-            <td><label>Tipo Temporada</label></td>
-            <td><select class="form-control" th:field="*{tipoTemporada}">
+            <td><label>Tipo de Temporada &nbsp;</label></td>
+            <td><select class="form-control" th:field="*{tipoTemporada}" required>
                 <option th:value="fijo">fijo</option>
                 <option th:value="temporal">temporal</option>
             </select>
         </tr>
         <tr>
-            <td><label>Tipo de servicio</label></td>
-            <td><input class="form-control" type="text" th:field="*{idTipoServicio}" readonly/></td>
+            <td><label>Tipo de Servicio</label></td>
+            <td><input class="form-control" type="hidden" th:field="*{idTipoServicio}" />
+            <input class="form-control" type="text" th:value="${tiposServicioService.getTipoServicio(servicio.idTipoServicio)}" disabled/></td>
         </tr>
         <tr>
-            <td><label>Area</label></td>
-            <td><input class="form-control" type="number" th:field="*{idArea}" readonly /></td>
+            <td><label>Área</label></td>
+            <td><input class="form-control" type="hidden" th:field="*{idArea}" />
+            <input class="form-control" type="text" th:value="${areasNaturalesService.getNombreArea(servicio.idArea)}" disabled/></td>
         </tr>
         <tr>
-            <a>* La periodicidad es el número de días para el cual tarda el servicio a volverse a activar desde la fechaFin establecida</a>
+
             <td colspan="2"><br><input type="submit"  class="btn btn-primary" value="Actualizar Servicio"
                                    th:onclick="return confirm('¿ Está seguro de que quiere actualizar los datos de este Servicio?');"
             /></td>
         </tr>
     </table>
-    <br>
+    <span>* La periodicidad es el número de días que tarda el servicio en volver a activarse desde la fechaFin establecida</span>
+    <p></p><p></p>
     <a href="/servicio/list" id="atras" role="button">VOLVER</a>
 </form></div>
 </body>

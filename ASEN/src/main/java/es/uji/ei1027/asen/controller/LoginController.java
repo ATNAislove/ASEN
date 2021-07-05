@@ -83,11 +83,7 @@ public class LoginController {
 
         session.setAttribute("user", user);
         return "redirect:areaNatural/list";
-        /*if(user.getRol().equals("Ciudadano")){
-            return "ciudadano/menuCiudadano";
-        } else{
-            return "gestorMunicipal/menuGestorMunicipal";
-        }*/
+
     }
     @RequestMapping("/logout")
     public String logout(HttpSession session) {

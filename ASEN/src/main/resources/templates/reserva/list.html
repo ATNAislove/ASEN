@@ -21,32 +21,34 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Fecha</th>
-            <th th:if="*{user.rol == 'GestorMunicipal'}">Usuario</th>
-            <th>Número Personas</th>
-            <th>Hora Salida</th>
-            <th>Fecha Creación</th>
-            <th>CodigoQR</th>
-            <th>Estado</th>
-            <th>Franja Horaria</th>
             <th>Área</th>
             <th>Zonas</th>
+            <th>Fecha</th>
+            <th>Franja Horaria</th>
+            <th>Hora Salida</th>
+            <th>Fecha Creación</th>
+            <th th:if="*{user.rol == 'GestorMunicipal'}">Usuario</th>
+            <th>Número Personas</th>
+            <th>Código QR</th>
+            <th>Estado</th>
+
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="reserva: ${reservas}">
-            <td th:text="${franjaHorariaService.transformarFecha(reserva.fecha)}"></td>
-            <td th:if="*{user.rol == 'GestorMunicipal'}" th:text="${reserva.usuario}"></td>
-            <td th:text="${reserva.numeroPersonas}"></td>
-            <td th:text="${reserva.horaSalida}"></td>
-            <td th:text="${franjaHorariaService.transformarFecha(reserva.fechaCreacion)}"></td>
-            <td><img style="max-width:40px;max-height:40px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
-            <td th:text="${reserva.estadoReserva}"></td>
-            <td th:text="${franjaHorariaService.getHorasFranja(reserva.idFranjaHoraria)}"></td>
             <td th:text="${reservaService.recuperarNombreArea(reserva.idReserva)}"></td>
             <td th:text="${reservaService.recuperarZonas(reserva.idReserva)}"></td>
+            <td th:text="${franjaHorariaService.transformarFecha(reserva.fecha)}"></td>
+            <td th:text="${franjaHorariaService.getHorasFranja(reserva.idFranjaHoraria)}"></td>
+            <td th:text="${reserva.horaSalida}"></td>
+            <td th:text="${franjaHorariaService.transformarFecha(reserva.fechaCreacion)}"></td>
+            <td th:if="*{user.rol == 'GestorMunicipal'}" th:text="${reserva.usuario}"></td>
+            <td th:text="${reserva.numeroPersonas}"></td>
+            <td><img style="max-width:40px;max-height:40px" th:src="${reserva.codigoQR}" alt="No disponible"></td>
+            <td th:text="${reserva.estadoReserva}"></td>
+
             <td> <a th:if="${reserva.horaSalida == null}" th:href="@{/reserva/updateHoraSalida/{idReserva}(idReserva=${reserva.idReserva})}" id="escanearQR" role="button">Escanear Qr</a></td>
             <td> <a th:href="@{/reserva/update/{idReserva}(idReserva=${reserva.idReserva})}" id="editar" role="button">Editar</a></td>
             <td> <a th:if="${reserva.estadoReserva != 'cancelado' && reserva.estadoReserva != 'usado' }" th:href="@{/reserva/cancel/{idReserva}(idReserva=${reserva.idReserva})}"

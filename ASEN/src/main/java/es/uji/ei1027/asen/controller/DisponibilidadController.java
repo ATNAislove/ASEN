@@ -98,17 +98,6 @@ public class DisponibilidadController {
         return "/disponibilidad/verHorarios";
     }
 
-    /*@RequestMapping(value="/add")
-    public String addHorarioServicio(Model model, HttpSession session) {
-        UserDetails user = (UserDetails) session.getAttribute("user");
-        int municipio = getMunicipiosService.getMunicipioGestor(user.getUsername());
-        model.addAttribute("disponibilidad", new Disponibilidad());
-        model.addAttribute("servicios", getTiposServicioService.getServiciosMunicipio(municipio));
-        model.addAttribute("getTiposServicio", getTiposServicioService);
-        model.addAttribute("franjasHorarias",getFranjasHorariasService.getFranjasServicio());
-
-        return "disponibilidad/add";
-    }*/
     @RequestMapping(value="/add/{idServicio}")
     public String addHorarioServicio(Model model,@PathVariable int idServicio, HttpSession session) {
         UserDetails user = (UserDetails) session.getAttribute("user");

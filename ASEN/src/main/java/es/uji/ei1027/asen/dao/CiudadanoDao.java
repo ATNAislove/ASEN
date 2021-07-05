@@ -87,17 +87,6 @@ public class CiudadanoDao implements UserDao {
         }catch(EmptyResultDataAccessException e) {
             return null;
         }
-        /*if (user == null)
-            return null; // Usuari no trobat
-        // Contrasenya
-        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        if (passwordEncryptor.checkPassword(password, user.getPassword())) {
-            // Es deuria esborrar de manera segura el camp password abans de tornar-lo
-            return user;
-        }
-        else {
-            return null; // bad login!
-        }*/
         return null;
 
     }

@@ -19,12 +19,12 @@
     <br>
     <table align="center" style="width:auto;">
         <tr>
-            <td>Tipo de terreno: <span th:text="${areaNatural.tipoTerreno}"/>&nbsp</td>
-            <td>&nbsp &nbsp Tipo de area: <span th:text="${areaNatural.tipoArea}"/></td>
+            <td>Tipo de terreno: <span th:text="${areaNatural.tipoTerreno}"/>&nbsp;</td>
+            <td>&nbsp; &nbsp; Tipo de area: <span th:text="${areaNatural.tipoArea}"/></td>
         </tr>
         <tr>
-            <td>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/>&nbsp</td>
-            <td>&nbsp &nbsp Municipio: <span th:text="${municipio}"/></td>
+            <td>Tipo de acceso: <span th:text="${areaNatural.tipoAcceso}"/>&nbsp;</td>
+            <td>&nbsp; &nbsp; Municipio: <span th:text="${municipio}"/></td>
         </tr>
     </table>
 
@@ -54,6 +54,8 @@
     </tr>
     </tbody>
 </table>
+    <span>La periodicidad es el número de días que tarda el servicio en volver a activarse desde la fechaFin establecida</span>
+
     <form action="#" th:action="@{/areaNatural/consultarOcupacion}"
           th:object="${filtro}" method="post">
         <input type="hidden" th:field="*{idArea}" th:value="${filtro.idArea}"/>

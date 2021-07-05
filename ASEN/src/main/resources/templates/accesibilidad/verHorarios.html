@@ -44,7 +44,7 @@
         </tr>
         </tbody>
     </table>
-    <a th:if="${session.user!=null && session.user.rol == 'GestorMunicipal'}" th:href="@{/accesibilidad/add/{idArea}(idArea=${area})}" id="añadir" role="button">+ Añadir Horario</a>
+    <a th:if="${session.user!=null && session.user.rol == 'GestorMunicipal'}" th:href="@{/accesibilidad/add/{idArea}(idArea=${area})}" id="añadir" role="button">Añadir Horario</a>
     <br><br><a href="/areaNatural/list" id="atras" role="button">VOLVER</a>
 </div>
 </body>

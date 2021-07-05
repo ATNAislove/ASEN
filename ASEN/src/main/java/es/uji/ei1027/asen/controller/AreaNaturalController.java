@@ -75,12 +75,7 @@ public class AreaNaturalController {
         session.removeAttribute("filtro");
         return "areaNatural/list";
     }
-    /*@RequestMapping("/listNoRegister")
-    public String listAreasNaturalesNoRegister(Model model, HttpSession session) {
-        model.addAttribute("areasNaturales", areaNaturalDao.getAreasNaturales());
-        session.setAttribute("user", new UserDetails());
-        return "areaNatural/listNoRegister";
-    }*/
+
 
     @RequestMapping(value="/add")
     public String addAreaNatural(Model model, HttpSession session) {
@@ -107,6 +102,8 @@ public class AreaNaturalController {
     @RequestMapping(value="/update/{idArea}", method = RequestMethod.GET)
     public String editAreaNatural(Model model, @PathVariable int idArea) {
         model.addAttribute("areaNatural", areaNaturalDao.getAreaNatural(idArea));
+        model.addAttribute("areasNaturalesService", getAreasNaturalesService);
+
         return "areaNatural/update";
     }
 

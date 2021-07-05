@@ -16,23 +16,23 @@
       th:object="${areaNatural}" method="post">
     <table>
         <tr>
-            <td><label>idArea</label></td>
+            <td><label>Identificador</label></td>
             <td><input class="form-control" type="number" th:field="*{idArea}" readonly/></td>
         </tr>
         <tr>
-            <td><label>NombreArea</label></td>
+            <td><label>Nombre del Área</label></td>
             <td><input class="form-control" type="text" th:field="*{nombreArea}" /></td>
         </tr>
         <tr>
-            <td><label>descripcion</label></td>
+            <td><label>Descripción</label></td>
             <td><textarea class="form-control" style="margin: 0px; width: 394px; height: 200px;"  type="text" th:field="*{descripcion}" /></td>
         </tr>
         <tr>
-            <td><label>imagen</label></td>
+            <td><label>Imagen</label></td>
             <td><input class="form-control" type="text" th:field="*{imagen}" placeholder="Introduce la url" /></td>
         </tr>
         <tr>
-            <td><label>Tipo de terreno</label></td>
+            <td><label>Terreno</label></td>
             <td><select class="form-control" th:field="*{tipoTerreno}">
                 <option th:value="arena">arena</option>
                 <option th:value="hierba">hierba</option>
@@ -44,7 +44,7 @@
             </td>
         </tr>
         <tr>
-            <td><label>Tipo de area</label></td>
+            <td><label>Tipo de Área</label></td>
             <td><select class="form-control"  th:field="*{tipoArea}">
                 <option th:value="playa">playa</option>
                 <option th:value="montaña">montaña</option>
@@ -58,7 +58,7 @@
             </td>
         </tr>
         <tr>
-            <td><label>Tipo de acceso</label></td>
+            <td><label>Acceso</label></td>
             <td>
                 <select class="form-control" th:field="*{tipoAcceso}">
                     <option th:value="abierto">abierto</option>
@@ -68,11 +68,12 @@
         </tr>
         <tr>
             <td><label>Municipio</label></td>
-            <td><input class="form-control" type="text" th:field="*{idMunicipio}" readonly/></td>
+            <td><input class="form-control" type="hidden" th:field="*{idMunicipio}" />
+                <input class="form-control" type="text" th:value="${areasNaturalesService.getNombreMunicipio(areaNatural.idMunicipio)}" disabled/></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" class="btn btn-primary" value="Actualizar area natural"
-                                   th:onclick="return confirm('¿ Está seguro de que quiere actualizar los datos de este area natural? \'');"
+                                   th:onclick="return confirm('¿ Está seguro de que quiere actualizar los datos de este area natural? ');"
             /></td>
         </tr>
     </table>

@@ -44,21 +44,6 @@ public class OcupacionController {
         return "redirect:list";
     }
 
-   /* @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
-    public String editCiudadano(Model model, @PathVariable String usuario) {
-        model.addAttribute("ciudadano", ciudadanoDao.getCiudadano(usuario));
-        return "ciudadano/update";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("ciudadano") Ciudadano ciudadano,
-                                      BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "ciudadano/update";
-        ciudadanoDao.updateCiudadano(ciudadano);
-        return "redirect:list";
-    }
-*/
 
     @RequestMapping(value = "/delete/{idReserva}/{idZona}")
     public String processDelete(@PathVariable int idReserva, @PathVariable int idCharNum) {
