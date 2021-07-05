@@ -18,15 +18,15 @@
     <table>
         <tr>
             <td><label>Nombre del Área</label></td>
-            <td><input class="form-control" type="text" th:field="*{nombreArea}" required/></td>
+            <td><input class="form-control" type="text" th:field="*{nombreArea}" maxlength="30" required/></td>
         </tr>
         <tr>
             <td><label>Descripción</label></td>
-            <td><textarea class="form-control" style="margin: 0px; width: 394px; height: 200px;" type="text" th:field="*{descripcion}" required/></td>
+            <td><textarea class="form-control" style="margin: 0px; width: 394px; height: 200px;" type="text" th:field="*{descripcion}" maxlength="500" required/></td>
         </tr>
         <tr>
             <td><label>Imagen</label></td>
-            <td><input class="form-control" type="text" th:field="*{imagen}" placeholder="Introduce la url" required/></td>
+            <td><input class="form-control" type="text" th:field="*{imagen}" placeholder="Introduce la url" maxlength="250" required/></td>
         </tr>
         <tr>
             <td><label>Terreno</label></td>

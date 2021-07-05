@@ -17,19 +17,19 @@
     <table>
         <tr>
             <td><label>Identificador</label></td>
-            <td><input class="form-control" type="number" th:field="*{idArea}" readonly/></td>
+            <td><input class="form-control" type="number" th:field="*{idArea}"  readonly/></td>
         </tr>
         <tr>
             <td><label>Nombre del Área</label></td>
-            <td><input class="form-control" type="text" th:field="*{nombreArea}" /></td>
+            <td><input class="form-control" type="text" th:field="*{nombreArea}" maxlength="30" /></td>
         </tr>
         <tr>
             <td><label>Descripción</label></td>
-            <td><textarea class="form-control" style="margin: 0px; width: 394px; height: 200px;"  type="text" th:field="*{descripcion}" /></td>
+            <td><textarea class="form-control" style="margin: 0px; width: 394px; height: 200px;"  type="text" th:field="*{descripcion}" maxlength="500" /></td>
         </tr>
         <tr>
             <td><label>Imagen</label></td>
-            <td><input class="form-control" type="text" th:field="*{imagen}" placeholder="Introduce la url" /></td>
+            <td><input class="form-control" type="text" th:field="*{imagen}" maxlength="250" placeholder="Introduce la url" /></td>
         </tr>
         <tr>
             <td><label>Terreno</label></td>

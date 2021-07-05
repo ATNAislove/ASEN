@@ -21,12 +21,12 @@
         </tr>
         <tr>
             <td><label>Identificador Zona</label></td>
-            <td><input class="form-control"  type="hidden" th:field="*{idCharNumero}" />
+            <td><input class="form-control"  type="hidden" th:field="*{idCharNumero}"  />
                 <input class="form-control"  type="text" th:field="*{idCharNumero}" disabled/></td>
         </tr>
         <tr>
             <td><label>Nombre de la Zona &nbsp;</label></td>
-            <td><input class="form-control"  type="text" th:field="*{nombreZona}" /></td>
+            <td><input class="form-control"  type="text" th:field="*{nombreZona}" maxlength="30"  /></td>
         </tr>
         <tr>
             <td><label>Aforo Máximo</label></td>
